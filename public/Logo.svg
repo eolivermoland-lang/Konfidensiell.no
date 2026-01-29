@@ -1,0 +1,17 @@
+<svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="logo-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#60A5FA" />
+      <stop offset="100%" stop-color="#A855F7" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Outer Stylized C -->
+  <path d="M40 25C30 25 20 35 20 50C20 65 30 75 40 75" stroke="url(#logo-gradient)" stroke-width="8" stroke-linecap="round" />
+  
+  <!-- Inner Forward Chevron (Next) -->
+  <path d="M55 35L75 50L55 65" stroke="url(#logo-gradient)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
+  
+  <!-- Code Underscore -->
+  <path d="M45 75H65" stroke="url(#logo-gradient)" stroke-width="4" stroke-linecap="round" />
+</svg>
