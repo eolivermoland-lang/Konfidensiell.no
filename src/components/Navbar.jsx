@@ -24,7 +24,7 @@ const Navbar = () => {
           {/* Logo Section */}
           <Link to='/' className='flex items-center gap-3 group'>
             <div className='w-10 h-10 transition-transform group-hover:rotate-12 duration-300'>
-              <img src='/Logo.svg' alt='CodeNext Logo' className='w-full h-full' />
+              <img src='/logo.svg' alt='CodeNext Logo' className='w-full h-full' />
             </div>
             <span className='font-black text-2xl tracking-tighter text-white'>
               CODE<span className='text-blue-500'>NEXT</span>

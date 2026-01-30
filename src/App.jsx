@@ -44,7 +44,7 @@ function App() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex flex-col md:flex-row justify-between items-center gap-8 mb-12">
                <div className="flex items-center gap-2">
-                  <img src="/Logo.svg" alt="CodeNext" className="w-8 h-8" />
+                  <img src="/logo.svg" alt="CodeNext" className="w-8 h-8" />
                   <span className="font-black text-2xl">CODE<span className="text-blue-500">NEXT</span></span>
                </div>
                <div className="flex gap-8 text-sm font-bold uppercase tracking-widest text-gray-500">
