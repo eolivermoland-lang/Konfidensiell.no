@@ -17,14 +17,14 @@ const Navbar = () => {
   const isActive = (path) => location.pathname === path;
 
   return (
-    <nav className='fixed top-0 left-0 w-full z-50 bg-slate-900/80 backdrop-blur-md border-b border-slate-800'>
+    <nav className='fixed top-0 left-0 w-full z-50 bg-slate-900/80 backdrop-blur-md border-b border-slate-800' aria-label="Main Navigation">
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
         <div className='flex items-center justify-between h-20'>
           
           {/* Logo Section */}
-          <Link to='/' className='flex items-center gap-3 group'>
+          <Link to='/' className='flex items-center gap-3 group' aria-label="CodeNext Home">
             <div className='w-10 h-10 transition-transform group-hover:rotate-12 duration-300'>
-              <img src='/logo.png' alt='CodeNext Logo' className='w-full h-full object-contain' />
+              <img src='/logo.png' alt="" className='w-full h-full object-contain' />
             </div>
             <span className='font-black text-2xl tracking-tighter text-white'>
               CODE<span className='text-blue-500'>NEXT</span>
@@ -51,13 +51,15 @@ const Navbar = () => {
             </div>
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile Menu Button - 2. Button Accessible Name Fix */}
           <div className='md:hidden'>
             <button
               onClick={() => setIsOpen(!isOpen)}
               className='text-gray-400 hover:text-white p-2 transition-colors'
+              aria-label={isOpen ? "Close menu" : "Open menu"}
+              aria-expanded={isOpen}
             >
-              {isOpen ? <X size={28} /> : <Menu size={28} />}
+              {isOpen ? <X size={28} aria-hidden="true" /> : <Menu size={28} aria-hidden="true" />}
             </button>
           </div>
         </div>
