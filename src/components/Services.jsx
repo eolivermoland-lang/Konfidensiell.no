@@ -1,175 +1,113 @@
 import React from 'react';
-import { Monitor, Smartphone, Code, Globe, Layout, BarChart, Gift, MessageSquare, ShieldCheck, Sparkles, Zap, Timer } from 'lucide-react';
+import { Monitor, Smartphone, Code, Globe, Layout, BarChart, Gift, MessageSquare, ShieldCheck, Sparkles, Zap, Timer, CheckCircle, Wallet, Smile, Coffee } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
 const services = [
-  {
-    id: 'web-design',
-    title: 'Web Design & Development',
-    description: 'Stunning, responsive websites built with React and Tailwind. We focus on SEO, speed, and conversion rates.',
-    features: ['Custom UI/UX Design', 'Full Responsive Layout', 'SEO Optimization', 'Speed Optimization'],
-    icon: <Monitor className='w-12 h-12 text-blue-500' />
-  },
-  {
-    id: 'app-development',
-    title: 'Mobile App Development',
-    description: 'Native and cross-platform mobile applications that provide seamless user experiences on iOS and Android.',
-    features: ['Cross-Platform (React Native)', 'Native Performance', 'App Store Deployment', 'Push Notifications'],
-    icon: <Smartphone className='w-12 h-12 text-purple-500' />
-  },
-  {
-    id: 'e-commerce',
-    title: 'E-commerce Solutions',
-    description: 'Build your online store with secure payment gateways, inventory management, and a smooth checkout flow.',
-    features: ['Secure Payments', 'Inventory Management', 'Customer Dashboard', 'Analytics Integration'],
-    icon: <Globe className='w-12 h-12 text-green-500' />
-  },
-  {
-    id: 'custom-software',
-    title: 'Custom Software',
-    description: 'Tailor-made software solutions (SaaS, CRMs, Portals) to optimize your business processes and increase efficiency.',
-    features: ['Scalable Architecture', 'API Integrations', 'Cloud Hosting', 'Database Design'],
-    icon: <Code className='w-12 h-12 text-yellow-500' />
-  },
-  {
-    id: 'ui-ux-audits',
-    title: 'UI/UX Audits',
-    description: 'Professional review of your existing product to identify usability issues and improve conversion.',
-    features: ['User Flow Analysis', 'Heatmap Review', 'Accessibility Audit', 'Design Refresh'],
-    icon: <Layout className='w-12 h-12 text-pink-500' />
-  },
-  {
-    id: 'data-analytics',
-    title: 'Data & Analytics',
-    description: 'Gain insights from your data with custom dashboards and tracking setups to drive informed decisions.',
-    features: ['Custom Dashboards', 'Conversion Tracking', 'User Behavior Analysis', 'Performance Metrics'],
-    icon: <BarChart className='w-12 h-12 text-indigo-500' />
-  }
+  { id: 'web-design', title: 'Web Design & Development', description: 'Stunning, responsive websites built with React and Tailwind.', icon: <Monitor className='w-12 h-12 text-blue-500' /> },
+  { id: 'app-development', title: 'Mobile App Development', description: 'Native and cross-platform mobile applications for iOS and Android.', icon: <Smartphone className='w-12 h-12 text-purple-500' /> },
+  { id: 'e-commerce', title: 'E-commerce Solutions', description: 'Build your online store with secure payment gateways.', icon: <Globe className='w-12 h-12 text-green-500' /> },
+  { id: 'custom-software', title: 'Custom Software', description: 'Tailor-made software solutions to optimize your business.', icon: <Code className='w-12 h-12 text-yellow-500' /> },
+  { id: 'ui-ux-audits', title: 'UI/UX Audits', description: 'Professional review to identify usability issues.', icon: <Layout className='w-12 h-12 text-pink-500' /> },
+  { id: 'data-analytics', title: 'Data & Analytics', description: 'Gain insights from your data with custom dashboards.', icon: <BarChart className='w-12 h-12 text-indigo-500' /> }
 ];
 
 const advantages = [
-  {
-    icon: <Gift className="text-blue-400" size={32} />,
-    title: 'Free Design Preview',
-    desc: 'We are so confident in our work that we offer a free visual preview of your project before you sign anything.'
-  },
-  {
-    icon: <MessageSquare className="text-purple-400" size={32} />,
-    title: 'Free Consultation',
-    desc: 'Get 30 minutes of expert IT strategy and project planning at no cost. No strings attached.'
-  },
-  {
-    icon: <ShieldCheck className="text-green-400" size={32} />,
-    title: 'Norwegian Quality',
-    desc: 'Local expertise with a focus on Scandinavian design principles, reliability, and precision.'
-  },
-  {
-    icon: <Zap className="text-yellow-400" size={32} />,
-    title: 'Speed & Power',
-    desc: 'We use the latest technology to ensure your site or app is faster and more powerful than your competitors.'
-  }
+  { icon: <Gift className="text-blue-400" size={32} />, title: 'Free Design Preview' },
+  { icon: <MessageSquare className="text-purple-400" size={32} />, title: 'Free Consultation' },
+  { icon: <ShieldCheck className="text-green-400" size={32} />, title: 'Norwegian Quality' },
+  { icon: <Zap className="text-yellow-400" size={32} />, title: 'Speed & Power' }
 ];
 
 const Services = () => {
   return (
-    <section id='services' className='py-20'>
+    <section className='py-20 bg-transparent'>
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
         
-        {/* Services Header */}
+        {/* Header */}
         <div className='text-center mb-20'>
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-600/10 border border-blue-600/20 text-blue-400 text-sm font-bold uppercase tracking-widest mb-6"
-          >
-            <Sparkles size={16} /> Solutions
-          </motion.div>
-          <h2 className='text-4xl md:text-6xl font-black text-white mb-6 tracking-tight'>Expert Services</h2>
-          <p className='mt-4 text-xl text-gray-400 max-w-2xl mx-auto'>
-            High-end IT services designed to launch and scale your business in the digital age.
-          </p>
+          <h2 className='text-4xl md:text-6xl font-black text-white mb-6 uppercase tracking-tighter'>Expert Services</h2>
+          <p className='text-gray-400 max-w-2xl mx-auto text-xl'>IT solutions designed to scale your business.</p>
         </div>
         
         {/* Services Grid */}
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mb-32'>
           {services.map((service, index) => (
-            <motion.div 
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              className='bg-slate-800/40 p-8 rounded-3xl border border-slate-700 hover:border-blue-500/50 transition-all group'
-            >
-              <div className='mb-8 p-4 bg-slate-900 w-fit rounded-2xl group-hover:scale-110 transition-transform'>
-                {service.icon}
-              </div>
-              <h3 className='text-2xl font-bold text-white mb-4'>{service.title}</h3>
-              <p className='text-gray-400 mb-6 leading-relaxed'>{service.description}</p>
-              
-              <ul className='space-y-3 mb-8'>
-                {service.features.map((feature, idx) => (
-                  <li key={idx} className='text-sm text-gray-300 flex items-center gap-2'>
-                    <div className='w-1.5 h-1.5 bg-blue-500 rounded-full'></div>
-                    {feature}
-                  </li>
-                ))}
-              </ul>
-
-              <Link 
-                to={`/services/${service.id}`}
-                className='block w-full py-4 bg-slate-900 border border-slate-700 text-white text-center rounded-xl hover:bg-blue-600 hover:border-blue-600 transition-all font-semibold'
-              >
-                Get Details
-              </Link>
+            <motion.div key={index} className='glass-card p-8 rounded-3xl hover:border-blue-500/50 transition-all group'>
+              <div className='mb-8 p-4 bg-slate-900/50 w-fit rounded-2xl group-hover:scale-110 transition-transform'>{service.icon}</div>
+              <h3 className='text-2xl font-bold text-white mb-4 uppercase tracking-tighter'>{service.title}</h3>
+              <p className='text-gray-400 mb-8 leading-relaxed'>{service.description}</p>
+              <Link to={`/services/${service.id}`} className='block w-full py-4 bg-blue-600/20 border border-blue-600/50 text-white text-center rounded-xl hover:bg-blue-600 transition-all font-bold uppercase tracking-widest text-xs'>Get Details</Link>
             </motion.div>
           ))}
         </div>
 
-        {/* The CodeNext Advantage */}
-        <div className='mb-32'>
-          <div className='text-center mb-16'>
-            <h2 className='text-3xl md:text-4xl font-black text-white mb-4'>The CodeNext Advantage</h2>
-            <p className='text-gray-400 max-w-2xl mx-auto'>Why businesses choose us over international agencies.</p>
-          </div>
-          
-          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6'>
-            {advantages.map((adv, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ delay: idx * 0.1 }}
-                className="bg-slate-900/50 p-8 rounded-3xl border border-slate-800 hover:border-blue-500/30 transition-all text-center"
-              >
-                <div className="mb-6 flex justify-center">{adv.icon}</div>
-                <h4 className="text-xl font-bold text-white mb-3">{adv.title}</h4>
-                <p className="text-sm text-gray-400 leading-relaxed">{adv.desc}</p>
-              </motion.div>
-            ))}
-          </div>
+        {/* The Advantage Row */}
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-32'>
+          {advantages.map((adv, idx) => (
+            <div key={idx} className="glass-panel p-8 rounded-3xl text-center">
+              <div className="mb-6 flex justify-center">{adv.icon}</div>
+              <h4 className="text-xl font-bold text-white mb-3 uppercase tracking-tighter">{adv.title}</h4>
+            </div>
+          ))}
         </div>
 
-        {/* Call to Action */}
-        <div className='p-1 bg-gradient-to-r from-blue-600 to-purple-600 rounded-[2.5rem]'>
-          <div className='p-12 bg-slate-900 rounded-[2.25rem] text-center backdrop-blur-md'>
-            <div className='inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-green-500/10 border border-green-500/20 text-green-400 text-xs font-black uppercase tracking-widest mb-8'>
-              <Timer size={14} /> Limited Spots Available
-            </div>
-            <h3 className='text-3xl md:text-5xl font-black text-white mb-6'>Let's build something extraordinary.</h3>
-            <p className='text-gray-400 text-xl mb-10 max-w-2xl mx-auto leading-relaxed'>
-              Take advantage of our <span className="text-blue-400 font-bold">Free Consultation</span> and see why we are the preferred choice for Norwegian digital innovation.
-            </p>
-            <div className='flex flex-wrap justify-center gap-4'>
-              <Link to='/contact' className='px-12 py-5 bg-blue-600 text-white font-black text-lg rounded-2xl hover:bg-blue-700 hover:scale-105 transition-all shadow-xl shadow-blue-600/20'>
-                Book My Free Strategy Call
-              </Link>
-              <Link to='/contact' className='px-12 py-5 bg-slate-800 text-white font-black text-lg rounded-2xl hover:bg-slate-700 transition-all'>
-                Get My Free Preview
-              </Link>
-            </div>
-          </div>
+        {/* WORK & PAYMENT PROCESS - NEW SECTION */}
+        <div className="mb-32">
+           <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-5xl font-black text-white mb-4 uppercase tracking-tighter">Our Zero-Risk Process</h2>
+              <p className="text-gray-400 max-w-2xl mx-auto">We don't believe in locking you into contracts for products you haven't seen yet.</p>
+           </div>
+
+           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <motion.div whileHover={{ y: -10 }} className="glass-card p-10 rounded-[2.5rem] border-l-4 border-l-blue-500">
+                 <div className="flex items-center gap-4 mb-6">
+                    <div className="w-12 h-12 bg-blue-600/20 rounded-xl flex items-center justify-center text-blue-400">
+                       <Coffee size={24} />
+                    </div>
+                    <h4 className="text-xl font-black text-white uppercase tracking-tighter">1. Free Consult</h4>
+                 </div>
+                 <p className="text-gray-400 text-sm leading-relaxed">
+                    We start with a 100% free consultation. No pressure, no sales talk. Just a deep dive into your vision and a clear roadmap on how we will build it.
+                 </p>
+              </motion.div>
+
+              <motion.div whileHover={{ y: -10 }} className="glass-card p-10 rounded-[2.5rem] border-l-4 border-l-purple-500">
+                 <div className="flex items-center gap-4 mb-6">
+                    <div className="w-12 h-12 bg-purple-600/20 rounded-xl flex items-center justify-center text-purple-400">
+                       <Sparkles size={24} />
+                    </div>
+                    <h4 className="text-xl font-black text-white uppercase tracking-tighter">2. Build & Review</h4>
+                 </div>
+                 <p className="text-gray-400 text-sm leading-relaxed">
+                    We get to work immediately. You will have a live link to watch your product being built in real-time. We iterate based on your feedback until it's perfect.
+                 </p>
+              </motion.div>
+
+              <motion.div whileHover={{ y: -10 }} className="glass-card p-10 rounded-[2.5rem] border-l-4 border-l-green-500">
+                 <div className="flex items-center gap-4 mb-6">
+                    <div className="w-12 h-12 bg-green-600/20 rounded-xl flex items-center justify-center text-green-400">
+                       <Wallet size={24} />
+                    </div>
+                    <h4 className="text-xl font-black text-white uppercase tracking-tighter">3. Pay Only if Happy</h4>
+                 </div>
+                 <p className="text-gray-400 text-sm leading-relaxed">
+                    This is our CodeNext promise: <span className="text-white font-bold">You don't pay a single krone until the project is finished and you are 100% happy with the result.</span>
+                 </p>
+              </motion.div>
+           </div>
+
+           <div className="mt-12 glass-panel p-8 rounded-3xl flex flex-col md:flex-row items-center justify-center gap-6 text-center">
+              <Smile className="text-yellow-500" size={32} />
+              <p className="text-white font-bold text-lg">Your satisfaction is our only metric for success. No upfront costs, no hidden risks.</p>
+           </div>
+        </div>
+
+        {/* Final CTA */}
+        <div className='glass-card p-12 rounded-[3rem] text-center border-t-2 border-t-blue-600/30'>
+          <h3 className='text-3xl md:text-5xl font-black text-white mb-6 uppercase tracking-tighter'>Ready for a new standard?</h3>
+          <p className="text-gray-400 mb-10 max-w-xl mx-auto uppercase tracking-widest text-xs font-bold">Experience the CodeNext difference today with a risk-free strategy session.</p>
+          <Link to='/contact' className='inline-block px-12 py-5 bg-blue-600 text-white font-black text-lg rounded-2xl hover:bg-blue-700 shadow-xl shadow-blue-600/20 transition-all active:scale-95 uppercase tracking-tighter'>Book Free Call</Link>
         </div>
 
       </div>
