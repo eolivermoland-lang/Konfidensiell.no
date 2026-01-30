@@ -71,7 +71,7 @@ function App() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex flex-col md:flex-row justify-between items-center gap-8 mb-12">
                <div className="flex items-center gap-2">
-                  <img src="/logo.png" alt="CodeNext Logo" className="w-8 h-8 object-contain" />
+                  <img src="/logo.png" alt="CodeNext Logo" width="32" height="32" className="w-8 h-8 object-contain" />
                   <span className="font-black text-2xl">CODE<span className="text-blue-500">NEXT</span></span>
                </div>
                <nav aria-label="Footer Navigation">
