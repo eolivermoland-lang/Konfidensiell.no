@@ -27,18 +27,22 @@ html, body, #root {
   border-radius: 10px;
 }
 
-/* Glassmorphism Styles - Transparent & Pro */
+/* Glassmorphism Styles - Optimized for Contrast (Accessibility Level A) */
 .glass-panel {
-  background: rgba(15, 23, 42, 0.2) !important;
-  backdrop-filter: blur(4px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(10, 15, 30, 0.6) !important; /* Darker for contrast */
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .glass-card {
-  background: rgba(30, 41, 59, 0.3) !important;
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+  background: rgba(15, 23, 42, 0.7) !important; /* Increased opacity for text readability */
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.5);
+}
+
+.text-gray-400 {
+  color: rgb(180, 188, 200); /* Brightened from default 400 for better contrast on dark BG */
 }
 
 .text-glow {
