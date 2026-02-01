@@ -1,40 +1,129 @@
-import React, { useState } from 'react';
-import { MessageCircle, X, Send } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { MessageCircle, X, Sparkles, Zap, ShieldCheck, Heart, ArrowLeft, MessageSquare, ExternalLink, Globe, Code, Clock, ShoppingCart, Lock } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 
 const Chatbot = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [currentMenu, setCurrentMenu] = useState('initial');
   const [messages, setMessages] = useState([
-    { text: 'Hi there! How can I help you today?', isBot: true }
+    { text: 'Welcome to CodeNext! I am your digital architect. What can we build together?', isBot: true }
   ]);
-  const [inputText, setInputText] = useState('');
+  const navigate = useNavigate();
+  const scrollRef = useRef(null);
 
-  const handleSend = (e) => {
-    e.preventDefault();
-    if (!inputText.trim()) return;
+  useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+    }
+  }, [messages]);
 
-    // Add user message
-    setMessages([...messages, { text: inputText, isBot: false }]);
-    
-    // Simulate bot response
-    setTimeout(() => {
-      let response = 'Thanks for your message! Our team will get back to you shortly.';
-      if (inputText.toLowerCase().includes('price') || inputText.toLowerCase().includes('cost')) {
-        response = 'Our pricing depends on the scope of the project. Please contact us for a quote!';
-      } else if (inputText.toLowerCase().includes('service')) {
-        response = 'We offer Web Design, App Development, and IT Consulting.';
-      }
-      setMessages(prev => [...prev, { text: response, isBot: true }]);
-    }, 1000);
+  const flow = {
+    initial: [
+      { label: "Website Solutions", next: "web", icon: <Globe size={14} /> },
+      { label: "App Development", next: "app", icon: <Zap size={14} /> },
+      { label: "E-commerce / Shop", next: "ecommerce", icon: <ShoppingCart size={14} /> },
+      { label: "Technical & Security", next: "technical", icon: <Lock size={14} /> },
+      { label: "Pricing & Timeline", next: "pricing", icon: <Clock size={14} /> },
+      { label: "About CodeNext", next: "about", icon: <Heart size={14} /> }
+    ],
+    web: [
+      { label: "What tech do you use?", answer: "We use the 'Bleeding Edge' stack: React 18, Vite 5, and Tailwind CSS for maximum speed and modern design.", next: "web_deep" },
+      { label: "Do you offer SEO?", answer: "Every site is built with technical SEO: SSR (Server Side Rendering), Schema markup, and meta-optimization.", next: "web_deep" },
+      { label: "Can you host it?", answer: "Yes! We deploy primarily on Cloudflare's global edge network for 99.9% uptime and zero-latency.", next: "web_deep" },
+      { label: "← Back", next: "initial" }
+    ],
+    web_deep: [
+      { label: "Is it mobile friendly?", answer: "Absolutely. We follow a 'Mobile-First' philosophy. Your site will look perfect on every screen size.", next: "more_help" },
+      { label: "Can I edit content?", answer: "Yes, we can integrate headless CMS systems so you can update text and images without touching code.", next: "more_help" },
+      { label: "← Back to Web", next: "web" }
+    ],
+    app: [
+      { label: "iOS or Android?", answer: "Both! We use React Native to build a single codebase that runs natively on both Apple and Android devices.", next: "app_deep" },
+      { label: "Custom Features?", answer: "We handle Push Notifications, GPS Tracking, Biometric Login, and real-time database syncing.", next: "app_deep" },
+      { label: "← Back", next: "initial" }
+    ],
+    app_deep: [
+      { label: "App Store Publishing?", answer: "We manage the entire submission process, including metadata, screenshots, and review cycles.", next: "more_help" },
+      { label: "App Maintenance?", answer: "We offer long-term support to ensure your app stays compatible with new iOS/Android updates.", next: "more_help" },
+      { label: "← Back to Apps", next: "app" }
+    ],
+    ecommerce: [
+      { label: "Which platforms?", answer: "We build custom storefronts or use Shopify/WooCommerce depending on your specific business goals.", next: "ecommerce_deep" },
+      { label: "Payment Systems?", answer: "We integrate Stripe, PayPal, Klarna, and Vipps for secure, one-click checkout experiences.", next: "ecommerce_deep" },
+      { label: "← Back", next: "initial" }
+    ],
+    ecommerce_deep: [
+      { label: "Inventory Sync?", answer: "Yes, we can sync your online shop with your physical warehouse or POS systems.", next: "more_help" },
+      { label: "Global Shipping?", answer: "We set up automated tax and shipping calculations for local or international delivery.", next: "more_help" },
+      { label: "← Back to Shop", next: "ecommerce" }
+    ],
+    technical: [
+      { label: "How secure is it?", answer: "We implement rigid Content Security Policies (CSP), SSL encryption, and brute-force protection.", next: "tech_deep" },
+      { label: "API Integrations?", answer: "We can connect your site to any 3rd party tool (CRM, ERP, Social Media) via custom API logic.", next: "tech_deep" },
+      { label: "← Back", next: "initial" }
+    ],
+    tech_deep: [
+      { label: "Performance Audit?", answer: "We can audit your existing site and fix bottlenecks to achieve 100/100 performance scores.", next: "more_help" },
+      { label: "Data Protection?", answer: "We follow GDPR best practices to ensure your customer data is handled with the highest privacy standards.", next: "more_help" },
+      { label: "← Back to Tech", next: "technical" }
+    ],
+    pricing: [
+      { label: "How much does it cost?", answer: "Pricing is scope-based. However, we are a fresh agency, so you get premium quality at very competitive rates.", next: "pricing_deep" },
+      { label: "Project Timeline?", answer: "Simple sites take 1-2 weeks. Complex apps take 4-8 weeks. We always deliver on time.", next: "pricing_deep" },
+      { label: "← Back", next: "initial" }
+    ],
+    pricing_deep: [
+      { label: "Monthly Fees?", answer: "None! Unless you want a maintenance plan. You own 100% of the code and the assets we build.", next: "more_help" },
+      { label: "Payment Stages?", answer: "Usually 0% upfront! You only pay when you are happy with the finished product.", next: "more_help" },
+      { label: "← Back to Pricing", next: "pricing" }
+    ],
+    about: [
+      { label: "Why CodeNext?", answer: "Because we are hungry for success. Every project is a chance for us to prove we are the best in Norway.", next: "more_help" },
+      { label: "Where are you?", answer: "We are based in Kristiansand, Norway, but we operate as a fully digital firm serving the world.", next: "more_help" },
+      { label: "← Back", next: "initial" }
+    ],
+    more_help: [
+      { label: "I want to start!", answer: "Excellent choice. Let's get you over to the contact page to book your free strategy session.", next: "contact_cta" },
+      { label: "I have another question", next: "initial" },
+      { label: "Still need more help?", next: "contact_cta" }
+    ],
+    contact_cta: [
+      { label: "Chat with a Developer", isAction: true, action: () => { navigate('/contact'); setIsOpen(false); }, icon: <MessageSquare size={14} /> },
+      { label: "Return to Main Menu", next: "initial", icon: <ArrowLeft size={14} /> }
+    ]
+  };
 
-    setInputText('');
+  const handleOptionClick = (option) => {
+    setMessages(prev => [...prev, { text: option.label, isBot: false }]);
+
+    if (option.answer) {
+      setTimeout(() => {
+        setMessages(prev => [...prev, { text: option.answer, isBot: true }]);
+      }, 400);
+    }
+
+    if (option.isAction) {
+      option.action();
+      return;
+    }
+
+    if (option.next) {
+      setTimeout(() => {
+        setCurrentMenu(option.next);
+        if (option.next === 'contact_cta') {
+          setMessages(prev => [...prev, { text: "I'd love to connect you with our lead developer for a free session. Shall we?", isBot: true }]);
+        }
+      }, 600);
+    }
   };
 
   return (
     <>
       <button 
         onClick={() => setIsOpen(true)}
-        className={`fixed bottom-6 right-6 bg-blue-600 text-white p-4 rounded-full shadow-lg hover:bg-blue-700 transition-transform hover:scale-110 z-50 ${isOpen ? 'hidden' : 'block'}`}
+        className={`fixed bottom-6 right-6 bg-blue-600 text-white p-4 rounded-full shadow-2xl hover:bg-blue-700 transition-all hover:scale-110 z-50 ${isOpen ? 'hidden' : 'block'}`}
+        aria-label="Open CodeNext Assistant"
       >
         <MessageCircle size={24} />
       </button>
@@ -45,44 +134,59 @@ const Chatbot = () => {
             initial={{ opacity: 0, y: 20, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.9 }}
-            className='fixed bottom-6 right-6 w-80 md:w-96 bg-slate-800 border border-slate-700 rounded-2xl shadow-2xl z-50 overflow-hidden flex flex-col'
-            style={{ maxHeight: '500px' }}
+            className='fixed bottom-6 right-6 w-80 md:w-96 bg-slate-900 border border-white/10 rounded-[2.5rem] shadow-2xl z-50 overflow-hidden flex flex-col'
+            style={{ maxHeight: '600px' }}
           >
             {/* Header */}
-            <div className='bg-gradient-to-r from-blue-600 to-purple-600 p-4 flex justify-between items-center'>
-              <div className='flex items-center gap-2'>
+            <div className='bg-gradient-to-r from-blue-600 to-purple-600 p-5 flex justify-between items-center'>
+              <div className='flex items-center gap-3'>
                 <div className='w-2 h-2 bg-green-400 rounded-full animate-pulse'></div>
-                <h3 className='font-bold text-white'>CodeNext Support</h3>
+                <h3 className='font-black text-white uppercase tracking-tighter text-sm'>CodeNext Expert</h3>
               </div>
-              <button onClick={() => setIsOpen(false)} className='text-white/80 hover:text-white'>
+              <button onClick={() => setIsOpen(false)} className='text-white/80 hover:text-white' aria-label="Close">
                 <X size={20} />
               </button>
             </div>
 
-            {/* Messages */}
-            <div className='flex-1 p-4 overflow-y-auto space-y-4 bg-slate-900/50' style={{ height: '300px' }}>
+            {/* Chat Area */}
+            <div 
+              ref={scrollRef}
+              className='flex-1 p-4 overflow-y-auto space-y-4 bg-slate-950/50 scroll-smooth' 
+              style={{ height: '350px' }}
+            >
               {messages.map((msg, idx) => (
-                <div key={idx} className={`flex ${msg.isBot ? 'justify-start' : 'justify-end'}`}>
-                  <div className={`max-w-[80%] p-3 rounded-xl text-sm ${msg.isBot ? 'bg-slate-700 text-gray-200 rounded-tl-none' : 'bg-blue-600 text-white rounded-tr-none'}`}>
+                <motion.div 
+                  key={idx} 
+                  initial={{ opacity: 0, y: 5 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className={`flex ${msg.isBot ? 'justify-start' : 'justify-end'}`}
+                >
+                  <div className={`max-w-[85%] p-4 rounded-2xl text-sm leading-relaxed ${msg.isBot ? 'bg-slate-800 text-gray-200 rounded-tl-none border border-white/5 shadow-inner' : 'bg-blue-600 text-white rounded-tr-none shadow-lg'}`}>
                     {msg.text}
                   </div>
-                </div>
+                </motion.div>
               ))}
             </div>
 
-            {/* Input */}
-            <form onSubmit={handleSend} className='p-4 bg-slate-800 border-t border-slate-700 flex gap-2'>
-              <input 
-                type='text' 
-                value={inputText}
-                onChange={(e) => setInputText(e.target.value)}
-                placeholder='Type a message...' 
-                className='flex-1 bg-slate-900 border border-slate-600 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-blue-500'
-              />
-              <button type='submit' className='bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-lg transition-colors'>
-                <Send size={18} />
-              </button>
-            </form>
+            {/* Dynamic Options */}
+            <div className='p-4 bg-slate-900 border-t border-white/5 shadow-[0_-10px_20px_rgba(0,0,0,0.3)]'>
+              <p className='text-[10px] font-black text-gray-500 uppercase tracking-widest mb-3 ml-1'>Knowledge Base</p>
+              <div className='flex flex-col gap-2 max-h-[200px] overflow-y-auto pr-1'>
+                {flow[currentMenu].map((option, idx) => (
+                  <button 
+                    key={idx}
+                    onClick={() => handleOptionClick(option)}
+                    className={`flex items-center justify-between w-full text-left p-3 rounded-xl text-xs transition-all font-bold ${option.isAction ? 'bg-blue-600 text-white hover:bg-blue-700 animate-pulse' : 'bg-slate-800/50 text-gray-300 hover:text-blue-400 border border-white/5'}`}
+                  >
+                    <div className="flex items-center gap-3">
+                      {option.icon || <Code size={14} className="opacity-50" />}
+                      {option.label}
+                    </div>
+                    {option.isAction && <ExternalLink size={12} />}
+                  </button>
+                ))}
+              </div>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
