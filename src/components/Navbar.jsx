@@ -24,7 +24,15 @@ const Navbar = () => {
           {/* Logo Section */}
           <Link to='/' className='flex items-center gap-3 group' aria-label="CodeNext Home">
             <div className='w-10 h-10 transition-transform group-hover:rotate-12 duration-300'>
-              <img src='/logo.png' alt='' width="40" height="40" className='w-full h-full object-contain' />
+              <img 
+                src='/logo.webp' 
+                alt='' 
+                width="40" 
+                height="40" 
+                fetchpriority="high"
+                loading="eager"
+                className='w-full h-full object-contain' 
+              />
             </div>
             <span className='font-black text-2xl tracking-tighter text-white'>
               CODE<span className='text-blue-500'>NEXT</span>

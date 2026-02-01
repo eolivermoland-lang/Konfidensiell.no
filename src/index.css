@@ -42,7 +42,7 @@ html, body, #root {
 }
 
 .text-gray-400 {
-  color: rgb(180, 188, 200); /* Brightened from default 400 for better contrast on dark BG */
+  color: #cbd5e1 !important; /* Brighter slate-300 for 100% accessibility score */
 }
 
 .text-glow {
