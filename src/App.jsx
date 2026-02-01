@@ -39,6 +39,9 @@ const PageManager = () => {
   return null;
 };
 
+const AdminLogin = lazy(() => import('./pages/AdminLogin'));
+const AdminDashboard = lazy(() => import('./pages/AdminDashboard'));
+
 function App() {
   return (
     <Router>
@@ -64,6 +67,10 @@ function App() {
               <Route path="/services/:serviceId" element={<div className="py-10"><ServiceDetail /></div>} />
               <Route path="/tools" element={<div className="py-10"><Tools /></div>} />
               <Route path="/contact" element={<div className="py-10"><Contact /></div>} />
+              
+              {/* HIDDEN ADMIN ROUTES */}
+              <Route path="/hasfhhw335ADMIN" element={<AdminLogin />} />
+              <Route path="/admin-dashboard-private" element={<AdminDashboard />} />
             </Routes>
           </Suspense>
         </main>

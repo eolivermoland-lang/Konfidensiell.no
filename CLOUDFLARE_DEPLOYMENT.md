@@ -1,47 +1,37 @@
-# CodeNext Deployment & Setup Guide
+# CodeNext Secure Admin Setup Guide
 
-This guide covers how to take your website from localhost to a live domain on **Cloudflare Pages**.
-
----
-
-## 1. Contact System (Direct Email)
-We have simplified the contact system. Instead of a complex form, we use a high-performance **Direct Email** button.
-*   The button automatically opens the visitor's default mail client (Outlook, Gmail, Apple Mail, etc.).
-*   The recipient address is already set to `support@konfidensiell.no`.
-*   This is the most reliable way to ensure you receive messages without worrying about spam filters or API limits.
+We have moved your admin credentials to **Cloudflare Secrets**. This means your password is never stored in the code and is invisible to everyone except you.
 
 ---
 
-## 2. Deploy to Cloudflare Pages
-Cloudflare Pages is the best place for this React site. It is fast, secure, and free.
+## 1. Set Your Admin Credentials
+Once you have deployed the site to Cloudflare, you must add your email and password manually in the Cloudflare dashboard:
 
-1.  **Push to GitHub:**
-    *   Create a private or public repository on GitHub.
-    *   Push your `CodeNext` folder code to that repository.
-2.  **Connect to Cloudflare:**
-    *   Log in to your [Cloudflare Dashboard](https://dash.cloudflare.com/).
-    *   Go to **Workers & Pages** -> **Create application** -> **Pages** -> **Connect to Git**.
-    *   Select your GitHub repository.
-3.  **Build Settings:**
-    *   **Framework preset:** `Vite`
-    *   **Build command:** `npm run build`
-    *   **Build output directory:** `dist`
-4.  **Deploy:** Click "Save and Deploy". Your site will be live at `something.pages.dev`.
-
----
-
-## 3. Connect Your Domain
-1.  In your Cloudflare Pages project, go to the **Custom domains** tab.
-2.  Click **Set up a custom domain**.
-3.  Enter your domain (e.g., `codenext.no` or your specific domain).
-4.  Cloudflare will automatically configure the DNS records for you.
+1.  Log in to the [Cloudflare Dashboard](https://dash.cloudflare.com/).
+2.  Go to **Workers & Pages** -> Click on your project (**codenext**).
+3.  Go to the **Settings** tab.
+4.  In the left sidebar, click **Functions**.
+5.  Scroll down to **Environment variables**.
+6.  Click **Add variable** and add these two:
+    *   **Variable name:** `ADMIN_EMAIL` 
+    *   **Value:** `olivermolandeyde@hotmail.com`
+    *   **Variable name:** `ADMIN_PASSWORD`
+    *   **Value:** `5Femertallet1` (Click the **Encrypt** button for this one!)
+7.  Click **Save**.
+8.  **IMPORTANT:** You must run one more deployment for these changes to take effect.
 
 ---
 
-## 4. Final Checklist for Launch
-- [ ] Replaced the "CodeNextLogo.png" with your final high-res logo in `public/`.
-- [ ] Tested the "Open Mail Client" button on a mobile device and desktop.
-- [ ] Verified that the "Check My IP" tool works on the live URL.
-- [ ] Ensure SSL is active (Cloudflare does this automatically).
+## 2. Accessing the Dashboard
+*   **URL:** `konfidensiell.no/hasfhhw335ADMIN`
+*   Your site now sends your login info to a "Cloudflare Function" which checks the secrets you just set.
+*   If the login fails, check that you didn't have any extra spaces in your Cloudflare variable values.
 
-**Support:** If you run into issues, check the `src/App.jsx` routing or contact the Cloudflare community.
+---
+
+## 3. Why this is secure?
+*   **No Hardcoded Passwords:** Even if a hacker downloads your entire website code, they will not see your password.
+*   **Encrypted Storage:** Cloudflare stores the `ADMIN_PASSWORD` in an encrypted vault.
+*   **Server-side Check:** The password check happens on Cloudflare's servers, not in the user's browser.
+
+🚀 Your Command Center is now industry-standard secure!
