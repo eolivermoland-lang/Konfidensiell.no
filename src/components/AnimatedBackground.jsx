@@ -2,10 +2,11 @@ import React, { useEffect, useRef } from 'react';
 
 const AnimatedBackground = () => {
   const canvasRef = useRef(null);
+  const requestRef = useRef();
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext('2d', { alpha: false }); // Performance optimization
     let width, height;
     let frame = 0;
 
@@ -15,7 +16,12 @@ const AnimatedBackground = () => {
     };
 
     const draw = () => {
-      // THE BASE BACKGROUND COLOR
+      // Performance: Only draw if tab is active
+      if (document.hidden) {
+        requestRef.current = requestAnimationFrame(draw);
+        return;
+      }
+
       ctx.fillStyle = '#020617';
       ctx.fillRect(0, 0, width, height);
       
@@ -25,20 +31,17 @@ const AnimatedBackground = () => {
       
       frame += 0.015;
 
-      // Draw Grid Lines
       ctx.beginPath();
-      ctx.strokeStyle = 'rgba(59, 130, 246, 0.3)'; // BRIGHTER BLUE
+      ctx.strokeStyle = 'rgba(59, 130, 246, 0.3)';
       ctx.lineWidth = 0.5;
 
       for (let i = 0; i < columns; i++) {
         for (let j = 0; j < rows; j++) {
           const x = i * gridSize;
           const y = j * gridSize;
-          
           const waveX = Math.sin(frame + (i * 0.5) + (j * 0.3)) * 15;
           const waveY = Math.cos(frame + (i * 0.3) + (j * 0.5)) * 15;
 
-          // Draw connections
           if (i < columns - 1) {
             const nextWaveX = Math.sin(frame + ((i + 1) * 0.5) + (j * 0.3)) * 15;
             const nextWaveY = Math.cos(frame + ((i + 1) * 0.3) + (j * 0.5)) * 15;
@@ -56,7 +59,7 @@ const AnimatedBackground = () => {
       }
       ctx.stroke();
 
-      // Draw Glowing Nodes
+      // Nodes
       for (let i = 0; i < columns; i += 2) {
         for (let j = 0; j < rows; j += 2) {
           const x = i * gridSize;
@@ -66,26 +69,21 @@ const AnimatedBackground = () => {
 
           ctx.beginPath();
           ctx.arc(x + waveX, y + waveY, 1.5, 0, Math.PI * 2);
-          ctx.fillStyle = 'rgba(168, 85, 247, 0.8)'; // BRIGHT PURPLE
-          ctx.fill();
-          
-          // Outer Glow
-          ctx.beginPath();
-          ctx.arc(x + waveX, y + waveY, 4, 0, Math.PI * 2);
-          ctx.fillStyle = 'rgba(168, 85, 247, 0.2)';
+          ctx.fillStyle = 'rgba(168, 85, 247, 0.8)';
           ctx.fill();
         }
       }
 
-      requestAnimationFrame(draw);
+      requestRef.current = requestAnimationFrame(draw);
     };
 
     window.addEventListener('resize', resize);
     resize();
-    draw();
+    requestRef.current = requestAnimationFrame(draw);
 
     return () => {
       window.removeEventListener('resize', resize);
+      cancelAnimationFrame(requestRef.current); // BUG FIX: Proper cleanup
     };
   }, []);
 
@@ -94,12 +92,8 @@ const AnimatedBackground = () => {
       ref={canvasRef}
       style={{
         position: 'fixed',
-        top: 0,
-        left: 0,
-        width: '100%',
-        height: '100%',
-        zIndex: -1,
-        pointerEvents: 'none'
+        top: 0, left: 0, width: '100%', height: '100%',
+        zIndex: -1, pointerEvents: 'none'
       }}
     />
   );

@@ -1,23 +1,28 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation, Link } from 'react-router-dom';
 import AnimatedBackground from './components/AnimatedBackground';
 import Navbar from './components/Navbar';
-import Home from './pages/Home';
-import About from './components/About';
-import Services from './components/Services';
-import ServiceDetail from './pages/ServiceDetail';
-import Tools from './components/Tools';
-import Contact from './components/Contact';
 import Chatbot from './components/Chatbot';
 
-// Accessibility Helper: Scroll to top and Dynamic Page Titles
+// Lazy load pages for better performance
+const Home = lazy(() => import('./pages/Home'));
+const About = lazy(() => import('./components/About'));
+const Services = lazy(() => import('./components/Services'));
+const ServiceDetail = lazy(() => import('./pages/ServiceDetail'));
+const Tools = lazy(() => import('./components/Tools'));
+const Contact = lazy(() => import('./components/Contact'));
+
+// Loading fallback component
+const PageLoader = () => (
+  <div className="h-screen w-full flex items-center justify-center bg-transparent">
+    <div className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+  </div>
+);
+
 const PageManager = () => {
   const { pathname } = useLocation();
-  
   useEffect(() => {
     window.scrollTo(0, 0);
-    
-    // Dynamic Titles for Accessibility
     const pageTitles = {
       '/': 'Home — CodeNext IT Solutions',
       '/about': 'About Us — CodeNext',
@@ -25,15 +30,12 @@ const PageManager = () => {
       '/tools': 'Developer Tools — CodeNext',
       '/contact': 'Contact Us — CodeNext',
     };
-    
-    // Handle dynamic service routes
     if (pathname.startsWith('/services/')) {
       document.title = 'Service Details — CodeNext';
     } else {
       document.title = pageTitles[pathname] || 'CodeNext IT Solutions';
     }
   }, [pathname]);
-  
   return null;
 };
 
@@ -42,7 +44,6 @@ function App() {
     <Router>
       <PageManager />
       
-      {/* 5. Primary Skip Link for Accessibility */}
       <a 
         href="#main-content" 
         className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-6 focus:py-3 focus:bg-blue-600 focus:text-white focus:rounded-xl focus:font-bold"
@@ -55,14 +56,16 @@ function App() {
         <Navbar />
         
         <main id="main-content" className='pt-20' tabIndex="-1">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<div className="py-10"><About /></div>} />
-            <Route path="/services" element={<div className="py-10"><Services /></div>} />
-            <Route path="/services/:serviceId" element={<div className="py-10"><ServiceDetail /></div>} />
-            <Route path="/tools" element={<div className="py-10"><Tools /></div>} />
-            <Route path="/contact" element={<div className="py-10"><Contact /></div>} />
-          </Routes>
+          <Suspense fallback={<PageLoader />}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/about" element={<div className="py-10"><About /></div>} />
+              <Route path="/services" element={<div className="py-10"><Services /></div>} />
+              <Route path="/services/:serviceId" element={<div className="py-10"><ServiceDetail /></div>} />
+              <Route path="/tools" element={<div className="py-10"><Tools /></div>} />
+              <Route path="/contact" element={<div className="py-10"><Contact /></div>} />
+            </Routes>
+          </Suspense>
         </main>
 
         <Chatbot />
