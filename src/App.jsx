@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation, Link } from 'react-router-dom';
 import AnimatedBackground from './components/AnimatedBackground';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
@@ -76,10 +76,10 @@ function App() {
                </div>
                <nav aria-label="Footer Navigation">
                  <div className="flex gap-8 text-sm font-bold uppercase tracking-widest text-gray-500">
-                    <a href="/about" className="hover:text-white transition-colors">About</a>
-                    <a href="/services" className="hover:text-white transition-colors">Services</a>
-                    <a href="/contact" className="hover:text-white transition-colors">Privacy</a>
-                    <a href="/contact" className="hover:text-white transition-colors">Terms</a>
+                    <Link to="/about" className="hover:text-white transition-colors">About</Link>
+                    <Link to="/services" className="hover:text-white transition-colors">Services</Link>
+                    <Link to="/contact" className="hover:text-white transition-colors">Privacy</Link>
+                    <Link to="/contact" className="hover:text-white transition-colors">Terms</Link>
                  </div>
                </nav>
             </div>

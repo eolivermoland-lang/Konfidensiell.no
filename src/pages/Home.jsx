@@ -68,13 +68,13 @@ const Home = () => {
               </Link>
             </motion.div>
             
-            <div className='grid grid-cols-2 gap-6'>
-              <article className='glass-card p-10 rounded-[2.5rem]'>
+            <div className='grid grid-cols-2 gap-6 items-stretch'>
+              <article className='glass-card p-10 rounded-[2.5rem] flex flex-col h-full'>
                 <Target className='mb-6 text-blue-500' size={48} aria-hidden="true" />
                 <h3 className='text-white font-black text-xl mb-4 uppercase tracking-tighter'>Outcome Driven</h3>
                 <p className='text-gray-400 text-sm'>We focus on your ROI and business goals from day one.</p>
               </article>
-              <article className='glass-card p-10 rounded-[2.5rem] mt-12'>
+              <article className='glass-card p-10 rounded-[2.5rem] flex flex-col h-full'>
                 <UserCheck className='mb-6 text-purple-500' size={48} aria-hidden="true" />
                 <h3 className='text-white font-black text-xl mb-4 uppercase tracking-tighter'>Personalized</h3>
                 <p className='text-gray-400 text-sm'>Tailor-made experiences, never copy-pasted templates.</p>
