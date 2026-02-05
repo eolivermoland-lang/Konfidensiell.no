@@ -13,31 +13,13 @@ const AdminDashboard = () => {
   const API_TOKEN = "VqbFcHPBkLelYskDf6tzknO7Ag0Jr6CTnQQ4T_Tv";
 
   useEffect(() => {
-    const authString = localStorage.getItem('admin_session');
-    
-    // 1. Check if auth exists
-    if (!authString) {
+    const auth = localStorage.getItem('admin_auth');
+    if (auth !== 'true') {
       navigate('/');
       return;
     }
+    setIsAuthorized(true);
 
-    // 2. Check if session expired
-    try {
-      const session = JSON.parse(authString);
-      if (!session.authenticated || new Date().getTime() > session.expiry) {
-        localStorage.removeItem('admin_session');
-        navigate('/');
-        return;
-      }
-      
-      // If we got here, they are legit
-      setIsAuthorized(true);
-    } catch (e) {
-      navigate('/');
-      return;
-    }
-
-    // 3. Fetch Analytics
     const fetchAnalytics = async () => {
       try {
         const query = `
@@ -64,7 +46,7 @@ const AdminDashboard = () => {
         });
 
         const data = await response.json();
-        const metrics = data.viewer.accounts[0]?.pagesDev?.analytics[0]?.sum;
+        const metrics = data.viewer?.accounts[0]?.pagesDev?.analytics[0]?.sum;
 
         if (metrics) {
           setRealStats({
@@ -74,7 +56,7 @@ const AdminDashboard = () => {
           });
         }
       } catch (err) {
-        console.error("API Error");
+        console.error("Dashboard Sync Error");
       } finally {
         setLoading(false);
       }
@@ -84,90 +66,37 @@ const AdminDashboard = () => {
   }, [navigate]);
 
   const handleLogout = () => {
-    localStorage.removeItem('admin_session');
+    localStorage.removeItem('admin_auth');
     navigate('/');
   };
 
-  // IF NOT AUTHORIZED, SHOW NOTHING (Completely Secure)
-  if (!isAuthorized) {
-    return null;
-  }
-
-  const stats = [
-    { label: 'Real Page Views', value: realStats.views, icon: <Eye />, color: 'text-blue-500' },
-    { label: 'Total Requests', value: realStats.visitors, icon: <Users />, color: 'text-purple-500' },
-    { label: 'Bandwidth Used', value: realStats.bandwidth, icon: <TrendingUp />, color: 'text-green-500' },
-    { label: 'Cloudflare Status', value: 'Active', icon: <ShieldCheck />, color: 'text-blue-400' },
-  ];
+  if (!isAuthorized) return null;
 
   return (
-    <div className="py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-      <div className="flex flex-col md:flex-row justify-between items-center mb-12 gap-6">
-        <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}>
-          <h1 className="text-4xl font-black text-white uppercase tracking-tighter text-glow">Command Center</h1>
-          <p className="text-gray-500 font-bold uppercase tracking-widest text-xs mt-2 flex items-center gap-2">
-            <ShieldCheck size={14} className="text-green-500" /> Secure Admin Session: Oliver
-          </p>
-        </motion.div>
-        <div className="flex gap-4">
-          <button 
-            onClick={() => window.location.reload()}
-            className="p-3 bg-slate-800 text-gray-400 rounded-xl hover:text-white transition-all border border-white/5"
-          >
-            <RefreshCw size={20} className={loading ? "animate-spin" : ""} />
-          </button>
-          <button 
-            onClick={handleLogout}
-            className="flex items-center gap-2 px-6 py-3 bg-red-600/10 text-red-500 rounded-xl font-bold hover:bg-red-600 hover:text-white transition-all active:scale-95 border border-red-600/20"
-          >
-            <LogOut size={18} /> Logout
-          </button>
-        </div>
-      </div>
+    <div className="py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto text-white">
+      <header className="flex justify-between items-center mb-12">
+        <h1 className="text-4xl font-black uppercase tracking-tighter">Command Center</h1>
+        <button onClick={handleLogout} className="px-6 py-3 bg-red-600/10 text-red-500 rounded-xl font-bold hover:bg-red-600 hover:text-white transition-all">Logout</button>
+      </header>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-        {stats.map((stat, idx) => (
-          <motion.div 
-            key={idx}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: idx * 0.1 }}
-            className="glass-card p-8 rounded-3xl border border-white/5"
-          >
-            <div className={`mb-4 ${stat.color}`}>{React.cloneElement(stat.icon, { size: 28 })}</div>
-            <div className="text-3xl font-black text-white mb-1">{loading ? "..." : stat.value}</div>
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
+        {[
+          { label: 'Total Views', value: realStats.views, icon: <Eye />, color: 'text-blue-500' },
+          { label: 'Requests', value: realStats.visitors, icon: <Users />, color: 'text-purple-500' },
+          { label: 'Bandwidth', value: realStats.bandwidth, icon: <TrendingUp />, color: 'text-green-500' },
+          { label: 'Status', value: 'Live', icon: <ShieldCheck />, color: 'text-blue-400' },
+        ].map((stat, i) => (
+          <motion.div key={i} className="glass-card p-8 rounded-3xl border border-white/5">
+            <div className={`mb-4 ${stat.color}`}>{stat.icon}</div>
+            <div className="text-3xl font-black mb-1">{loading ? "..." : stat.value}</div>
             <div className="text-gray-500 text-[10px] font-black uppercase tracking-widest">{stat.label}</div>
           </motion.div>
         ))}
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <div className="glass-panel rounded-[2.5rem] p-10 border border-white/5">
-           <h3 className="text-xl font-black text-white mb-8 uppercase tracking-tighter flex items-center gap-3">
-              <Globe className="text-blue-500" /> Live Data Stream
-           </h3>
-           <div className="space-y-4">
-              <div className="flex justify-between items-center p-4 bg-slate-950/50 rounded-2xl border border-white/5">
-                 <span className="text-gray-400 text-xs font-bold uppercase">Cloudflare Account</span>
-                 <span className="text-white font-mono text-xs">{ACCOUNT_ID}</span>
-              </div>
-              <div className="flex justify-between items-center p-4 bg-slate-950/50 rounded-2xl border border-white/5">
-                 <span className="text-gray-400 text-xs font-bold uppercase">Auth Status</span>
-                 <span className="text-green-500 text-[10px] font-black uppercase bg-green-500/10 px-2 py-1 rounded">Session Verified</span>
-              </div>
-           </div>
-        </div>
-
-        <div className="glass-panel rounded-[2.5rem] p-10 border border-white/5">
-           <h3 className="text-xl font-black text-white mb-8 uppercase tracking-tighter flex items-center gap-3">
-              <ShieldAlert className="text-purple-500" /> Security Log
-           </h3>
-           <div className="text-[10px] font-mono text-gray-500 space-y-2">
-              <p>[{new Date().toLocaleTimeString()}] - HANDSHAKE: SUCCESS</p>
-              <p>[{new Date().toLocaleTimeString()}] - TOKEN: VALIDATED</p>
-              <p>[{new Date().toLocaleTimeString()}] - ENCRYPTION: ACTIVE</p>
-           </div>
-        </div>
+      <div className="glass-panel rounded-[2.5rem] p-10 border border-white/5">
+         <h3 className="text-xl font-black mb-8 uppercase tracking-tighter flex items-center gap-3"><Globe className="text-blue-500" /> Infrastructure</h3>
+         <p className="text-gray-400 text-sm">Direct connection to Cloudflare Analytics enabled.</p>
       </div>
     </div>
   );
