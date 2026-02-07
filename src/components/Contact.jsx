@@ -20,11 +20,20 @@ const Contact = () => {
     const TEMPLATE_ID = "template_i6v4hzu";
     const PUBLIC_KEY = "J_-l2lpNZ9tB9bxwr";
 
-    emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, form.current, PUBLIC_KEY)
+    const templateParams = {
+      name: form.current.user_name.value,
+      user_name: form.current.user_name.value,
+      user_mail: form.current.user_email.value,
+      subject: form.current.subject.value,
+      message: form.current.message.value,
+    };
+
+    emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY)
       .then((result) => {
         setSubmitStatus('success');
         form.current.reset();
       }, (error) => {
+        console.error('EmailJS Error:', error);
         setSubmitStatus('error');
       })
       .finally(() => {
