@@ -9,12 +9,23 @@ const AdminLogin = () => {
   const [error, setError] = useState(false);
   const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    if (email === 'olivermolandeyde@hotmail.com' && password === '5Femertallet1') {
-      localStorage.setItem('admin_auth', 'true');
-      navigate('/admin-dashboard-private');
-    } else {
+    try {
+      const response = await fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
+      });
+      const data = await response.json();
+      if (data.success) {
+        localStorage.setItem('admin_auth', 'true');
+        navigate('/admin-dashboard-private');
+      } else {
+        setError(true);
+        setTimeout(() => setError(false), 3000);
+      }
+    } catch (err) {
       setError(true);
       setTimeout(() => setError(false), 3000);
     }

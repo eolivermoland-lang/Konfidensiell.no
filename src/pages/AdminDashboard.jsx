@@ -9,9 +9,6 @@ const AdminDashboard = () => {
   const [loading, setLoading] = useState(true);
   const [realStats, setRealStats] = useState({ views: '0', visitors: '0', bandwidth: '0 MB' });
 
-  const ACCOUNT_ID = "961d9b8159d86770ecbfa38b78c6ea7c";
-  const API_TOKEN = "VqbFcHPBkLelYskDf6tzknO7Ag0Jr6CTnQQ4T_Tv";
-
   useEffect(() => {
     const auth = localStorage.getItem('admin_auth');
     if (auth !== 'true') {
@@ -22,29 +19,7 @@ const AdminDashboard = () => {
 
     const fetchAnalytics = async () => {
       try {
-        const query = `
-          query {
-            viewer {
-              accounts(filter: { accountTag: "${ACCOUNT_ID}" }) {
-                pagesDev {
-                  analytics(filter: { date_geq: "2026-01-01" }, limit: 1) {
-                    sum { requests pageViews bytes }
-                  }
-                }
-              }
-            }
-          }
-        `;
-
-        const response = await fetch('https://api.cloudflare.com/client/v4/graphql', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${API_TOKEN}`
-          },
-          body: JSON.stringify({ query })
-        });
-
+        const response = await fetch('/api/analytics');
         const data = await response.json();
         const metrics = data.viewer?.accounts[0]?.pagesDev?.analytics[0]?.sum;
 
