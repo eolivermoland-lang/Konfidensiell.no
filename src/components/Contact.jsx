@@ -16,7 +16,7 @@ const Contact = () => {
     setSubmitStatus(null);
 
     // Replace these with your actual EmailJS IDs
-    const SERVICE_ID = "default_service";
+    const SERVICE_ID = "service_vxg82me";
     const TEMPLATE_ID = "template_i6v4hzu";
     const PUBLIC_KEY = "J_-l2lpNZ9tB9bxwr";
 
