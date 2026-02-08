@@ -82,10 +82,10 @@ function App() {
             <div className="flex flex-col md:flex-row justify-between items-center gap-8 mb-12">
                <div className="flex items-center gap-2">
                   <img src="/logo.webp" alt="Konfidensiell Logo" width="32" height="32" className="w-8 h-8 object-contain" />
-                  <span className="font-black text-2xl uppercase tracking-tighter">KONFIDE<span className="text-blue-500">NSIELL</span></span>
+                  <span className="font-black text-2xl uppercase tracking-tighter">KONFIDE<span className="text-emerald-500">NSIELL</span></span>
                </div>
                <nav aria-label="Footer Navigation">
-                 <div className="flex gap-8 text-sm font-bold uppercase tracking-widest text-gray-500">
+                 <div className="flex gap-8 text-sm font-bold uppercase tracking-widest text-slate-500">
                     <Link to="/about" className="hover:text-white transition-colors">About</Link>
                     <Link to="/services" className="hover:text-white transition-colors">Services</Link>
                     <Link to="/contact" className="hover:text-white transition-colors">Privacy</Link>
