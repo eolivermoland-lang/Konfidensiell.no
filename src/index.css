@@ -7,12 +7,12 @@
   color-scheme: dark;
 }
 
+/* THE FIX: Ensure containers are transparent so the background shows through */
 html, body, #root {
   margin: 0;
   padding: 0;
   min-height: 100vh;
-  /* Premium Deep Navy instead of Black */
-  background-color: #050a1f !important;
+  background-color: transparent !important;
   overflow-x: hidden;
   color: #f8fafc;
 }
@@ -31,35 +31,33 @@ html, body, #root {
 
 /* Ultra-Modern Transparency */
 .glass-panel {
-  background: rgba(8, 14, 44, 0.2) !important;
+  background: rgba(8, 14, 44, 0.15) !important;
   backdrop-filter: blur(20px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .glass-card {
-  background: rgba(255, 255, 255, 0.015) !important;
-  backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.01) !important;
+  backdrop-filter: blur(14px);
   border: 1px solid rgba(255, 255, 255, 0.05);
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .glass-card:hover {
-  background: rgba(255, 255, 255, 0.06) !important;
-  border: 1px solid rgba(59, 130, 246, 0.3);
-  box-shadow: 0 8px 32px 0 rgba(59, 130, 246, 0.15);
+  background: rgba(255, 255, 255, 0.04) !important;
+  border: 1px solid rgba(59, 130, 246, 0.2);
   transform: translateY(-5px);
 }
 
 .text-gray-400 {
-  color: #94a3b8 !important; /* Slate-400 */
+  color: #94a3b8 !important;
 }
 
 .text-glow {
   text-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
 }
 
-/* Animated Gradient Background for specific elements */
 .animate-gradient {
   background-size: 200% 200%;
   animation: gradient 15s ease infinite;
