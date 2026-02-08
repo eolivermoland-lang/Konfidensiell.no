@@ -50,44 +50,44 @@ const Home = () => {
       </section>
 
       {/* Intro Section */}
-      <section className='py-24 sm:py-32 bg-transparent' aria-labelledby="intro-heading">
-        <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
-          <div className='grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center'>
+      <section className='py-20 sm:py-32 bg-transparent' aria-labelledby="intro-heading">
+        <div className='max-w-7xl mx-auto px-6 sm:px-10 lg:px-8'>
+          <div className='grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center'>
             <motion.div className="text-center lg:text-left">
-              <h2 id="intro-heading" className='text-3xl sm:text-4xl md:text-6xl font-black mb-8 text-white tracking-tighter leading-tight'>
+              <h2 id="intro-heading" className='text-[2.25rem] leading-tight sm:text-4xl md:text-6xl font-black mb-6 text-white tracking-tighter'>
                 {t.home_intro.heading} <br />
                 <span className="text-emerald-500 uppercase">{t.home_intro.subheading}</span>
               </h2>
-              <p className='text-slate-400 text-lg sm:text-xl mb-10 leading-relaxed'>
+              <p className='text-slate-400 text-base sm:text-xl mb-8 leading-relaxed max-w-xl mx-auto lg:mx-0'>
                 {t.home_intro.desc}
               </p>
-              <div className="space-y-4 mb-10 inline-block text-left" role="list">
+              <div className="space-y-3 mb-10 inline-block text-left w-full sm:w-auto" role="list">
                 {[t.home_intro.point1, t.home_intro.point2, t.home_intro.point3].map((item, i) => (
-                  <div key={i} className="flex items-center gap-3 text-gray-200 font-bold text-sm sm:text-base" role="listitem">
-                    <CheckCircle className="text-emerald-500 flex-shrink-0" size={20} aria-hidden="true" /> {item}
+                  <div key={i} className="flex items-center gap-3 text-gray-200 font-bold text-xs sm:text-base bg-white/5 sm:bg-transparent p-3 sm:p-0 rounded-xl" role="listitem">
+                    <CheckCircle className="text-emerald-500 flex-shrink-0" size={18} aria-hidden="true" /> {item}
                   </div>
                 ))}
               </div>
               <div className="flex justify-center lg:justify-start">
-                <Link to='/services' className='inline-flex items-center gap-3 px-8 py-4 bg-emerald-600 hover:bg-emerald-700 text-white font-black rounded-2xl transition-all shadow-xl'>
-                  {t.home_intro.cta} <ArrowRight size={20} aria-hidden="true" />
+                <Link to='/services' className='w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 bg-emerald-600 hover:bg-emerald-700 text-white font-black rounded-2xl transition-all shadow-xl text-sm sm:text-base'>
+                  {t.home_intro.cta} <ArrowRight size={18} aria-hidden="true" />
                 </Link>
               </div>
             </motion.div>
             
-            <div className='grid grid-cols-1 sm:grid-cols-2 gap-6 w-full'>
-              <article className='glass-card p-8 sm:p-10 rounded-[2rem] sm:rounded-[2.5rem] flex flex-col justify-between h-full border border-white/5 hover:border-emerald-500/30 transition-colors'>
+            <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 w-full'>
+              <article className='glass-card p-6 sm:p-10 rounded-[1.5rem] sm:rounded-[2.5rem] flex flex-col justify-between h-full border border-white/5 hover:border-emerald-500/30 transition-colors'>
                 <div>
-                  <Target className='mb-6 text-emerald-500' size={40} aria-hidden="true" />
-                  <h3 className='text-white font-black text-lg sm:text-xl mb-4 uppercase tracking-tighter'>{t.home_intro.card1_title}</h3>
-                  <p className='text-slate-400 text-xs sm:text-sm leading-relaxed'>{t.home_intro.card1_desc}</p>
+                  <Target className='mb-4 sm:mb-6 text-emerald-500' size={32} sm={40} aria-hidden="true" />
+                  <h3 className='text-white font-black text-base sm:text-xl mb-3 uppercase tracking-tighter'>{t.home_intro.card1_title}</h3>
+                  <p className='text-slate-400 text-[11px] sm:text-sm leading-relaxed'>{t.home_intro.card1_desc}</p>
                 </div>
               </article>
-              <article className='glass-card p-8 sm:p-10 rounded-[2rem] sm:rounded-[2.5rem] flex flex-col justify-between h-full border border-white/5 hover:border-cyan-500/30 transition-colors'>
+              <article className='glass-card p-6 sm:p-10 rounded-[1.5rem] sm:rounded-[2.5rem] flex flex-col justify-between h-full border border-white/5 hover:border-cyan-500/30 transition-colors'>
                 <div>
-                  <UserCheck className='mb-6 text-cyan-500' size={40} aria-hidden="true" />
-                  <h3 className='text-white font-black text-lg sm:text-xl mb-4 uppercase tracking-tighter'>{t.home_intro.card2_title}</h3>
-                  <p className='text-slate-400 text-xs sm:text-sm leading-relaxed'>{t.home_intro.card2_desc}</p>
+                  <UserCheck className='mb-4 sm:mb-6 text-cyan-500' size={32} sm={40} aria-hidden="true" />
+                  <h3 className='text-white font-black text-base sm:text-xl mb-3 uppercase tracking-tighter'>{t.home_intro.card2_title}</h3>
+                  <p className='text-slate-400 text-[11px] sm:text-sm leading-relaxed'>{t.home_intro.card2_desc}</p>
                 </div>
               </article>
             </div>

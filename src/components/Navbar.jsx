@@ -25,8 +25,8 @@ const Navbar = () => {
           
           {/* Logo Section - Absolute Left */}
           <div className='flex items-center gap-2 sm:gap-4'>
-            <Link to='/' className='flex items-center gap-2 sm:gap-3 group' aria-label="Konfidensiell Home">
-              <div className='w-8 h-8 sm:w-10 sm:h-10 transition-transform group-hover:rotate-12 duration-300'>
+            <Link to='/' className='flex items-center gap-1.5 sm:gap-3 group' aria-label="Konfidensiell Home">
+              <div className='w-7 h-7 sm:w-10 sm:h-10 transition-transform group-hover:rotate-12 duration-300'>
                 <img 
                   src='/logo.webp' 
                   alt='' 
@@ -37,7 +37,7 @@ const Navbar = () => {
                   className='w-full h-full object-contain' 
                 />
               </div>
-              <span className='font-black text-xl sm:text-2xl tracking-tighter text-white uppercase'>
+              <span className='font-black text-lg sm:text-2xl tracking-tighter text-white uppercase'>
                 KONFIDE<span className='text-emerald-500'>NSIELL</span>
               </span>
             </Link>
@@ -45,10 +45,10 @@ const Navbar = () => {
             {/* Language Switcher - Behind/Next to Logo */}
             <button 
               onClick={toggleLanguage}
-              className="flex items-center gap-1 sm:gap-2 px-2 sm:px-3 py-1 sm:py-1.5 bg-white/5 hover:bg-white/10 border border-white/5 rounded-full transition-all text-[9px] sm:text-[10px] font-black uppercase tracking-widest text-gray-400 hover:text-white group overflow-hidden relative min-w-[50px] sm:min-w-[60px]"
+              className="flex items-center gap-1 sm:gap-2 px-2 sm:px-3 py-1 sm:py-1.5 bg-white/5 hover:bg-white/10 border border-white/5 rounded-full transition-all text-[8px] sm:text-[10px] font-black uppercase tracking-widest text-gray-400 hover:text-white group overflow-hidden relative min-w-[45px] sm:min-w-[60px]"
             >
-              <Globe size={12} className="text-emerald-500 group-hover:rotate-12 transition-transform" />
-              <div className="relative h-3 sm:h-4 w-4 sm:w-6">
+              <Globe size={10} sm={12} className="text-emerald-500 group-hover:rotate-12 transition-transform" />
+              <div className="relative h-3 sm:h-4 w-3 sm:w-6">
                 <AnimatePresence mode="wait">
                   <motion.span
                     key={language}
