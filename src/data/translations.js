@@ -12,9 +12,9 @@ export const translations = {
       contact: "Book Consultation"
     },
     hero: {
-      title: "DIGITAL INFRASTRUCTURE FOR",
-      subtitle: "MODERN BUSINESSES",
-      description: "We help businesses and startups scale with high-performance websites, secure IT infrastructure, and strategic consulting. Reliable. Confidential. Result-driven.",
+      title: "DIGITAL INFRASTRUCTURE",
+      subtitle: "FOR BUSINESSES",
+      description: "Scalable websites and secure IT solutions for modern companies. Reliable. Confidential. Result-driven.",
       cta: "Book a Free Consultation"
     },
     manifesto: {
@@ -92,7 +92,7 @@ export const translations = {
         footer: "We value long-term partnerships over short-term gains. Your growth is our success."
       },
       cta: {
-        heading: "Ready for a new standard?",
+        heading: "Ready to scale your business?",
         subheading: "Don't let legacy tech hold you back. Start your transformation today.",
         btn: "Book a Consultation"
       }
@@ -155,9 +155,9 @@ export const translations = {
       contact: "Bestill Konsultasjon"
     },
     hero: {
-      title: "DIGITAL INFRASTRUKTUR FOR",
-      subtitle: "MODERNE BEDRIFTER",
-      description: "Vi hjelper bedrifter og startups med å skalere gjennom høykvalitets nettsider, sikker IT-infrastruktur og strategisk rådgivning. Pålitelig. Konfidensielt. Resultatdrevet.",
+      title: "DIGITAL INFRASTRUKTUR",
+      subtitle: "FOR BEDRIFTER",
+      description: "Skalerbare nettsider og sikre IT-løsninger for moderne selskaper. Pålitelig. Konfidensielt. Resultatdrevet.",
       cta: "Bestill en gratis konsultasjon"
     },
     manifesto: {
