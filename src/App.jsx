@@ -1,8 +1,10 @@
 import React, { useEffect, Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation, Link } from 'react-router-dom';
-import AnimatedBackground from './components/AnimatedBackground';
 import Navbar from './components/Navbar';
-import Chatbot from './components/Chatbot';
+
+// Critical UI components
+const AnimatedBackground = lazy(() => import('./components/AnimatedBackground'));
+const Chatbot = lazy(() => import('./components/Chatbot'));
 
 // Lazy load pages for better performance
 const Home = lazy(() => import('./pages/Home'));
@@ -15,7 +17,7 @@ const Contact = lazy(() => import('./components/Contact'));
 // Loading fallback component
 const PageLoader = () => (
   <div className="h-screen w-full flex items-center justify-center bg-transparent">
-    <div className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+    <div className="w-12 h-12 border-4 border-emerald-500 border-t-transparent rounded-full animate-spin"></div>
   </div>
 );
 
@@ -49,13 +51,16 @@ function App() {
       
       <a 
         href="#main-content" 
-        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-6 focus:py-3 focus:bg-blue-600 focus:text-white focus:rounded-xl focus:font-bold"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-6 focus:py-3 focus:bg-emerald-600 focus:text-white focus:rounded-xl focus:font-bold"
       >
         Skip to main content
       </a>
 
-      <div className='relative min-h-screen text-white overflow-x-hidden selection:bg-blue-500/30'>
-        <AnimatedBackground />
+      <div className='relative min-h-screen text-white overflow-x-hidden selection:bg-emerald-500/30'>
+        <Suspense fallback={<div className="fixed inset-0 bg-[#050a1f]" />}>
+          <AnimatedBackground />
+        </Suspense>
+        
         <Navbar />
         
         <main id="main-content" className='pt-20' tabIndex="-1">
@@ -75,7 +80,9 @@ function App() {
           </Suspense>
         </main>
 
-        <Chatbot />
+        <Suspense fallback={null}>
+          <Chatbot />
+        </Suspense>
         
         <footer className='bg-transparent border-t border-slate-900/50 py-16 text-center backdrop-blur-sm'>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
