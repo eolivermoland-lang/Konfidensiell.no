@@ -46,29 +46,29 @@ const Tools = () => {
     <section className='py-20 bg-transparent'>
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
         
-        <header className='text-center mb-20'>
-          <h1 className='text-4xl md:text-6xl font-black text-white mb-6 tracking-tighter'>{t.heading}</h1>
-          <p className='text-gray-400 max-w-2xl mx-auto text-xl'>{t.subheading}</p>
+        <header className='text-center mb-16 sm:mb-20'>
+          <h1 className='text-3xl sm:text-4xl md:text-6xl font-black text-white mb-6 tracking-tighter'>{t.heading}</h1>
+          <p className='text-gray-400 max-w-2xl mx-auto text-lg sm:text-xl px-4'>{t.subheading}</p>
         </header>
 
         {/* Tech Stack Suggester */}
-        <div className="mb-32 glass-panel rounded-[3rem] p-8 md:p-16">
-           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+        <div className="mb-24 sm:mb-32 glass-panel rounded-[2rem] sm:rounded-[3rem] p-6 sm:p-12 lg:p-16">
+           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
               <div>
-                 <h2 className="text-3xl font-black text-white mb-6">{t.architect.title}</h2>
-                 <p className="text-gray-400 mb-10">{t.architect.desc}</p>
+                 <h2 className="text-2xl sm:text-3xl font-black text-white mb-6">{t.architect.title}</h2>
+                 <p className="text-gray-400 mb-8 sm:mb-10 text-sm sm:text-base">{t.architect.desc}</p>
                  
-                 <div className="space-y-6" role="tablist" aria-label="Technology goals">
+                 <div className="space-y-4 sm:space-y-6" role="tablist" aria-label="Technology goals">
                     {Object.keys(techStacks).map(key => (
                        <button 
                          key={key} 
                          role="tab"
                          aria-selected={goal === key}
                          onClick={() => setGoal(key)}
-                         className={`w-full text-left p-6 rounded-2xl border transition-all ${goal === key ? 'bg-blue-600/20 border-blue-600 text-white' : 'bg-slate-800/20 border-white/5 text-gray-500 hover:border-white/20'}`}
+                         className={`w-full text-left p-4 sm:p-6 rounded-2xl border transition-all ${goal === key ? 'bg-blue-600/20 border-blue-600 text-white' : 'bg-slate-800/20 border-white/5 text-gray-500 hover:border-white/20'}`}
                        >
                          <div className="flex justify-between items-center">
-                            <span className="text-lg font-bold capitalize">{language === 'en' ? key : (key === 'speed' ? 'fart' : key === 'security' ? 'sikkerhet' : 'e-handel')}</span>
+                            <span className="text-base sm:text-lg font-bold capitalize">{language === 'en' ? key : (key === 'speed' ? 'fart' : key === 'security' ? 'sikkerhet' : 'e-handel')}</span>
                             {goal === key && <Zap className="text-blue-400" size={18} aria-hidden="true" />}
                          </div>
                        </button>
@@ -76,62 +76,62 @@ const Tools = () => {
                  </div>
               </div>
 
-              <div className="flex flex-col justify-center glass-card p-10 rounded-[2.5rem] relative overflow-hidden" role="tabpanel">
-                 <div className="absolute top-0 right-0 p-8 opacity-5 pointer-events-none">
+              <div className="flex flex-col justify-center glass-card p-6 sm:p-10 rounded-[2rem] sm:rounded-[2.5rem] relative overflow-hidden" role="tabpanel">
+                 <div className="absolute top-0 right-0 p-8 opacity-5 pointer-events-none hidden sm:block">
                     <Layers size={200} aria-hidden="true" />
                  </div>
                  
                  <motion.div key={goal} initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }}>
-                    <div className="text-blue-500 font-bold uppercase text-xs tracking-widest mb-2">{t.architect.strategy}</div>
-                    <h3 className="text-2xl font-black text-white mb-6">{techStacks[goal].title}</h3>
+                    <div className="text-blue-500 font-bold uppercase text-[10px] sm:text-xs tracking-widest mb-2">{t.architect.strategy}</div>
+                    <h3 className="text-xl sm:text-2xl font-black text-white mb-6">{techStacks[goal].title}</h3>
                     
-                    <div className="space-y-4 mb-8">
+                    <div className="space-y-3 sm:space-y-4 mb-8">
                        {[
                          { icon: <Cpu size={16} />, label: language === 'en' ? 'Frontend' : 'Frontend', val: techStacks[goal].frontend },
                          { icon: <Zap size={16} />, label: language === 'en' ? 'Styling' : 'Styling', val: techStacks[goal].styling },
                          { icon: <Server size={16} />, label: language === 'en' ? 'Hosting' : 'Hosting', val: techStacks[goal].hosting },
                        ].map((item, i) => (
-                         <div key={i} className="flex items-center gap-4 bg-slate-950/50 p-4 rounded-xl border border-white/5">
-                            <div className="text-blue-500" aria-hidden="true">{item.icon}</div>
+                         <div key={i} className="flex items-center gap-4 bg-slate-950/50 p-3 sm:p-4 rounded-xl border border-white/5">
+                            <div className="text-blue-500 flex-shrink-0" aria-hidden="true">{item.icon}</div>
                             <div>
-                               <div className="text-[10px] text-gray-500 font-black uppercase tracking-widest">{item.label}</div>
-                               <div className="text-white font-bold">{item.val}</div>
+                               <div className="text-[9px] sm:text-[10px] text-gray-500 font-black uppercase tracking-widest">{item.label}</div>
+                               <div className="text-white font-bold text-sm sm:text-base">{item.val}</div>
                             </div>
                          </div>
                        ))}
                     </div>
-                    <p className="text-gray-400 italic text-sm">{techStacks[goal].desc}</p>
+                    <p className="text-gray-400 italic text-xs sm:text-sm">{techStacks[goal].desc}</p>
                  </motion.div>
               </div>
            </div>
         </div>
 
-        <div className='grid grid-cols-1 lg:grid-cols-3 gap-10'>
-          <section className='glass-card p-10 rounded-3xl' aria-labelledby="ip-tool-heading">
+        <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-10'>
+          <section className='glass-card p-8 sm:p-10 rounded-3xl' aria-labelledby="ip-tool-heading">
             <Globe className='text-blue-500 mb-6' size={32} aria-hidden="true" />
-            <h2 id="ip-tool-heading" className='text-2xl font-bold text-white mb-8'>{t.ip.title}</h2>
-            <div className='bg-slate-950/50 p-6 rounded-2xl mb-8 text-center text-xl font-bold text-blue-400' aria-live="polite">
+            <h2 id="ip-tool-heading" className='text-xl sm:text-2xl font-bold text-white mb-8'>{t.ip.title}</h2>
+            <div className='bg-slate-950/50 p-6 rounded-2xl mb-8 text-center text-lg sm:text-xl font-bold text-blue-400' aria-live="polite">
               {loadingIp ? t.ip.fetching : (ipData || '?.?.?.?')}
             </div>
-            <button onClick={checkIp} className='w-full py-4 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700 transition-colors'>{t.ip.btn}</button>
+            <button onClick={checkIp} className='w-full py-4 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700 transition-colors text-sm sm:text-base'> {t.ip.btn}</button>
           </section>
 
-          <section className='glass-card p-10 rounded-3xl' aria-labelledby="pass-tool-heading">
+          <section className='glass-card p-8 sm:p-10 rounded-3xl' aria-labelledby="pass-tool-heading">
             <Key className='text-purple-500 mb-6' size={32} aria-hidden="true" />
-            <h2 id="pass-tool-heading" className='text-2xl font-bold text-white mb-8'>{t.pass.title}</h2>
-            <div className='bg-slate-950/50 p-6 rounded-2xl mb-8 text-center text-sm font-mono text-purple-400 break-all' aria-live="polite">
+            <h2 id="pass-tool-heading" className='text-xl sm:text-2xl font-bold text-white mb-8'>{t.pass.title}</h2>
+            <div className='bg-slate-950/50 p-6 rounded-2xl mb-8 text-center text-xs sm:text-sm font-mono text-purple-400 break-all h-[60px] flex items-center justify-center' aria-live="polite">
               {password || '••••••••'}
             </div>
-            <button onClick={generatePassword} className='w-full py-4 bg-purple-600 text-white rounded-xl font-bold hover:bg-purple-700 transition-colors'>{t.pass.btn}</button>
+            <button onClick={generatePassword} className='w-full py-4 bg-purple-600 text-white rounded-xl font-bold hover:bg-purple-700 transition-colors text-sm sm:text-base'>{t.pass.btn}</button>
           </section>
 
-          <section className='glass-card p-10 rounded-3xl' aria-labelledby="ping-tool-heading">
+          <section className='glass-card p-8 sm:p-10 rounded-3xl sm:col-span-2 lg:col-span-1' aria-labelledby="ping-tool-heading">
             <Wifi className='text-green-500 mb-6' size={32} aria-hidden="true" />
-            <h2 id="ping-tool-heading" className='text-2xl font-bold text-white mb-8'>{t.ping.title}</h2>
-            <div className='bg-slate-950/50 p-6 rounded-2xl mb-8 text-center text-3xl font-black text-green-400' aria-live="polite">
+            <h2 id="ping-tool-heading" className='text-xl sm:text-2xl font-bold text-white mb-8'>{t.ping.title}</h2>
+            <div className='bg-slate-950/50 p-6 rounded-2xl mb-8 text-center text-2xl sm:text-3xl font-black text-green-400' aria-live="polite">
               {latency !== null ? `${latency}ms` : '--'}
             </div>
-            <button onClick={checkLatency} className='w-full py-4 bg-green-600 text-white rounded-xl font-bold hover:bg-green-700 transition-colors'>{t.ping.btn}</button>
+            <button onClick={checkLatency} className='w-full py-4 bg-green-600 text-white rounded-xl font-bold hover:bg-green-700 transition-colors text-sm sm:text-base'>{t.ping.btn}</button>
           </section>
         </div>
       </div>

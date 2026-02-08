@@ -29,7 +29,7 @@ const Hero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <h1 className='text-6xl md:text-8xl font-black text-white mb-8 tracking-tighter leading-[0.9]'>
+          <h1 className='text-4xl sm:text-6xl md:text-8xl font-black text-white mb-8 tracking-tighter leading-[0.9] break-words'>
             {t.hero.title}<br />
             <span className='text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-blue-600 bg-[length:200%_auto] animate-gradient'>
               {t.hero.subtitle}.
@@ -42,7 +42,7 @@ const Hero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className='mt-4 max-w-2xl mx-auto text-xl md:text-2xl text-gray-400 font-medium'
+          className='mt-4 max-w-2xl mx-auto text-lg md:text-2xl text-gray-400 font-medium px-4'
         >
           {t.hero.description}
         </motion.p>
@@ -52,12 +52,12 @@ const Hero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className='mt-12 flex flex-wrap justify-center gap-6'
+          className='mt-12 flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6'
         >
-          <Link to='/contact' className='group relative flex items-center gap-2 px-10 py-5 bg-white text-slate-900 font-black text-lg rounded-2xl hover:bg-blue-500 hover:text-white transition-all duration-300 shadow-2xl shadow-white/5 active:scale-95'>
+          <Link to='/contact' className='w-full sm:w-auto group relative flex items-center justify-center gap-2 px-8 py-4 sm:px-10 sm:py-5 bg-white text-slate-900 font-black text-base sm:text-lg rounded-2xl hover:bg-blue-500 hover:text-white transition-all duration-300 shadow-2xl active:scale-95'>
             {language === 'en' ? 'Start Your Journey' : 'Start Reisen Din'} <ArrowRight size={22} className="group-hover:translate-x-1 transition-transform" />
           </Link>
-          <Link to='/services' className='px-10 py-5 bg-slate-900/50 backdrop-blur-md border border-slate-700 text-white font-black text-lg rounded-2xl hover:bg-slate-800 transition-all active:scale-95'>
+          <Link to='/services' className='w-full sm:w-auto px-8 py-4 sm:px-10 sm:py-5 bg-slate-900/50 backdrop-blur-md border border-slate-700 text-white font-black text-base sm:text-lg rounded-2xl hover:bg-slate-800 transition-all active:scale-95 text-center'>
             {language === 'en' ? 'View Our Work' : 'Se Våre Prosjekter'}
           </Link>
         </motion.div>
