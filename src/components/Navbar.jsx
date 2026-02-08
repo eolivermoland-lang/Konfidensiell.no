@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Globe } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
+import { useLanguage } from '../store/LanguageContext';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
+  const { language, toggleLanguage } = useLanguage();
 
   const links = [
-    { name: 'Home', href: '/' },
-    { name: 'About', href: '/about' },
-    { name: 'Services', href: '/services' },
-    { name: 'Tools', href: '/tools' },
+    { name: language === 'en' ? 'Home' : 'Hjem', href: '/' },
+    { name: language === 'en' ? 'About' : 'Om Oss', href: '/about' },
+    { name: language === 'en' ? 'Services' : 'Tjenester', href: '/services' },
+    { name: language === 'en' ? 'Tools' : 'Verktøy', href: '/tools' },
   ];
 
   const isActive = (path) => location.pathname === path;
@@ -53,14 +55,44 @@ const Navbar = () => {
                   {link.name}
                 </Link>
               ))}
+
+              {/* Language Switcher */}
+              <button 
+                onClick={toggleLanguage}
+                className="flex items-center gap-2 px-3 py-1.5 bg-white/5 hover:bg-white/10 border border-white/5 rounded-full transition-all text-[10px] font-black uppercase tracking-widest text-gray-400 hover:text-white group overflow-hidden relative"
+              >
+                <Globe size={14} className="text-blue-500 group-hover:rotate-12 transition-transform" />
+                <div className="relative h-4 w-6">
+                  <AnimatePresence mode="wait">
+                    <motion.span
+                      key={language}
+                      initial={{ y: 20, opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      exit={{ y: -20, opacity: 0 }}
+                      transition={{ duration: 0.2 }}
+                      className="absolute inset-0 flex items-center justify-center"
+                    >
+                      {language === 'en' ? 'EN' : 'NO'}
+                    </motion.span>
+                  </AnimatePresence>
+                </div>
+              </button>
+
               <Link to='/contact' className='ml-4 px-6 py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-black uppercase tracking-widest rounded-full transition-all shadow-lg shadow-blue-600/20 active:scale-95'>
-                Contact
+                {language === 'en' ? 'Contact' : 'Kontakt'}
               </Link>
             </div>
           </div>
 
-          {/* Mobile Menu Button - 2. Button Accessible Name Fix */}
-          <div className='md:hidden'>
+          {/* Mobile Actions */}
+          <div className='md:hidden flex items-center gap-4'>
+            <button 
+              onClick={toggleLanguage}
+              className="flex items-center gap-1.5 px-3 py-1.5 bg-white/5 rounded-full text-[10px] font-black uppercase text-gray-400"
+            >
+              <Globe size={12} className="text-blue-500" />
+              {language === 'en' ? 'EN' : 'NO'}
+            </button>
             <button
               onClick={() => setIsOpen(!isOpen)}
               className='text-gray-400 hover:text-white p-2 transition-colors'
