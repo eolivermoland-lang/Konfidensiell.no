@@ -7,46 +7,48 @@
   color-scheme: dark;
 }
 
-/* THE FIX: Ensure containers are transparent so the background shows through */
+/* NEW THEME: Arctic Emerald & Slate */
 html, body, #root {
   margin: 0;
   padding: 0;
   min-height: 100vh;
-  background-color: transparent !important;
+  /* Brighter, more sophisticated Slate Grey-Navy */
+  background-color: #0f172a !important; 
   overflow-x: hidden;
-  color: #f8fafc;
+  color: #f1f5f9;
 }
 
-/* Custom Scrollbar */
+/* Custom Scrollbar - Emerald Gradient */
 ::-webkit-scrollbar {
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #050a1f;
+  background: #0f172a;
 }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(to bottom, #3b82f6, #6366f1);
+  background: linear-gradient(to bottom, #10b981, #06b6d4);
   border-radius: 10px;
 }
 
-/* Ultra-Modern Transparency */
+/* Ultra-Transparent Glass - Emerald Tints */
 .glass-panel {
-  background: rgba(8, 14, 44, 0.15) !important;
+  background: rgba(15, 23, 42, 0.3) !important;
   backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(16, 185, 129, 0.1);
 }
 
 .glass-card {
-  background: rgba(255, 255, 255, 0.01) !important;
-  backdrop-filter: blur(14px);
+  background: rgba(255, 255, 255, 0.02) !important;
+  backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.05);
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .glass-card:hover {
-  background: rgba(255, 255, 255, 0.04) !important;
-  border: 1px solid rgba(59, 130, 246, 0.2);
+  background: rgba(16, 185, 129, 0.05) !important;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  box-shadow: 0 8px 32px 0 rgba(16, 185, 129, 0.1);
   transform: translateY(-5px);
 }
 
@@ -54,8 +56,9 @@ html, body, #root {
   color: #94a3b8 !important;
 }
 
+/* Emerald & Cyan Text Glow */
 .text-glow {
-  text-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+  text-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
 }
 
 .animate-gradient {

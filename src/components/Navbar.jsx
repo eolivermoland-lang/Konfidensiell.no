@@ -19,7 +19,7 @@ const Navbar = () => {
   const isActive = (path) => location.pathname === path;
 
   return (
-    <nav className='fixed top-0 left-0 w-full z-50 bg-slate-900/80 backdrop-blur-md border-b border-slate-800' aria-label="Main Navigation">
+    <nav className='fixed top-0 left-0 w-full z-50 bg-slate-900/40 backdrop-blur-md border-b border-white/5' aria-label="Main Navigation">
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
         <div className='flex items-center justify-between h-20'>
           
@@ -38,7 +38,7 @@ const Navbar = () => {
                 />
               </div>
               <span className='font-black text-xl sm:text-2xl tracking-tighter text-white uppercase'>
-                KONFIDE<span className='text-blue-500'>NSIELL</span>
+                KONFIDE<span className='text-emerald-500'>NSIELL</span>
               </span>
             </Link>
 
@@ -47,7 +47,7 @@ const Navbar = () => {
               onClick={toggleLanguage}
               className="flex items-center gap-1 sm:gap-2 px-2 sm:px-3 py-1 sm:py-1.5 bg-white/5 hover:bg-white/10 border border-white/5 rounded-full transition-all text-[9px] sm:text-[10px] font-black uppercase tracking-widest text-gray-400 hover:text-white group overflow-hidden relative min-w-[50px] sm:min-w-[60px]"
             >
-              <Globe size={12} className="text-blue-500 group-hover:rotate-12 transition-transform" />
+              <Globe size={12} className="text-emerald-500 group-hover:rotate-12 transition-transform" />
               <div className="relative h-3 sm:h-4 w-4 sm:w-6">
                 <AnimatePresence mode="wait">
                   <motion.span
@@ -72,15 +72,15 @@ const Navbar = () => {
                 <Link 
                   key={link.name}
                   to={link.href} 
-                  className={`px-2 py-1 text-sm font-bold uppercase tracking-widest transition-all hover:text-blue-400 ${
-                    isActive(link.href) ? 'text-blue-400' : 'text-gray-400'
+                  className={`px-2 py-1 text-sm font-bold uppercase tracking-widest transition-all hover:text-emerald-400 ${
+                    isActive(link.href) ? 'text-emerald-400' : 'text-gray-400'
                   }`}
                 >
                   {link.name}
                 </Link>
               ))}
 
-              <Link to='/contact' className='ml-4 px-6 py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-black uppercase tracking-widest rounded-full transition-all shadow-lg shadow-blue-600/20 active:scale-95'>
+              <Link to='/contact' className='ml-4 px-6 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-black uppercase tracking-widest rounded-full transition-all shadow-lg shadow-emerald-600/20 active:scale-95'>
                 {language === 'en' ? 'Contact' : 'Kontakt'}
               </Link>
             </div>

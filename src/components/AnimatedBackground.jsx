@@ -1,20 +1,20 @@
 import React, { useRef, Suspense } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { Sphere, MeshDistortMaterial, Float, Environment } from '@react-three/drei';
+import { Sphere, MeshDistortMaterial, Float } from '@react-three/drei';
 
-const CrystalOrb = ({ position, color, size, speed, distort }) => {
+const ArcticOrb = ({ position, color, size, speed, distort }) => {
   const mesh = useRef();
   
   useFrame((state) => {
     const t = state.clock.getElapsedTime();
     if (mesh.current) {
-      mesh.current.rotation.x = t * 0.2;
-      mesh.current.rotation.y = t * 0.3;
+      mesh.current.rotation.x = t * 0.15;
+      mesh.current.rotation.y = t * 0.2;
     }
   });
 
   return (
-    <Float speed={speed * 2} rotationIntensity={2} floatIntensity={2}>
+    <Float speed={speed * 2} rotationIntensity={1.5} floatIntensity={2}>
       <mesh ref={mesh} position={position}>
         <sphereGeometry args={[size, 64, 64]} />
         <MeshDistortMaterial
@@ -22,12 +22,12 @@ const CrystalOrb = ({ position, color, size, speed, distort }) => {
           speed={speed}
           distort={distort}
           radius={1}
-          metalness={1}
-          roughness={0}
+          metalness={0.8}
+          roughness={0.1}
           transparent
           opacity={0.5}
           emissive={color}
-          emissiveIntensity={0.5}
+          emissiveIntensity={0.4}
         />
       </mesh>
     </Float>
@@ -37,27 +37,29 @@ const CrystalOrb = ({ position, color, size, speed, distort }) => {
 const Scene = () => {
   return (
     <>
-      <ambientLight intensity={1} />
-      <pointLight position={[10, 10, 10]} intensity={2} color="#3b82f6" />
-      <pointLight position={[-10, -10, -10]} intensity={2} color="#8b5cf6" />
+      <ambientLight intensity={1.2} />
+      <pointLight position={[10, 10, 10]} intensity={2.5} color="#10b981" />
+      <pointLight position={[-10, -10, -10]} intensity={2} color="#06b6d4" />
+      <spotLight position={[0, 10, 0]} intensity={1.5} color="#ffffff" />
       
-      {/* Large Central "Energy" Hub */}
-      <CrystalOrb position={[0, 0, -2]} color="#2563eb" size={2} speed={1} distort={0.3} />
+      {/* Arctic Emerald Orbs */}
+      <ArcticOrb position={[0, 0, -2]} color="#10b981" size={2.2} speed={1} distort={0.3} />
+      <ArcticOrb position={[-5, 2, -5]} color="#06b6d4" size={1.5} speed={2} distort={0.4} />
+      <ArcticOrb position={[5, -2, -5]} color="#10b981" size={1.8} speed={1.5} distort={0.5} />
+      <ArcticOrb position={[2, 4, -7]} color="#f1f5f9" size={1} speed={2.5} distort={0.3} />
       
-      {/* Surrounding Orbs */}
-      <CrystalOrb position={[-4, 2, -4]} color="#3b82f6" size={1.2} speed={2} distort={0.5} />
-      <CrystalOrb position={[4, -2, -4]} color="#7c3aed" size={1.5} speed={1.5} distort={0.4} />
-      <CrystalOrb position={[2, 3, -6]} color="#60a5fa" size={0.8} speed={3} distort={0.6} />
-      
-      {/* Moving Tech Grid */}
-      <gridHelper args={[100, 50, "#1e293b", "#0f172a"]} rotation={[Math.PI / 4, 0, 0]} position={[0, -10, 0]} opacity={0.2} transparent />
+      {/* Subtle Moving Lattice */}
+      <mesh rotation={[Math.PI / 4, 0, 0]} position={[0, 0, -10]}>
+        <sphereGeometry args={[15, 32, 32]} />
+        <meshBasicMaterial color="#1e293b" wireframe transparent opacity={0.05} />
+      </mesh>
     </>
   );
 };
 
 const AnimatedBackground = () => {
   return (
-    <div className="fixed inset-0 z-[-1] bg-[#020617] pointer-events-none">
+    <div className="fixed inset-0 z-[-1] bg-[#0f172a] pointer-events-none">
       <Canvas 
         camera={{ position: [0, 0, 8], fov: 50 }}
         dpr={[1, 2]}
@@ -67,9 +69,10 @@ const AnimatedBackground = () => {
         </Suspense>
       </Canvas>
       
-      {/* Visual Polish Overlays */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,transparent_0%,#020617_100%)] opacity-60" />
-      <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-blue-600/5 via-transparent to-purple-600/5" />
+      {/* Arctic Overlay Gradients */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(16,185,129,0.08),transparent_50%)] pointer-events-none" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_100%_100%,rgba(6,184,212,0.08),transparent_50%)] pointer-events-none" />
+      <div className="absolute inset-0 bg-[#0f172a]/20 pointer-events-none" />
     </div>
   );
 };

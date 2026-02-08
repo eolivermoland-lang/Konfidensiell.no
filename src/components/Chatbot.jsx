@@ -122,7 +122,7 @@ const Chatbot = () => {
     <>
       <button 
         onClick={() => setIsOpen(true)}
-        className={`fixed bottom-6 right-6 bg-blue-600 text-white p-4 rounded-full shadow-2xl hover:bg-blue-700 transition-all hover:scale-110 z-50 ${isOpen ? 'hidden' : 'block'}`}
+        className={`fixed bottom-6 right-6 bg-emerald-600 text-white p-4 rounded-full shadow-2xl hover:bg-emerald-700 transition-all hover:scale-110 z-50 ${isOpen ? 'hidden' : 'block'}`}
         aria-label="Open Konfidensiell Assistant"
       >
         <MessageCircle size={24} />
@@ -134,13 +134,13 @@ const Chatbot = () => {
             initial={{ opacity: 0, y: 20, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.9 }}
-            className='fixed bottom-6 right-6 w-80 md:w-96 bg-slate-900 border border-white/10 rounded-[2.5rem] shadow-2xl z-50 overflow-hidden flex flex-col'
+            className='fixed bottom-6 right-6 w-80 md:w-96 bg-slate-900 border border-white/10 rounded-[2rem] shadow-2xl z-50 overflow-hidden flex flex-col'
             style={{ maxHeight: '600px' }}
           >
             {/* Header */}
-            <div className='bg-gradient-to-r from-blue-600 to-purple-600 p-5 flex justify-between items-center'>
+            <div className='bg-gradient-to-r from-emerald-600 to-cyan-600 p-5 flex justify-between items-center'>
               <div className='flex items-center gap-3'>
-                <div className='w-2 h-2 bg-green-400 rounded-full animate-pulse'></div>
+                <div className='w-2 h-2 bg-emerald-300 rounded-full animate-pulse'></div>
                 <h3 className='font-black text-white uppercase tracking-tighter text-sm'>Konfidensiell Expert</h3>
               </div>
               <button onClick={() => setIsOpen(false)} className='text-white/80 hover:text-white' aria-label="Close">
@@ -161,7 +161,7 @@ const Chatbot = () => {
                   animate={{ opacity: 1, y: 0 }}
                   className={`flex ${msg.isBot ? 'justify-start' : 'justify-end'}`}
                 >
-                  <div className={`max-w-[85%] p-4 rounded-2xl text-sm leading-relaxed ${msg.isBot ? 'bg-slate-800 text-gray-200 rounded-tl-none border border-white/5 shadow-inner' : 'bg-blue-600 text-white rounded-tr-none shadow-lg'}`}>
+                  <div className={`max-w-[85%] p-4 rounded-2xl text-sm leading-relaxed ${msg.isBot ? 'bg-slate-800 text-gray-200 rounded-tl-none border border-white/5 shadow-inner' : 'bg-emerald-600 text-white rounded-tr-none shadow-lg'}`}>
                     {msg.text}
                   </div>
                 </motion.div>
@@ -170,13 +170,13 @@ const Chatbot = () => {
 
             {/* Dynamic Options */}
             <div className='p-4 bg-slate-900 border-t border-white/5 shadow-[0_-10px_20px_rgba(0,0,0,0.3)]'>
-              <p className='text-[10px] font-black text-gray-500 uppercase tracking-widest mb-3 ml-1'>Knowledge Base</p>
+              <p className='text-[10px] font-black text-slate-500 uppercase tracking-widest mb-3 ml-1'>Knowledge Base</p>
               <div className='flex flex-col gap-2 max-h-[200px] overflow-y-auto pr-1'>
                 {flow[currentMenu].map((option, idx) => (
                   <button 
                     key={idx}
                     onClick={() => handleOptionClick(option)}
-                    className={`flex items-center justify-between w-full text-left p-3 rounded-xl text-xs transition-all font-bold ${option.isAction ? 'bg-blue-600 text-white hover:bg-blue-700 animate-pulse' : 'bg-slate-800/50 text-gray-300 hover:text-blue-400 border border-white/5'}`}
+                    className={`flex items-center justify-between w-full text-left p-3 rounded-xl text-xs transition-all font-bold ${option.isAction ? 'bg-emerald-600 text-white hover:bg-emerald-700' : 'bg-slate-800/50 text-gray-300 hover:text-emerald-400 border border-white/5'}`}
                   >
                     <div className="flex items-center gap-3">
                       {option.icon || <Code size={14} className="opacity-50" />}

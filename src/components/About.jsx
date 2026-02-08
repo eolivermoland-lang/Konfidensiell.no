@@ -49,10 +49,10 @@ const About = () => {
 
             <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 px-4 sm:px-0'>
               {[
-                { icon: <Award className='w-6 h-6 sm:w-8 sm:h-8 text-blue-500' />, title: t.card1_title, desc: t.card1_desc },
-                { icon: <ShieldCheck className='w-6 h-6 sm:w-8 sm:h-8 text-purple-500' />, title: t.card2_title, desc: t.card2_desc },
-                { icon: <Briefcase className='w-6 h-6 sm:w-8 sm:h-8 text-green-500' />, title: t.card3_title, desc: t.card3_desc },
-                { icon: <Zap className='w-6 h-6 sm:w-8 sm:h-8 text-yellow-500' />, title: t.card4_title, desc: t.card4_desc }
+                { icon: <Award className='w-6 h-6 sm:w-8 sm:h-8 text-emerald-500' />, title: t.card1_title, desc: t.card1_desc },
+                { icon: <ShieldCheck className='w-6 h-6 sm:w-8 sm:h-8 text-cyan-500' />, title: t.card2_title, desc: t.card2_desc },
+                { icon: <Briefcase className='w-6 h-6 sm:w-8 sm:h-8 text-emerald-400' />, title: t.card3_title, desc: t.card3_desc },
+                { icon: <Zap className='w-6 h-6 sm:w-8 sm:h-8 text-cyan-400' />, title: t.card4_title, desc: t.card4_desc }
               ].map((item, index) => (
                 <motion.div 
                   key={index}
@@ -60,11 +60,11 @@ const About = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  className='glass-card p-6 sm:p-8 rounded-[1.5rem] sm:rounded-3xl border border-white/5 hover:border-blue-500/30 transition-all'
+                  className='glass-card p-6 sm:p-8 rounded-[1.5rem] sm:rounded-3xl border border-white/5 hover:border-emerald-500/30 transition-all'
                 >
                   <div className='mb-4'>{item.icon}</div>
                   <h4 className='font-black text-lg sm:text-xl text-white mb-2 uppercase tracking-tighter'>{item.title}</h4>
-                  <p className='text-gray-400 text-xs sm:text-sm leading-relaxed'>{item.desc}</p>
+                  <p className='text-slate-400 text-xs sm:text-sm leading-relaxed'>{item.desc}</p>
                 </motion.div>
               ))}
             </div>
@@ -76,9 +76,9 @@ const About = () => {
                whileHover={{ y: -10 }}
                className='glass-panel p-8 sm:p-10 rounded-[2rem] sm:rounded-[2.5rem] border border-white/5'
              >
-                <Target className='text-blue-500 mb-6' size={40} />
+                <Target className='text-emerald-500 mb-6' size={40} />
                 <h3 className='text-xl sm:text-2xl font-black text-white mb-4 uppercase tracking-tighter'>{t.mission_title}</h3>
-                <p className='text-gray-400 leading-relaxed text-xs sm:text-sm'>
+                <p className='text-slate-400 leading-relaxed text-xs sm:text-sm'>
                   {t.mission_desc}
                 </p>
              </motion.div>
@@ -87,9 +87,9 @@ const About = () => {
                whileHover={{ y: -10 }}
                className='glass-panel p-8 sm:p-10 rounded-[2rem] sm:rounded-[2.5rem] border border-white/5'
              >
-                <Eye className='text-purple-500 mb-6' size={40} />
+                <Eye className='text-cyan-500 mb-6' size={40} />
                 <h3 className='text-xl sm:text-2xl font-black text-white mb-4 uppercase tracking-tighter'>{t.vision_title}</h3>
-                <p className='text-gray-400 leading-relaxed text-xs sm:text-sm'>
+                <p className='text-slate-400 leading-relaxed text-xs sm:text-sm'>
                   {t.vision_desc}
                 </p>
              </motion.div>
@@ -98,9 +98,9 @@ const About = () => {
                whileHover={{ y: -10 }}
                className='glass-panel p-8 sm:p-10 rounded-[2rem] sm:rounded-[2.5rem] border border-white/5'
              >
-                <Users className='text-green-500 mb-6' size={40} />
+                <Users className='text-emerald-400 mb-6' size={40} />
                 <h3 className='text-xl sm:text-2xl font-black text-white mb-4 uppercase tracking-tighter'>{t.team_title}</h3>
-                <p className='text-gray-400 leading-relaxed text-xs sm:text-sm'>
+                <p className='text-slate-400 leading-relaxed text-xs sm:text-sm'>
                   {t.team_desc}
                 </p>
              </motion.div>
