@@ -5,6 +5,65 @@ import { Link } from 'react-router-dom';
 import { useLanguage } from '../store/LanguageContext';
 import { translations } from '../data/translations';
 
+const WavyText = ({ text, className }) => {
+  const letters = Array.from(text);
+  
+  const container = {
+    hidden: { opacity: 0 },
+    visible: (i = 1) => ({
+      opacity: 1,
+      transition: { staggerChildren: 0.05, delayChildren: 0.04 * i },
+    }),
+  };
+
+  const child = {
+    visible: {
+      opacity: 1,
+      y: [0, -10, 0],
+      transition: {
+        type: "spring",
+        damping: 12,
+        stiffness: 100,
+        repeat: Infinity,
+        duration: 3,
+      },
+    },
+    hidden: {
+      opacity: 0,
+      y: 0,
+    },
+  };
+
+  return (
+    <motion.div
+      style={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}
+      variants={container}
+      initial="hidden"
+      animate="visible"
+      className={className}
+    >
+      {letters.map((letter, index) => (
+        <motion.span 
+          variants={child} 
+          key={index} 
+          style={{ display: "inline-block", whiteSpace: "pre" }}
+          transition={{
+            repeat: Infinity,
+            duration: 3,
+            delay: index * 0.1,
+            ease: "easeInOut"
+          }}
+          animate={{
+            y: [0, -8, 0],
+          }}
+        >
+          {letter}
+        </motion.span>
+      ))}
+    </motion.div>
+  );
+};
+
 const Hero = () => {
   const { language } = useLanguage();
   const t = translations[language];
@@ -23,19 +82,22 @@ const Hero = () => {
           <Terminal size={14} /> {language === 'en' ? 'The Future of Development is Here' : 'Fremtidens utvikling er her'}
         </motion.div>
 
-        {/* Title */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-        >
-          <h1 className='text-[2.75rem] leading-[1.05] sm:text-7xl md:text-8xl font-black text-white mb-6 sm:mb-8 tracking-tighter'>
-            {t.hero.title}<br />
-            <span className='text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-cyan-400 to-emerald-500 bg-[length:200%_auto] animate-gradient'>
+        {/* Wavy Title */}
+        <div className="mb-6 sm:mb-8">
+          <WavyText 
+            text={t.hero.title} 
+            className="text-[2.75rem] leading-[1.05] sm:text-7xl md:text-8xl font-black text-white tracking-tighter" 
+          />
+          <motion.h1 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className='text-[2.75rem] leading-[1.05] sm:text-7xl md:text-8xl font-black tracking-tighter mt-2'
+          >
+            <span className='text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-cyan-400 to-emerald-500 bg-[length:200%_auto] animate-gradient block'>
               {t.hero.subtitle}.
             </span>
-          </h1>
-        </motion.div>
+          </motion.h1>
+        </div>
 
         {/* Subtitle */}
         <motion.p 
