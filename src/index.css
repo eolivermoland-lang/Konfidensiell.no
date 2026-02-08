@@ -11,8 +11,10 @@ html, body, #root {
   margin: 0;
   padding: 0;
   min-height: 100vh;
-  background-color: transparent !important; /* Force transparency */
+  /* Premium Deep Navy instead of Black */
+  background-color: #050a1f !important;
   overflow-x: hidden;
+  color: #f8fafc;
 }
 
 /* Custom Scrollbar */
@@ -20,31 +22,51 @@ html, body, #root {
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #020617;
+  background: #050a1f;
 }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(to bottom, #3b82f6, #a855f7);
+  background: linear-gradient(to bottom, #3b82f6, #6366f1);
   border-radius: 10px;
 }
 
-/* Glassmorphism Styles - Optimized for Contrast (Accessibility Level A) */
+/* Ultra-Modern Transparency */
 .glass-panel {
-  background: rgba(10, 15, 30, 0.6) !important; /* Darker for contrast */
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(8, 14, 44, 0.4) !important;
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .glass-card {
-  background: rgba(15, 23, 42, 0.7) !important; /* Increased opacity for text readability */
+  background: rgba(255, 255, 255, 0.03) !important;
   backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card:hover {
+  background: rgba(255, 255, 255, 0.06) !important;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  box-shadow: 0 8px 32px 0 rgba(59, 130, 246, 0.15);
+  transform: translateY(-5px);
 }
 
 .text-gray-400 {
-  color: #cbd5e1 !important; /* Brighter slate-300 for 100% accessibility score */
+  color: #94a3b8 !important; /* Slate-400 */
 }
 
 .text-glow {
-  text-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+  text-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+}
+
+/* Animated Gradient Background for specific elements */
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
