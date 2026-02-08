@@ -8,8 +8,10 @@ const Stars = (props) => {
   const [sphere] = useState(() => random.inSphere(new Float32Array(5000), { radius: 1.5 }));
 
   useFrame((state, delta) => {
-    ref.current.rotation.x -= delta / 10;
-    ref.current.rotation.y -= delta / 15;
+    if (ref.current) {
+      ref.current.rotation.x -= delta / 10;
+      ref.current.rotation.y -= delta / 15;
+    }
   });
 
   return (
@@ -33,7 +35,6 @@ const AnimatedBackground = () => {
       <Canvas camera={{ position: [0, 0, 1] }}>
         <Stars />
       </Canvas>
-      {/* Cinematic Glow Overlays */}
       <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-slate-950/0 via-slate-950/50 to-slate-950 pointer-events-none" />
       <div className="absolute -top-[20%] -left-[10%] w-[60%] h-[60%] bg-blue-600/10 rounded-full blur-[150px] animate-pulse pointer-events-none" />
       <div className="absolute top-[40%] -right-[10%] w-[50%] h-[50%] bg-purple-600/10 rounded-full blur-[150px] animate-pulse pointer-events-none" style={{ animationDelay: '4s' }} />
