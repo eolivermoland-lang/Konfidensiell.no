@@ -5,63 +5,6 @@ import { Link } from 'react-router-dom';
 import { useLanguage } from '../store/LanguageContext';
 import { translations } from '../data/translations';
 
-const WavyText = ({ text, className, delay = 0 }) => {
-  const letters = Array.from(text);
-  
-  const container = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.1, delayChildren: delay },
-    },
-  };
-
-  const child = {
-    visible: {
-      opacity: 1,
-      y: [0, -15, 0],
-      transition: {
-        duration: 6, // Ekstremt rolig bølge (6 sekunder)
-        repeat: Infinity,
-        ease: "easeInOut",
-      },
-    },
-    hidden: {
-      opacity: 0,
-      y: 0,
-    },
-  };
-
-  return (
-    <motion.div
-      style={{ display: "inline-flex", flexWrap: "nowrap", justifyContent: "center" }}
-      variants={container}
-      initial="hidden"
-      animate="visible"
-      className={className}
-    >
-      {letters.map((letter, index) => (
-        <motion.span 
-          variants={child} 
-          key={index} 
-          style={{ display: "inline-block", whiteSpace: "pre" }}
-          transition={{
-            repeat: Infinity,
-            duration: 6,
-            delay: (index * 0.2) + delay,
-            ease: "easeInOut"
-          }}
-          animate={{
-            y: [0, -12, 0],
-          }}
-        >
-          {letter}
-        </motion.span>
-      ))}
-    </motion.div>
-  );
-};
-
 const Hero = () => {
   const { language } = useLanguage();
   const t = translations[language];
@@ -80,24 +23,28 @@ const Hero = () => {
           <Terminal size={14} /> {language === 'en' ? 'The Future of Development is Here' : 'Fremtidens utvikling er her'}
         </motion.div>
 
-        {/* Wavy Main Heading - Reduced sizes to prevent wrapping */}
-        <div className="flex flex-col items-center justify-center gap-2 sm:gap-4 mb-8 sm:mb-12">
-          <WavyText 
-            text={t.hero.title} 
-            className="text-[1.8rem] sm:text-5xl md:text-6xl lg:text-7xl font-black text-white tracking-tighter uppercase" 
-          />
-          <WavyText 
-            text={t.hero.subtitle} 
-            delay={0.8}
-            className="text-[1.8rem] sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-cyan-400 to-emerald-500 bg-[length:200%_auto] animate-gradient uppercase" 
-          />
-        </div>
+        {/* Static Heading */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="mb-8 sm:mb-12"
+        >
+          <h1 className='text-[2rem] sm:text-5xl md:text-6xl lg:text-7xl font-black text-white tracking-tighter uppercase leading-tight'>
+            {t.hero.title}
+          </h1>
+          <h1 className='text-[2rem] sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tighter uppercase leading-tight'>
+            <span className='text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-cyan-400 to-emerald-500 bg-[length:200%_auto] animate-gradient block'>
+              {t.hero.subtitle}.
+            </span>
+          </h1>
+        </motion.div>
 
         {/* Subtitle */}
         <motion.p 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 2.5 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
           className='mt-4 max-w-2xl mx-auto text-sm sm:text-lg md:text-xl text-slate-300 font-medium px-4 leading-relaxed'
         >
           {t.hero.description}
@@ -107,7 +54,7 @@ const Hero = () => {
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 2.8 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
           className='mt-10 sm:mt-12 flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6 px-6'
         >
           <Link to='/contact' className='w-full sm:w-auto group relative flex items-center justify-center gap-2 px-8 py-4 bg-emerald-500 text-slate-900 font-black text-base rounded-2xl hover:bg-emerald-400 transition-all duration-300 shadow-2xl active:scale-95'>
@@ -122,7 +69,7 @@ const Hero = () => {
         <motion.div 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 3.2, duration: 1 }}
+          transition={{ delay: 0.6, duration: 1 }}
           className="mt-16 sm:mt-24 flex justify-center items-center gap-4 sm:gap-8 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all overflow-hidden"
         >
            <span className="text-white font-bold tracking-widest text-[9px] sm:text-sm uppercase">{language === 'en' ? 'Innovation' : 'Innovasjon'}</span>
