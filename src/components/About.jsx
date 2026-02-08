@@ -1,8 +1,13 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Award, ShieldCheck, Heart, Zap, Target, Eye, Users, Globe } from 'lucide-react';
+import { Award, ShieldCheck, Heart, Zap, Target, Eye, Users, Globe, Briefcase } from 'lucide-react';
+import { useLanguage } from '../store/LanguageContext';
+import { translations } from '../data/translations';
 
 const About = () => {
+  const { language } = useLanguage();
+  const t = translations[language].about;
+
   return (
     <div className='pb-20'>
       <section id='about' className='py-20'>
@@ -11,12 +16,12 @@ const About = () => {
             <motion.h2 
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
-              className='text-4xl md:text-6xl font-extrabold text-white mb-6'
+              className='text-4xl md:text-6xl font-black text-white mb-6 uppercase tracking-tighter'
             >
-              Who is CodeNext?
+              {t.heading}
             </motion.h2>
-            <p className='mt-4 text-2xl text-gray-400 max-w-3xl mx-auto'>
-              A Norwegian powerhouse of <span className='text-blue-400 font-bold'>innovation</span>, built on the pillars of quality and Scandinavian precision.
+            <p className='mt-4 text-2xl text-gray-400 max-w-3xl mx-auto font-medium'>
+              {t.subheading}
             </p>
           </div>
 
@@ -27,26 +32,26 @@ const About = () => {
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              <h3 className='text-3xl font-bold text-white mb-6 flex items-center gap-3'>
-                Our Story 🇳🇴
+              <h3 className='text-3xl font-black text-white mb-6 flex items-center gap-3 uppercase tracking-tighter'>
+                {t.story_title}
               </h3>
-              <p className='text-gray-300 mb-6 text-lg leading-relaxed'>
-                Founded with a vision to redefine the digital landscape, CodeNext emerged from the need for high-quality, reliable, and beautiful software solutions in the Norwegian market. 
+              <p className='text-gray-400 mb-6 text-lg leading-relaxed'>
+                {t.story_p1}
               </p>
-              <p className='text-gray-300 mb-6 text-lg leading-relaxed'>
-                Our journey started with a simple belief: <span className='text-white font-semibold'>Every idea deserves a perfect digital execution.</span> We saw too many businesses struggling with clunky systems and uninspired designs. We decided to be the change.
+              <p className='text-gray-400 mb-6 text-lg leading-relaxed'>
+                {t.story_p2}
               </p>
-              <div className='bg-slate-800/50 p-6 rounded-xl border-l-4 border-blue-600 italic text-gray-400'>
-                "CodeNext is more than a name; it represents the next generation of code, design, and user experience."
+              <div className='glass-panel p-6 rounded-2xl border-l-4 border-l-blue-600 italic text-gray-300'>
+                "{t.quote}"
               </div>
             </motion.div>
 
             <div className='grid grid-cols-1 sm:grid-cols-2 gap-6'>
               {[
-                { icon: <Award className='w-8 h-8 text-yellow-500' />, title: 'Premium Quality', desc: 'We write code that lasts, following industry best practices and rigorous standards.' },
-                { icon: <ShieldCheck className='w-8 h-8 text-green-500' />, title: 'Extreme Security', desc: 'In a world of threats, we build fortresses. Your data security is our top priority.' },
-                { icon: <Heart className='w-8 h-8 text-red-500' />, title: 'Client Centric', desc: 'Your success is our success. We work closely with you as a digital partner.' },
-                { icon: <Zap className='w-8 h-8 text-purple-500' />, title: 'Modern Tech', desc: 'We stay at the bleeding edge, utilizing React, Node.js, and Cloudflare.' }
+                { icon: <Award className='w-8 h-8 text-blue-500' />, title: t.card1_title, desc: t.card1_desc },
+                { icon: <ShieldCheck className='w-8 h-8 text-purple-500' />, title: t.card2_title, desc: t.card2_desc },
+                { icon: <Briefcase className='w-8 h-8 text-green-500' />, title: t.card3_title, desc: t.card3_desc },
+                { icon: <Zap className='w-8 h-8 text-yellow-500' />, title: t.card4_title, desc: t.card4_desc }
               ].map((item, index) => (
                 <motion.div 
                   key={index}
@@ -54,11 +59,11 @@ const About = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  className='bg-slate-800/30 p-8 rounded-2xl border border-slate-700 hover:bg-slate-800 transition-all hover:border-blue-500/50 hover:-translate-y-1'
+                  className='glass-card p-8 rounded-3xl border border-white/5 hover:border-blue-500/30 transition-all'
                 >
                   <div className='mb-4'>{item.icon}</div>
-                  <h4 className='font-bold text-xl text-white mb-2'>{item.title}</h4>
-                  <p className='text-gray-400 leading-relaxed'>{item.desc}</p>
+                  <h4 className='font-black text-xl text-white mb-2 uppercase tracking-tighter'>{item.title}</h4>
+                  <p className='text-gray-400 text-sm leading-relaxed'>{item.desc}</p>
                 </motion.div>
               ))}
             </div>
@@ -68,34 +73,34 @@ const About = () => {
           <div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
              <motion.div 
                whileHover={{ y: -10 }}
-               className='bg-gradient-to-br from-blue-900/40 to-slate-900 p-10 rounded-3xl border border-slate-700'
+               className='glass-panel p-10 rounded-[2.5rem] border border-white/5'
              >
                 <Target className='text-blue-500 mb-6' size={48} />
-                <h3 className='text-2xl font-bold text-white mb-4'>Our Mission</h3>
-                <p className='text-gray-400 leading-relaxed'>
-                  To empower businesses through high-end digital craftsmanship, turning complex problems into elegant, scalable solutions that drive growth.
+                <h3 className='text-2xl font-black text-white mb-4 uppercase tracking-tighter'>{t.mission_title}</h3>
+                <p className='text-gray-400 leading-relaxed text-sm'>
+                  {t.mission_desc}
                 </p>
              </motion.div>
 
              <motion.div 
                whileHover={{ y: -10 }}
-               className='bg-gradient-to-br from-purple-900/40 to-slate-900 p-10 rounded-3xl border border-slate-700'
+               className='glass-panel p-10 rounded-[2.5rem] border border-white/5'
              >
                 <Eye className='text-purple-500 mb-6' size={48} />
-                <h3 className='text-2xl font-bold text-white mb-4'>Our Vision</h3>
-                <p className='text-gray-400 leading-relaxed'>
-                  To be the leading choice for digital transformation in Scandinavia, known for our unwavering commitment to quality and innovation.
+                <h3 className='text-2xl font-black text-white mb-4 uppercase tracking-tighter'>{t.vision_title}</h3>
+                <p className='text-gray-400 leading-relaxed text-sm'>
+                  {t.vision_desc}
                 </p>
              </motion.div>
 
              <motion.div 
                whileHover={{ y: -10 }}
-               className='bg-gradient-to-br from-green-900/40 to-slate-900 p-10 rounded-3xl border border-slate-700'
+               className='glass-panel p-10 rounded-[2.5rem] border border-white/5'
              >
                 <Users className='text-green-500 mb-6' size={48} />
-                <h3 className='text-2xl font-bold text-white mb-4'>Our Team</h3>
-                <p className='text-gray-400 leading-relaxed'>
-                  A diverse group of passionate developers, designers, and strategists who eat, sleep, and breathe technology and design.
+                <h3 className='text-2xl font-black text-white mb-4 uppercase tracking-tighter'>{t.team_title}</h3>
+                <p className='text-gray-400 leading-relaxed text-sm'>
+                  {t.team_desc}
                 </p>
              </motion.div>
           </div>

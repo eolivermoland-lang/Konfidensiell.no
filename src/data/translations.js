@@ -118,6 +118,28 @@ export const translations = {
         title: "System Latency",
         btn: "Test Ping"
       }
+    },
+    about: {
+      heading: "Who is Konfidensiell?",
+      subheading: "A Norwegian powerhouse of innovation, built on the pillars of quality and Scandinavian precision.",
+      story_title: "Our Story 🇳🇴",
+      story_p1: "Founded with a vision to redefine the digital landscape, Konfidensiell emerged from the need for high-quality, reliable, and secure software solutions in the Norwegian market.",
+      story_p2: "Our journey started with a simple belief: Every idea deserves a perfect digital execution. We saw too many businesses struggling with clunky systems and uninspired designs. We decided to be the change.",
+      quote: "Konfidensiell is more than a name; it represents the next generation of code, security, and digital integrity.",
+      card1_title: "Premium Quality",
+      card1_desc: "We write code that lasts, following industry best practices and rigorous engineering standards.",
+      card2_title: "Extreme Security",
+      card2_desc: "In a world of threats, we build fortresses. Your data security and confidentiality are our top priorities.",
+      card3_title: "Business Centric",
+      card3_desc: "Your growth is our metric for success. We work closely with you as a long-term technical partner.",
+      card4_title: "Modern Tech",
+      card4_desc: "We stay at the bleeding edge, utilizing React, Node.js, and secure Cloudflare infrastructure.",
+      mission_title: "Our Mission",
+      mission_desc: "To empower businesses through high-end digital craftsmanship, turning complex problems into elegant, scalable solutions that drive growth.",
+      vision_title: "Our Vision",
+      vision_desc: "To be the leading choice for digital transformation in Scandinavia, known for our unwavering commitment to quality and innovation.",
+      team_title: "Our Team",
+      team_desc: "A focused group of passionate developers, designers, and strategists who eat, sleep, and breathe technology and design."
     }
   },
   no: {
@@ -239,6 +261,28 @@ export const translations = {
         title: "Systemforsinkelse",
         btn: "Ping"
       }
+    },
+    about: {
+      heading: "Hvem er Konfidensiell?",
+      subheading: "Et norsk kraftsenter for innovasjon, bygget på bærebjelkene kvalitet og skandinavisk presisjon.",
+      story_title: "Vår Historie 🇳🇴",
+      story_p1: "Konfidensiell ble grunnlagt med en visjon om å redefinere det digitale landskapet, og oppsto fra behovet for pålitelige og sikre programvareløsninger av høy kvalitet i det norske markedet.",
+      story_p2: "Vår reise startet med en enkel tro: Enhver idé fortjener en perfekt digital utførelse. Vi så for mange bedrifter som kjempet med tunge systemer og uinspirert design. Vi bestemte oss for å være endringen.",
+      quote: "Konfidensiell er mer enn et navn; det representerer neste generasjon kode, sikkerhet og digital integritet.",
+      card1_title: "Premium Kvalitet",
+      card1_desc: "Vi skriver kode som varer, og følger industriens beste praksis og strenge ingeniørstandarder.",
+      card2_title: "Ekstrem Sikkerhet",
+      card2_desc: "In a world of threats, we build fortresses. Din datasikkerhet og konfidensialitet er våre høyeste prioriteringer.",
+      card3_title: "Forretningsfokusert",
+      card3_desc: "Din vekst er vårt mål på suksess. Vi jobber tett med deg som en langsiktig teknisk partner.",
+      card4_title: "Moderne Teknologi",
+      card4_desc: "Vi holder oss i forkant og benytter React, Node.js og sikker Cloudflare-infrastruktur.",
+      mission_title: "Vårt Oppdrag",
+      mission_desc: "Å styrke bedrifter gjennom digitalt håndverk av høy klasse, og forvandle komplekse problemer til elegante, skalerbare løsninger som driver vekst.",
+      vision_title: "Vår Visjon",
+      vision_desc: "Å være det foretrukne valget for digital transformasjon i Skandinavia, kjent for vårt urokkelige engasjement for kvalitet og innovasjon.",
+      team_title: "Vårt Team",
+      team_desc: "En fokusert gruppe lidenskapelige utviklere, designere og strateger som lever og ånder for teknologi og design."
     }
   }
 };
