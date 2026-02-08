@@ -3,19 +3,24 @@ import Hero from '../components/Hero';
 import { motion } from 'framer-motion';
 import { ArrowRight, Code, Zap, Shield, Search, Lightbulb, Rocket, Settings, CheckCircle, Target, UserCheck } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useLanguage } from '../store/LanguageContext';
+import { translations } from '../data/translations';
 
 const Home = () => {
+  const { language } = useLanguage();
+  const t = translations[language];
+
   const processSteps = [
-    { icon: <Search aria-hidden="true" />, title: 'Discovery', desc: 'We dive deep into your business needs and project goals to build a rock-solid foundation.' },
-    { icon: <Lightbulb aria-hidden="true" />, title: 'Concept', desc: 'Turning ideas into interactive wireframes and stunning UI designs for your approval.' },
-    { icon: <Settings aria-hidden="true" />, title: 'Development', desc: 'Our Norwegian engineers write clean, scalable code using the latest tech stacks.' },
-    { icon: <Rocket aria-hidden="true" />, title: 'Launch', desc: 'Rigorous testing followed by a seamless deployment to your chosen environment.' }
+    { icon: <Search aria-hidden="true" />, title: t.process.step1_title, desc: t.process.step1_desc },
+    { icon: <Lightbulb aria-hidden="true" />, title: t.process.step2_title, desc: t.process.step2_desc },
+    { icon: <Settings aria-hidden="true" />, title: t.process.step3_title, desc: t.process.step3_desc },
+    { icon: <Rocket aria-hidden="true" />, title: t.process.step4_title, desc: t.process.step4_desc }
   ];
 
   const manifestoPoints = [
-    { title: "No Legacy Baggage", desc: "We are new. We don't use 10-year-old tech. We use what's fast, secure, and modern today." },
-    { title: "Founder-Led Projects", desc: "Because we are growing, you work directly with our lead developers, not junior account managers." },
-    { title: "Scandinavian Precision", desc: "Built in Norway, our code follows a culture of transparency, honesty, and extreme quality." }
+    { title: t.manifesto.point1_title, desc: t.manifesto.point1_desc },
+    { title: t.manifesto.point2_title, desc: t.manifesto.point2_desc },
+    { title: t.manifesto.point3_title, desc: t.manifesto.point3_desc }
   ];
 
   return (
@@ -31,7 +36,7 @@ const Home = () => {
             whileInView={{ opacity: 1 }}
             className="text-blue-500 font-black uppercase tracking-[0.4em] text-xs mb-12"
           >
-            Our Manifesto
+            {t.manifesto.heading}
           </motion.h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
             {manifestoPoints.map((point, idx) => (
@@ -50,34 +55,34 @@ const Home = () => {
           <div className='grid grid-cols-1 md:grid-cols-2 gap-24 items-center'>
             <motion.div>
               <h2 id="intro-heading" className='text-4xl md:text-6xl font-black mb-8 text-white tracking-tighter leading-tight'>
-                A NEW ERA OF <br />
-                <span className="text-blue-500 uppercase">DIGITAL.</span>
+                {t.home_intro.heading} <br />
+                <span className="text-blue-500 uppercase">{t.home_intro.subheading}</span>
               </h2>
               <p className='text-gray-400 text-xl mb-10 leading-relaxed'>
-                We are a fresh, hungry agency dedicated to perfection. We don't have thousands of clients—and that's your advantage. You get 100% of our focus and the highest level of craftsmanship.
+                {t.home_intro.desc}
               </p>
               <div className="space-y-4 mb-10" role="list">
-                {['Direct access to developers', 'Cutting-edge tech stack only', 'Total transparency & honesty'].map((item, i) => (
+                {[t.home_intro.point1, t.home_intro.point2, t.home_intro.point3].map((item, i) => (
                   <div key={i} className="flex items-center gap-3 text-gray-200 font-bold" role="listitem">
                     <CheckCircle className="text-blue-500" size={20} aria-hidden="true" /> {item}
                   </div>
                 ))}
               </div>
               <Link to='/services' className='inline-flex items-center gap-3 px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-black rounded-2xl transition-all shadow-xl'>
-                See Our Solutions <ArrowRight size={20} aria-hidden="true" />
+                {t.home_intro.cta} <ArrowRight size={20} aria-hidden="true" />
               </Link>
             </motion.div>
             
             <div className='flex items-stretch gap-6'>
               <article className='glass-card p-10 rounded-[2.5rem] flex-1 flex flex-col m-0'>
                 <Target className='mb-6 text-blue-500' size={48} aria-hidden="true" />
-                <h3 className='text-white font-black text-xl mb-4 uppercase tracking-tighter'>Outcome Driven</h3>
-                <p className='text-gray-400 text-sm'>We focus on your ROI and business goals from day one.</p>
+                <h3 className='text-white font-black text-xl mb-4 uppercase tracking-tighter'>{t.home_intro.card1_title}</h3>
+                <p className='text-gray-400 text-sm'>{t.home_intro.card1_desc}</p>
               </article>
               <article className='glass-card p-10 rounded-[2.5rem] flex-1 flex flex-col m-0'>
                 <UserCheck className='mb-6 text-purple-500' size={48} aria-hidden="true" />
-                <h3 className='text-white font-black text-xl mb-4 uppercase tracking-tighter'>Personalized</h3>
-                <p className='text-gray-400 text-sm'>Tailor-made experiences, never copy-pasted templates.</p>
+                <h3 className='text-white font-black text-xl mb-4 uppercase tracking-tighter'>{t.home_intro.card2_title}</h3>
+                <p className='text-gray-400 text-sm'>{t.home_intro.card2_desc}</p>
               </article>
             </div>
           </div>
@@ -88,8 +93,8 @@ const Home = () => {
       <section className='py-32 border-t border-white/5 glass-panel' aria-labelledby="process-heading">
         <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
           <div className='text-center mb-24'>
-            <h2 id="process-heading" className='text-4xl md:text-5xl font-black text-white mb-6 uppercase tracking-tighter'>How We Work</h2>
-            <p className="text-gray-400 text-xl max-w-2xl mx-auto">Transparent and efficient from the first line of code to the final launch.</p>
+            <h2 id="process-heading" className='text-4xl md:text-5xl font-black text-white mb-6 uppercase tracking-tighter'>{t.process.heading}</h2>
+            <p className="text-gray-400 text-xl max-w-2xl mx-auto">{t.process.subheading}</p>
           </div>
           <div className='grid grid-cols-1 md:grid-cols-4 gap-12'>
             {processSteps.map((step, index) => (

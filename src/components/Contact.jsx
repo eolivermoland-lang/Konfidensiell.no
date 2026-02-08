@@ -2,11 +2,15 @@ import React, { useState, useRef } from 'react';
 import { Mail, Send, MapPin, Clock, Linkedin, Twitter, Github, CheckCircle, AlertCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import emailjs from '@emailjs/browser';
+import { useLanguage } from '../store/LanguageContext';
+import { translations } from '../data/translations';
 
 const Contact = () => {
   const form = useRef();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null); // 'success' | 'error'
+  const { language } = useLanguage();
+  const t = translations[language].contact;
 
   const email = "support@konfidensiell.no";
 
@@ -47,9 +51,9 @@ const Contact = () => {
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
         
         <div className='text-center mb-16'>
-           <h2 className='text-4xl md:text-5xl font-black text-white mb-6 uppercase tracking-tighter'>Let's Connect</h2>
+           <h2 className='text-4xl md:text-5xl font-black text-white mb-6 uppercase tracking-tighter'>{t.heading}</h2>
            <p className='text-gray-400 text-xl max-w-2xl mx-auto font-medium'>
-             Ready to start your digital transformation? Fill out the form below or reach out directly.
+             {t.subheading}
            </p>
         </div>
 
@@ -58,7 +62,7 @@ const Contact = () => {
           {/* Contact Info Sidebar */}
           <div className='lg:col-span-1 space-y-8'>
             <div className='glass-card p-8 rounded-[2.5rem] border border-white/5'>
-              <h3 className='text-2xl font-black text-white mb-8 uppercase tracking-tighter'>Contact Details</h3>
+              <h3 className='text-2xl font-black text-white mb-8 uppercase tracking-tighter'>{t.details_title}</h3>
               
               <div className='space-y-6'>
                 <div className='flex items-start gap-4'>
@@ -66,7 +70,7 @@ const Contact = () => {
                     <Mail size={24} />
                   </div>
                   <div>
-                    <p className='text-[10px] text-gray-500 font-black uppercase tracking-widest mb-1'>Direct Email</p>
+                    <p className='text-[10px] text-gray-500 font-black uppercase tracking-widest mb-1'>{t.email_label}</p>
                     <a href={`mailto:${email}`} className='text-white hover:text-blue-400 transition-colors font-bold'>{email}</a>
                   </div>
                 </div>
@@ -76,8 +80,8 @@ const Contact = () => {
                     <MapPin size={24} />
                   </div>
                   <div>
-                    <p className='text-[10px] text-gray-500 font-black uppercase tracking-widest mb-1'>Location</p>
-                    <p className='text-white font-bold'>Kristiansand, Norway 🇳🇴</p>
+                    <p className='text-[10px] text-gray-500 font-black uppercase tracking-widest mb-1'>{t.location_label}</p>
+                    <p className='text-white font-bold'>{t.location_val}</p>
                   </div>
                 </div>
 
@@ -86,14 +90,14 @@ const Contact = () => {
                     <Clock size={24} />
                   </div>
                   <div>
-                    <p className='text-[10px] text-gray-500 font-black uppercase tracking-widest mb-1'>Response Time</p>
-                    <p className='text-white font-bold'>Within 24 Hours</p>
+                    <p className='text-[10px] text-gray-500 font-black uppercase tracking-widest mb-1'>{t.time_label}</p>
+                    <p className='text-white font-bold'>{t.time_val}</p>
                   </div>
                 </div>
               </div>
 
               <div className='mt-12 pt-12 border-t border-white/5'>
-                 <p className='text-gray-500 mb-6 font-black uppercase text-[10px] tracking-widest'>Social Presence</p>
+                 <p className='text-gray-500 mb-6 font-black uppercase text-[10px] tracking-widest'>{t.social_label}</p>
                  <div className='flex gap-4'>
                     <a href='#' className='p-3 bg-white/5 rounded-2xl text-gray-400 hover:text-blue-500 hover:bg-white/10 transition-all'><Linkedin size={20} /></a>
                     <a href='#' className='p-3 bg-white/5 rounded-2xl text-gray-400 hover:text-blue-400 hover:bg-white/10 transition-all'><Twitter size={20} /></a>
@@ -112,7 +116,7 @@ const Contact = () => {
             >
               <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
                 <div className='space-y-2'>
-                  <label className='text-[10px] font-black uppercase tracking-widest text-gray-500 ml-4'>Full Name</label>
+                  <label className='text-[10px] font-black uppercase tracking-widest text-gray-500 ml-4'>{t.form_name}</label>
                   <input 
                     type="text" 
                     name="user_name"
@@ -122,7 +126,7 @@ const Contact = () => {
                   />
                 </div>
                 <div className='space-y-2'>
-                  <label className='text-[10px] font-black uppercase tracking-widest text-gray-500 ml-4'>Email Address</label>
+                  <label className='text-[10px] font-black uppercase tracking-widest text-gray-500 ml-4'>{t.form_email}</label>
                   <input 
                     type="email" 
                     name="user_email"
@@ -134,7 +138,7 @@ const Contact = () => {
               </div>
 
               <div className='space-y-2'>
-                <label className='text-[10px] font-black uppercase tracking-widest text-gray-500 ml-4'>Subject</label>
+                <label className='text-[10px] font-black uppercase tracking-widest text-gray-500 ml-4'>{t.form_subject}</label>
                 <input 
                   type="text" 
                   name="subject"
@@ -145,7 +149,7 @@ const Contact = () => {
               </div>
 
               <div className='space-y-2'>
-                <label className='text-[10px] font-black uppercase tracking-widest text-gray-500 ml-4'>Message</label>
+                <label className='text-[10px] font-black uppercase tracking-widest text-gray-500 ml-4'>{t.form_message}</label>
                 <textarea 
                   name="message"
                   required
@@ -165,7 +169,7 @@ const Contact = () => {
                     : 'bg-blue-600 text-white hover:bg-blue-700 hover:scale-[1.02] active:scale-[0.98]'
                   }`}
                 >
-                  {isSubmitting ? 'Sending...' : 'Send Message'}
+                  {isSubmitting ? t.form_sending : t.form_btn}
                   <Send size={20} />
                 </button>
 
@@ -177,7 +181,7 @@ const Contact = () => {
                       exit={{ opacity: 0 }}
                       className='flex items-center gap-2 text-green-500 font-bold'
                     >
-                      <CheckCircle size={20} /> Message sent successfully!
+                      <CheckCircle size={20} /> {t.form_success}
                     </motion.div>
                   )}
                   {submitStatus === 'error' && (
@@ -187,7 +191,7 @@ const Contact = () => {
                       exit={{ opacity: 0 }}
                       className='flex items-center gap-2 text-red-500 font-bold'
                     >
-                      <AlertCircle size={20} /> Failed to send message.
+                      <AlertCircle size={20} /> {t.form_error}
                     </motion.div>
                   )}
                 </AnimatePresence>
