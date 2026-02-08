@@ -49,43 +49,10 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Testimonials Section */}
-      <section className="py-32 border-b border-white/5" aria-labelledby="testimonials-heading">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-24">
-            <h2 id="testimonials-heading" className="text-blue-500 font-black uppercase tracking-[0.4em] text-xs mb-4">
-              {t.testimonials.heading}
-            </h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {[
-              { quote: t.testimonials.quote1, author: t.testimonials.author1, role: t.testimonials.role1 },
-              { quote: t.testimonials.quote2, author: t.testimonials.author2, role: t.testimonials.role2 }
-            ].map((item, i) => (
-              <motion.div 
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                className="glass-card p-12 rounded-[2.5rem] relative"
-              >
-                <div className="text-blue-500 text-6xl font-serif absolute top-6 left-8 opacity-20">"</div>
-                <p className="text-gray-300 text-lg mb-8 italic relative z-10 leading-relaxed">
-                  {item.quote}
-                </p>
-                <div>
-                  <div className="text-white font-black uppercase tracking-tighter text-lg">{item.author}</div>
-                  <div className="text-blue-500 text-xs font-black uppercase tracking-widest mt-1">{item.role}</div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Intro Section */}
       <section className='py-32 bg-transparent' aria-labelledby="intro-heading">
         <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
-          <div className='grid grid-cols-1 md:grid-cols-2 gap-24 items-center'>
+          <div className='grid grid-cols-1 lg:grid-cols-2 gap-24 items-center'>
             <motion.div>
               <h2 id="intro-heading" className='text-4xl md:text-6xl font-black mb-8 text-white tracking-tighter leading-tight'>
                 {t.home_intro.heading} <br />
@@ -106,16 +73,20 @@ const Home = () => {
               </Link>
             </motion.div>
             
-            <div className='flex items-stretch gap-6'>
-              <article className='glass-card p-10 rounded-[2.5rem] flex-1 flex flex-col m-0'>
-                <Target className='mb-6 text-blue-500' size={48} aria-hidden="true" />
-                <h3 className='text-white font-black text-xl mb-4 uppercase tracking-tighter'>{t.home_intro.card1_title}</h3>
-                <p className='text-gray-400 text-sm'>{t.home_intro.card1_desc}</p>
+            <div className='grid grid-cols-1 sm:grid-cols-2 gap-6 w-full'>
+              <article className='glass-card p-10 rounded-[2.5rem] flex flex-col justify-between h-full border border-white/5 hover:border-blue-500/30 transition-colors'>
+                <div>
+                  <Target className='mb-6 text-blue-500' size={48} aria-hidden="true" />
+                  <h3 className='text-white font-black text-xl mb-4 uppercase tracking-tighter'>{t.home_intro.card1_title}</h3>
+                  <p className='text-gray-400 text-sm leading-relaxed'>{t.home_intro.card1_desc}</p>
+                </div>
               </article>
-              <article className='glass-card p-10 rounded-[2.5rem] flex-1 flex flex-col m-0'>
-                <UserCheck className='mb-6 text-purple-500' size={48} aria-hidden="true" />
-                <h3 className='text-white font-black text-xl mb-4 uppercase tracking-tighter'>{t.home_intro.card2_title}</h3>
-                <p className='text-gray-400 text-sm'>{t.home_intro.card2_desc}</p>
+              <article className='glass-card p-10 rounded-[2.5rem] flex flex-col justify-between h-full border border-white/5 hover:border-purple-500/30 transition-colors'>
+                <div>
+                  <UserCheck className='mb-6 text-purple-500' size={48} aria-hidden="true" />
+                  <h3 className='text-white font-black text-xl mb-4 uppercase tracking-tighter'>{t.home_intro.card2_title}</h3>
+                  <p className='text-gray-400 text-sm leading-relaxed'>{t.home_intro.card2_desc}</p>
+                </div>
               </article>
             </div>
           </div>

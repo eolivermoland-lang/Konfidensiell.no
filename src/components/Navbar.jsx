@@ -25,7 +25,7 @@ const Navbar = () => {
           
           {/* Logo Section - Absolute Left */}
           <div className='flex items-center gap-4'>
-            <Link to='/' className='flex items-center gap-3 group' aria-label="CodeNext Home">
+            <Link to='/' className='flex items-center gap-3 group' aria-label="Konfidensiell Home">
               <div className='w-10 h-10 transition-transform group-hover:rotate-12 duration-300'>
                 <img 
                   src='/logo.webp' 
@@ -37,8 +37,8 @@ const Navbar = () => {
                   className='w-full h-full object-contain' 
                 />
               </div>
-              <span className='font-black text-2xl tracking-tighter text-white'>
-                CODE<span className='text-blue-500'>NEXT</span>
+              <span className='font-black text-2xl tracking-tighter text-white uppercase'>
+                KONFIDE<span className='text-blue-500'>NSIELL</span>
               </span>
             </Link>
 

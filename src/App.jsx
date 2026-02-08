@@ -24,16 +24,16 @@ const PageManager = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
     const pageTitles = {
-      '/': 'Home — CodeNext IT Solutions',
-      '/about': 'About Us — CodeNext',
-      '/services': 'Our Services — CodeNext',
-      '/tools': 'Developer Tools — CodeNext',
-      '/contact': 'Contact Us — CodeNext',
+      '/': 'Home — Konfidensiell IT Solutions',
+      '/about': 'About Us — Konfidensiell',
+      '/services': 'Our Services — Konfidensiell',
+      '/tools': 'Developer Tools — Konfidensiell',
+      '/contact': 'Contact Us — Konfidensiell',
     };
     if (pathname.startsWith('/services/')) {
-      document.title = 'Service Details — CodeNext';
+      document.title = 'Service Details — Konfidensiell';
     } else {
-      document.title = pageTitles[pathname] || 'CodeNext IT Solutions';
+      document.title = pageTitles[pathname] || 'Konfidensiell IT Solutions';
     }
   }, [pathname]);
   return null;
@@ -81,8 +81,8 @@ function App() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex flex-col md:flex-row justify-between items-center gap-8 mb-12">
                <div className="flex items-center gap-2">
-                  <img src="/logo.webp" alt="CodeNext Logo" width="32" height="32" className="w-8 h-8 object-contain" />
-                  <span className="font-black text-2xl">CODE<span className="text-blue-500">NEXT</span></span>
+                  <img src="/logo.webp" alt="Konfidensiell Logo" width="32" height="32" className="w-8 h-8 object-contain" />
+                  <span className="font-black text-2xl uppercase tracking-tighter">KONFIDE<span className="text-blue-500">NSIELL</span></span>
                </div>
                <nav aria-label="Footer Navigation">
                  <div className="flex gap-8 text-sm font-bold uppercase tracking-widest text-gray-500">
@@ -94,7 +94,7 @@ function App() {
                </nav>
             </div>
             <p className='text-gray-600 text-sm'>
-              &copy; {new Date().getFullYear()} CodeNext. All rights reserved. <br />
+              &copy; {new Date().getFullYear()} Konfidensiell. All rights reserved. <br />
               <span className="mt-2 block italic text-gray-700 font-medium tracking-tighter uppercase">Crafted with Perfection in Norway 🇳🇴</span>
             </p>
           </div>

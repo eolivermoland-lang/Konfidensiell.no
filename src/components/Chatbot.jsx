@@ -7,7 +7,7 @@ const Chatbot = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [currentMenu, setCurrentMenu] = useState('initial');
   const [messages, setMessages] = useState([
-    { text: 'Welcome to CodeNext! I am your digital architect. What can we build together?', isBot: true }
+    { text: 'Welcome to Konfidensiell! I am your digital architect. What can we build together?', isBot: true }
   ]);
   const navigate = useNavigate();
   const scrollRef = useRef(null);
@@ -25,7 +25,7 @@ const Chatbot = () => {
       { label: "E-commerce / Shop", next: "ecommerce", icon: <ShoppingCart size={14} /> },
       { label: "Technical & Security", next: "technical", icon: <Lock size={14} /> },
       { label: "Pricing & Timeline", next: "pricing", icon: <Clock size={14} /> },
-      { label: "About CodeNext", next: "about", icon: <Heart size={14} /> }
+      { label: "About Konfidensiell", next: "about", icon: <Heart size={14} /> }
     ],
     web: [
       { label: "What tech do you use?", answer: "We use the 'Bleeding Edge' stack: React 18, Vite 5, and Tailwind CSS for maximum speed and modern design.", next: "web_deep" },
@@ -79,7 +79,7 @@ const Chatbot = () => {
       { label: "← Back to Pricing", next: "pricing" }
     ],
     about: [
-      { label: "Why CodeNext?", answer: "Because we are hungry for success. Every project is a chance for us to prove we are the best in Norway.", next: "more_help" },
+      { label: "Why Konfidensiell?", answer: "Because we are hungry for success. Every project is a chance for us to prove we are the best in Norway.", next: "more_help" },
       { label: "Where are you?", answer: "We are based in Kristiansand, Norway, but we operate as a fully digital firm serving the world.", next: "more_help" },
       { label: "← Back", next: "initial" }
     ],
@@ -123,7 +123,7 @@ const Chatbot = () => {
       <button 
         onClick={() => setIsOpen(true)}
         className={`fixed bottom-6 right-6 bg-blue-600 text-white p-4 rounded-full shadow-2xl hover:bg-blue-700 transition-all hover:scale-110 z-50 ${isOpen ? 'hidden' : 'block'}`}
-        aria-label="Open CodeNext Assistant"
+        aria-label="Open Konfidensiell Assistant"
       >
         <MessageCircle size={24} />
       </button>
@@ -141,7 +141,7 @@ const Chatbot = () => {
             <div className='bg-gradient-to-r from-blue-600 to-purple-600 p-5 flex justify-between items-center'>
               <div className='flex items-center gap-3'>
                 <div className='w-2 h-2 bg-green-400 rounded-full animate-pulse'></div>
-                <h3 className='font-black text-white uppercase tracking-tighter text-sm'>CodeNext Expert</h3>
+                <h3 className='font-black text-white uppercase tracking-tighter text-sm'>Konfidensiell Expert</h3>
               </div>
               <button onClick={() => setIsOpen(false)} className='text-white/80 hover:text-white' aria-label="Close">
                 <X size={20} />

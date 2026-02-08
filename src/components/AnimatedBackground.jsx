@@ -2,100 +2,103 @@ import React, { useEffect, useRef } from 'react';
 
 const AnimatedBackground = () => {
   const canvasRef = useRef(null);
-  const requestRef = useRef();
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    const ctx = canvas.getContext('2d', { alpha: false }); // Performance optimization
-    let width, height;
-    let frame = 0;
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    let animationFrameId;
 
     const resize = () => {
-      width = canvas.width = window.innerWidth;
-      height = canvas.height = window.innerHeight;
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
+
+    class Particle {
+      constructor() {
+        this.reset();
+      }
+
+      reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.vx = (Math.random() - 0.5) * 0.5;
+        this.vy = (Math.random() - 0.5) * 0.5;
+        this.radius = Math.random() * 2;
+      }
+
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+
+        if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+        if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+      }
+
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(59, 130, 246, 0.4)';
+        ctx.fill();
+      }
+    }
+
+    const init = () => {
+      particles = [];
+      const count = Math.min(Math.floor(window.innerWidth / 15), 100);
+      for (let i = 0; i < count; i++) {
+        particles.push(new Particle());
+      }
     };
 
     const draw = () => {
-      // Performance: Only draw if tab is active
-      if (document.hidden) {
-        requestRef.current = requestAnimationFrame(draw);
-        return;
-      }
-
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.fillStyle = '#020617';
-      ctx.fillRect(0, 0, width, height);
-      
-      const gridSize = 50;
-      const columns = Math.ceil(width / gridSize) + 1;
-      const rows = Math.ceil(height / gridSize) + 1;
-      
-      frame += 0.015;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      ctx.beginPath();
-      ctx.strokeStyle = 'rgba(59, 130, 246, 0.3)';
-      ctx.lineWidth = 0.5;
+      particles.forEach((p, i) => {
+        p.update();
+        p.draw();
 
-      for (let i = 0; i < columns; i++) {
-        for (let j = 0; j < rows; j++) {
-          const x = i * gridSize;
-          const y = j * gridSize;
-          const waveX = Math.sin(frame + (i * 0.5) + (j * 0.3)) * 15;
-          const waveY = Math.cos(frame + (i * 0.3) + (j * 0.5)) * 15;
-
-          if (i < columns - 1) {
-            const nextWaveX = Math.sin(frame + ((i + 1) * 0.5) + (j * 0.3)) * 15;
-            const nextWaveY = Math.cos(frame + ((i + 1) * 0.3) + (j * 0.5)) * 15;
-            ctx.moveTo(x + waveX, y + waveY);
-            ctx.lineTo((i + 1) * gridSize + nextWaveX, y + nextWaveY);
-          }
-
-          if (j < rows - 1) {
-            const nextWaveX = Math.sin(frame + (i * 0.5) + ((j + 1) * 0.3)) * 15;
-            const nextWaveY = Math.cos(frame + (i * 0.2) + ((j + 1) * 0.5)) * 15;
-            ctx.moveTo(x + waveX, y + waveY);
-            ctx.lineTo(x + nextWaveX, (j + 1) * gridSize + nextWaveY);
+        for (let j = i + 1; j < particles.length; j++) {
+          const p2 = particles[j];
+          const dist = Math.hypot(p.x - p2.x, p.y - p2.y);
+          if (dist < 150) {
+            ctx.beginPath();
+            ctx.strokeStyle = `rgba(59, 130, 246, ${0.15 * (1 - dist / 150)})`;
+            ctx.lineWidth = 0.5;
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(p2.x, p2.y);
+            ctx.stroke();
           }
         }
-      }
-      ctx.stroke();
+      });
 
-      // Nodes
-      for (let i = 0; i < columns; i += 2) {
-        for (let j = 0; j < rows; j += 2) {
-          const x = i * gridSize;
-          const y = j * gridSize;
-          const waveX = Math.sin(frame + (i * 0.5) + (j * 0.3)) * 15;
-          const waveY = Math.cos(frame + (i * 0.3) + (j * 0.5)) * 15;
-
-          ctx.beginPath();
-          ctx.arc(x + waveX, y + waveY, 1.5, 0, Math.PI * 2);
-          ctx.fillStyle = 'rgba(168, 85, 247, 0.8)';
-          ctx.fill();
-        }
-      }
-
-      requestRef.current = requestAnimationFrame(draw);
+      animationFrameId = requestAnimationFrame(draw);
     };
 
-    window.addEventListener('resize', resize);
+    window.addEventListener('resize', () => {
+      resize();
+      init();
+    });
+    
     resize();
-    requestRef.current = requestAnimationFrame(draw);
+    init();
+    draw();
 
     return () => {
+      cancelAnimationFrame(animationFrameId);
       window.removeEventListener('resize', resize);
-      cancelAnimationFrame(requestRef.current); // BUG FIX: Proper cleanup
     };
   }, []);
 
   return (
-    <canvas
-      ref={canvasRef}
-      style={{
-        position: 'fixed',
-        top: 0, left: 0, width: '100%', height: '100%',
-        zIndex: -1, pointerEvents: 'none'
-      }}
-    />
+    <div className="fixed inset-0 z-[-1] overflow-hidden bg-slate-950">
+      <canvas ref={canvasRef} className="opacity-60" />
+      {/* Dynamic Glows */}
+      <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-blue-600/10 rounded-full blur-[120px] animate-pulse" />
+      <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-purple-600/10 rounded-full blur-[120px] animate-pulse" style={{ animationDelay: '2s' }} />
+    </div>
   );
 };
 

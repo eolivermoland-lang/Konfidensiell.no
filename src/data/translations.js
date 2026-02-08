@@ -39,15 +39,6 @@ export const translations = {
       card2_title: "Startup Ready",
       card2_desc: "Fast-moving tech for fast-moving founders. We scale as you grow."
     },
-    testimonials: {
-      heading: "Trusted by Industry Leaders",
-      quote1: "Konfidensiell transformed our outdated infrastructure into a secure, lightning-fast system. Their approach to security is unmatched.",
-      author1: "Lars Jensen",
-      role1: "CEO, NordTech Solutions",
-      quote2: "As a startup, we needed a partner who could move fast without breaking things. They delivered a world-class product on time.",
-      author2: "Emma Berg",
-      role2: "Founder, PeakPulse"
-    },
     process: {
       heading: "Expert Execution",
       subheading: "A structured, transparent methodology for complex digital projects.",
@@ -168,15 +159,6 @@ export const translations = {
       card1_desc: "Nettsiden din skal være din beste selger. Vi optimaliserer for resultater.",
       card2_title: "Startup-klar",
       card2_desc: "Moderne teknologi for ambisiøse grundere. Vi skalerer med deg.",
-    },
-    testimonials: {
-      heading: "Stol på våre resultater",
-      quote1: "Konfidensiell forvandlet vår utdaterte infrastruktur til et sikkert og lynraskt system. Deres tilnærming til sikkerhet er i en egen klasse.",
-      author1: "Lars Jensen",
-      role1: "Daglig leder, NordTech Solutions",
-      quote2: "Som en startup trengte vi en partner som kunne bevege seg raskt. De leverte et produkt i verdensklasse, nøyaktig som avtalt.",
-      author2: "Emma Berg",
-      role2: "Gründer, PeakPulse"
     },
     process: {
       heading: "Profesjonell Utførelse",

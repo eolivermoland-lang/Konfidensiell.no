@@ -33,5 +33,12 @@ export const servicesData = {
     process: ['24/7 Monitoring Setup', 'Automated Backup Logic', 'Security Patching', 'Performance Reporting', 'Priority Support'],
     techStack: ['Sentry', 'UptimeRobot', 'Github Actions', 'Managed Cloud'],
     benefits: ['Zero downtime focus', 'Proactive security updates', 'Peace of mind for management', 'Consistent system performance']
+  },
+  'digital-growth': {
+    title: 'Digital Growth & SEO',
+    fullDescription: 'Visibility is the key to organic growth. We optimize your technical foundation and content strategy to ensure your business ranks where your customers are looking.',
+    process: ['Keyword Research', 'Technical SEO Audit', 'Content Strategy', 'Backlink Planning', 'Analytics Monitoring'],
+    techStack: ['Google Search Console', 'Ahrefs', 'Screaming Frog', 'Search Atlas'],
+    benefits: ['Increased organic traffic', 'Higher domain authority', 'Sustainable lead generation', 'Competitive market positioning']
   }
 };
