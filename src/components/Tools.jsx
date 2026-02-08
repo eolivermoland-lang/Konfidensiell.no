@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Globe, Key, Wifi, RefreshCw, Cpu, Zap, Layers, Server, Check } from 'lucide-react';
+import { useLanguage } from '../store/LanguageContext';
+import { translations } from '../data/translations';
 
 const Tools = () => {
+  const { language } = useLanguage();
+  const t = translations[language].tools;
   const [ipData, setIpData] = useState(null);
   const [loadingIp, setLoadingIp] = useState(false);
   const [password, setPassword] = useState('');
@@ -11,9 +15,9 @@ const Tools = () => {
   const [goal, setGoal] = useState('speed');
   
   const techStacks = {
-    speed: { title: 'Ultra-Fast Web Engine', frontend: 'React + Vite', styling: 'Tailwind CSS', hosting: 'Cloudflare Edge', desc: 'Optimized for < 1s load times.' },
-    security: { title: 'Secure Enterprise Portal', frontend: 'Next.js (SSR)', styling: 'Headless UI', hosting: 'Vercel / AWS', desc: 'Built with rigid security layers.' },
-    ecommerce: { title: 'High-Conversion Store', frontend: 'React 18', styling: 'Modern CSS-in-JS', hosting: 'Netlify Storefront', desc: 'Seamless integration with Stripe.' }
+    speed: { title: language === 'en' ? 'Ultra-Fast Web Engine' : 'Lynhurtig Web-motor', frontend: 'React + Vite', styling: 'Tailwind CSS', hosting: 'Cloudflare Edge', desc: language === 'en' ? 'Optimized for < 1s load times.' : 'Optimalisert for < 1s lastetid.' },
+    security: { title: language === 'en' ? 'Secure Enterprise Portal' : 'Sikker Bedriftsportal', frontend: 'Next.js (SSR)', styling: 'Headless UI', hosting: 'Vercel / AWS', desc: language === 'en' ? 'Built with rigid security layers.' : 'Bygget med strenge sikkerhetslag.' },
+    ecommerce: { title: language === 'en' ? 'High-Conversion Store' : 'Høikonverterende Butikk', frontend: 'React 18', styling: 'Modern CSS-in-JS', hosting: 'Netlify Storefront', desc: language === 'en' ? 'Seamless integration with Stripe.' : 'Sømløs integrasjon med Stripe.' }
   };
 
   const checkIp = async () => {
@@ -43,16 +47,16 @@ const Tools = () => {
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
         
         <header className='text-center mb-20'>
-          <h1 className='text-4xl md:text-6xl font-black text-white mb-6 tracking-tighter'>POWER TOOLS</h1>
-          <p className='text-gray-400 max-w-2xl mx-auto text-xl'>Utilities for the modern digital landscape.</p>
+          <h1 className='text-4xl md:text-6xl font-black text-white mb-6 tracking-tighter'>{t.heading}</h1>
+          <p className='text-gray-400 max-w-2xl mx-auto text-xl'>{t.subheading}</p>
         </header>
 
         {/* Tech Stack Suggester */}
         <div className="mb-32 glass-panel rounded-[3rem] p-8 md:p-16">
            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
               <div>
-                 <h2 className="text-3xl font-black text-white mb-6">Stack Architect</h2>
-                 <p className="text-gray-400 mb-10">Select your primary goal to see the modern technology stack we recommend for your project.</p>
+                 <h2 className="text-3xl font-black text-white mb-6">{t.architect.title}</h2>
+                 <p className="text-gray-400 mb-10">{t.architect.desc}</p>
                  
                  <div className="space-y-6" role="tablist" aria-label="Technology goals">
                     {Object.keys(techStacks).map(key => (
@@ -64,7 +68,7 @@ const Tools = () => {
                          className={`w-full text-left p-6 rounded-2xl border transition-all ${goal === key ? 'bg-blue-600/20 border-blue-600 text-white' : 'bg-slate-800/20 border-white/5 text-gray-500 hover:border-white/20'}`}
                        >
                          <div className="flex justify-between items-center">
-                            <span className="text-lg font-bold capitalize">{key}</span>
+                            <span className="text-lg font-bold capitalize">{language === 'en' ? key : (key === 'speed' ? 'fart' : key === 'security' ? 'sikkerhet' : 'e-handel')}</span>
                             {goal === key && <Zap className="text-blue-400" size={18} aria-hidden="true" />}
                          </div>
                        </button>
@@ -78,14 +82,14 @@ const Tools = () => {
                  </div>
                  
                  <motion.div key={goal} initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }}>
-                    <div className="text-blue-500 font-bold uppercase text-xs tracking-widest mb-2">Recommended Strategy</div>
+                    <div className="text-blue-500 font-bold uppercase text-xs tracking-widest mb-2">{t.architect.strategy}</div>
                     <h3 className="text-2xl font-black text-white mb-6">{techStacks[goal].title}</h3>
                     
                     <div className="space-y-4 mb-8">
                        {[
-                         { icon: <Cpu size={16} />, label: 'Frontend', val: techStacks[goal].frontend },
-                         { icon: <Zap size={16} />, label: 'Styling', val: techStacks[goal].styling },
-                         { icon: <Server size={16} />, label: 'Hosting', val: techStacks[goal].hosting },
+                         { icon: <Cpu size={16} />, label: language === 'en' ? 'Frontend' : 'Frontend', val: techStacks[goal].frontend },
+                         { icon: <Zap size={16} />, label: language === 'en' ? 'Styling' : 'Styling', val: techStacks[goal].styling },
+                         { icon: <Server size={16} />, label: language === 'en' ? 'Hosting' : 'Hosting', val: techStacks[goal].hosting },
                        ].map((item, i) => (
                          <div key={i} className="flex items-center gap-4 bg-slate-950/50 p-4 rounded-xl border border-white/5">
                             <div className="text-blue-500" aria-hidden="true">{item.icon}</div>
@@ -105,29 +109,29 @@ const Tools = () => {
         <div className='grid grid-cols-1 lg:grid-cols-3 gap-10'>
           <section className='glass-card p-10 rounded-3xl' aria-labelledby="ip-tool-heading">
             <Globe className='text-blue-500 mb-6' size={32} aria-hidden="true" />
-            <h2 id="ip-tool-heading" className='text-2xl font-bold text-white mb-8'>IP Checker</h2>
+            <h2 id="ip-tool-heading" className='text-2xl font-bold text-white mb-8'>{t.ip.title}</h2>
             <div className='bg-slate-950/50 p-6 rounded-2xl mb-8 text-center text-xl font-bold text-blue-400' aria-live="polite">
-              {loadingIp ? "Fetching..." : (ipData || '?.?.?.?')}
+              {loadingIp ? t.ip.fetching : (ipData || '?.?.?.?')}
             </div>
-            <button onClick={checkIp} className='w-full py-4 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700 transition-colors'>Trace IP</button>
+            <button onClick={checkIp} className='w-full py-4 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700 transition-colors'>{t.ip.btn}</button>
           </section>
 
           <section className='glass-card p-10 rounded-3xl' aria-labelledby="pass-tool-heading">
             <Key className='text-purple-500 mb-6' size={32} aria-hidden="true" />
-            <h2 id="pass-tool-heading" className='text-2xl font-bold text-white mb-8'>Password Gen</h2>
+            <h2 id="pass-tool-heading" className='text-2xl font-bold text-white mb-8'>{t.pass.title}</h2>
             <div className='bg-slate-950/50 p-6 rounded-2xl mb-8 text-center text-sm font-mono text-purple-400 break-all' aria-live="polite">
               {password || '••••••••'}
             </div>
-            <button onClick={generatePassword} className='w-full py-4 bg-purple-600 text-white rounded-xl font-bold hover:bg-purple-700 transition-colors'>Generate</button>
+            <button onClick={generatePassword} className='w-full py-4 bg-purple-600 text-white rounded-xl font-bold hover:bg-purple-700 transition-colors'>{t.pass.btn}</button>
           </section>
 
           <section className='glass-card p-10 rounded-3xl' aria-labelledby="ping-tool-heading">
             <Wifi className='text-green-500 mb-6' size={32} aria-hidden="true" />
-            <h2 id="ping-tool-heading" className='text-2xl font-bold text-white mb-8'>Latency Ping</h2>
+            <h2 id="ping-tool-heading" className='text-2xl font-bold text-white mb-8'>{t.ping.title}</h2>
             <div className='bg-slate-950/50 p-6 rounded-2xl mb-8 text-center text-3xl font-black text-green-400' aria-live="polite">
               {latency !== null ? `${latency}ms` : '--'}
             </div>
-            <button onClick={checkLatency} className='w-full py-4 bg-green-600 text-white rounded-xl font-bold hover:bg-green-700 transition-colors'>Ping</button>
+            <button onClick={checkLatency} className='w-full py-4 bg-green-600 text-white rounded-xl font-bold hover:bg-green-700 transition-colors'>{t.ping.btn}</button>
           </section>
         </div>
       </div>

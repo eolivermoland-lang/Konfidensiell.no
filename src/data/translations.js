@@ -65,6 +65,55 @@ export const translations = {
       form_sending: "Sending...",
       form_success: "Message sent successfully!",
       form_error: "Failed to send message."
+    },
+    services: {
+      heading: "Expert Services",
+      subheading: "IT solutions designed to scale your business.",
+      get_details: "Get Details",
+      advantages: {
+        preview: "Free Design Preview",
+        consult: "Free Consultation",
+        quality: "Norwegian Quality",
+        speed: "Speed & Power"
+      },
+      zero_risk: {
+        heading: "Our Zero-Risk Process",
+        subheading: "We don't believe in locking you into contracts for products you haven't seen yet.",
+        step1_title: "1. Free Consult",
+        step1_desc: "We start with a 100% free consultation. No pressure, no sales talk. Just a deep dive into your vision and a clear roadmap on how we will build it.",
+        step2_title: "2. Build & Review",
+        step2_desc: "We get to work immediately. You will have a live link to watch your product being built in real-time. We iterate based on your feedback until it's perfect.",
+        step3_title: "3. Pay Only if Happy",
+        step3_desc: "This is our CodeNext promise: You don't pay a single krone until the project is finished and you are 100% happy with the result.",
+        footer: "Your satisfaction is our only metric for success. No upfront costs, no hidden risks."
+      },
+      cta: {
+        heading: "Ready for a new standard?",
+        subheading: "Experience the CodeNext difference today with a risk-free strategy session.",
+        btn: "Book Free Call"
+      }
+    },
+    tools: {
+      heading: "POWER TOOLS",
+      subheading: "Utilities for the modern digital landscape.",
+      architect: {
+        title: "Stack Architect",
+        desc: "Select your primary goal to see the modern technology stack we recommend for your project.",
+        strategy: "Recommended Strategy"
+      },
+      ip: {
+        title: "IP Checker",
+        btn: "Trace IP",
+        fetching: "Fetching..."
+      },
+      pass: {
+        title: "Password Gen",
+        btn: "Generate"
+      },
+      ping: {
+        title: "Latency Ping",
+        btn: "Ping"
+      }
     }
   },
   no: {
@@ -133,6 +182,55 @@ export const translations = {
       form_sending: "Sender...",
       form_success: "Melding sendt!",
       form_error: "Kunne ikke sende melding."
+    },
+    services: {
+      heading: "Eksperttjenester",
+      subheading: "IT-løsninger designet for å skalere din bedrift.",
+      get_details: "Se Detaljer",
+      advantages: {
+        preview: "Gratis Designutkast",
+        consult: "Gratis Konsultasjon",
+        quality: "Norsk Kvalitet",
+        speed: "Fart & Kraft"
+      },
+      zero_risk: {
+        heading: "Vår Risiko-frie Prosess",
+        subheading: "Vi tror ikke på å låse deg til kontrakter for produkter du ikke har sett ennå.",
+        step1_title: "1. Gratis Samtale",
+        step1_desc: "Vi starter med en 100% gratis konsultasjon. Ikke noe press, bare et dypdykk i din visjon og en klar plan for hvordan vi bygger den.",
+        step2_title: "2. Bygg & Vurder",
+        step2_desc: "Vi setter i gang med en gang. Du får en live-lenke for å se produktet ditt bli bygget i sanntid. Vi justerer basert på dine tilbakemeldinger.",
+        step3_title: "3. Betal kun om du er fornøyd",
+        step3_desc: "Dette er vårt CodeNext-løfte: Du betaler ikke en eneste krone før prosjektet er ferdig og du er 100% fornøyd med resultatet.",
+        footer: "Din tilfredshet er vårt eneste mål på suksess. Ingen forskuddsbetaling, ingen skjult risiko."
+      },
+      cta: {
+        heading: "Klar for en ny standard?",
+        subheading: "Opplev CodeNext-forskjellen i dag med en risiko-fri strategisamtale.",
+        btn: "Bestill Gratis Samtale"
+      }
+    },
+    tools: {
+      heading: "VERKTØY",
+      subheading: "Nyttige verktøy for det moderne digitale landskapet.",
+      architect: {
+        title: "Stack Arkitekt",
+        desc: "Velg ditt primære mål for å se den moderne teknologien vi anbefaler for ditt prosjekt.",
+        strategy: "Anbefalt Strategi"
+      },
+      ip: {
+        title: "IP-Sjekk",
+        btn: "Spor IP",
+        fetching: "Henter..."
+      },
+      pass: {
+        title: "Passord-Gen",
+        btn: "Generer"
+      },
+      ping: {
+        title: "Forsinkelse",
+        btn: "Ping"
+      }
     }
   }
 };

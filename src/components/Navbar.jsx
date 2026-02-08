@@ -20,11 +20,11 @@ const Navbar = () => {
 
   return (
     <nav className='fixed top-0 left-0 w-full z-50 bg-slate-900/80 backdrop-blur-md border-b border-slate-800' aria-label="Main Navigation">
-      <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
+      <div className='max-w-[100vw] px-4 sm:px-6 lg:px-8'>
         <div className='flex items-center justify-between h-20'>
           
-          {/* Logo Section */}
-          <div className='flex items-center gap-6'>
+          {/* Logo Section - Absolute Left */}
+          <div className='flex items-center gap-4'>
             <Link to='/' className='flex items-center gap-3 group' aria-label="CodeNext Home">
               <div className='w-10 h-10 transition-transform group-hover:rotate-12 duration-300'>
                 <img 
@@ -42,7 +42,7 @@ const Navbar = () => {
               </span>
             </Link>
 
-            {/* Language Switcher - Left Aligned */}
+            {/* Language Switcher - Behind/Next to Logo */}
             <button 
               onClick={toggleLanguage}
               className="flex items-center gap-2 px-3 py-1.5 bg-white/5 hover:bg-white/10 border border-white/5 rounded-full transition-all text-[10px] font-black uppercase tracking-widest text-gray-400 hover:text-white group overflow-hidden relative min-w-[60px]"
