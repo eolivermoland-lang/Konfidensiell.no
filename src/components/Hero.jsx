@@ -5,27 +5,25 @@ import { Link } from 'react-router-dom';
 import { useLanguage } from '../store/LanguageContext';
 import { translations } from '../data/translations';
 
-const WavyText = ({ text, className }) => {
+const WavyText = ({ text, className, delay = 0 }) => {
   const letters = Array.from(text);
   
   const container = {
     hidden: { opacity: 0 },
-    visible: (i = 1) => ({
+    visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.05, delayChildren: 0.04 * i },
-    }),
+      transition: { staggerChildren: 0.08, delayChildren: delay },
+    },
   };
 
   const child = {
     visible: {
       opacity: 1,
-      y: [0, -10, 0],
+      y: [0, -12, 0],
       transition: {
-        type: "spring",
-        damping: 12,
-        stiffness: 100,
+        duration: 4, // Tregere hastighet
         repeat: Infinity,
-        duration: 3,
+        ease: "easeInOut",
       },
     },
     hidden: {
@@ -36,7 +34,7 @@ const WavyText = ({ text, className }) => {
 
   return (
     <motion.div
-      style={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}
+      style={{ display: "inline-flex", flexWrap: "wrap", justifyContent: "center" }}
       variants={container}
       initial="hidden"
       animate="visible"
@@ -49,12 +47,12 @@ const WavyText = ({ text, className }) => {
           style={{ display: "inline-block", whiteSpace: "pre" }}
           transition={{
             repeat: Infinity,
-            duration: 3,
-            delay: index * 0.1,
+            duration: 4,
+            delay: (index * 0.15) + delay, // Smidigere delay mellom bokstaver
             ease: "easeInOut"
           }}
           animate={{
-            y: [0, -8, 0],
+            y: [0, -10, 0],
           }}
         >
           {letter}
@@ -71,7 +69,7 @@ const Hero = () => {
   return (
     <section className='relative min-h-[90vh] flex items-center justify-center overflow-hidden py-20'>
       
-      <div className='text-center px-6 sm:px-10 lg:px-8 z-10 w-full max-w-5xl mx-auto'>
+      <div className='text-center px-6 sm:px-10 lg:px-8 z-10 w-full max-w-6xl mx-auto'>
         {/* Badge */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
@@ -82,29 +80,25 @@ const Hero = () => {
           <Terminal size={14} /> {language === 'en' ? 'The Future of Development is Here' : 'Fremtidens utvikling er her'}
         </motion.div>
 
-        {/* Wavy Title */}
-        <div className="mb-6 sm:mb-8">
+        {/* Wavy Main Heading */}
+        <div className="flex flex-col items-center justify-center">
           <WavyText 
             text={t.hero.title} 
-            className="text-[2.75rem] leading-[1.05] sm:text-7xl md:text-8xl font-black text-white tracking-tighter" 
+            className="text-[2.5rem] leading-[1.1] sm:text-7xl md:text-8xl font-black text-white tracking-tighter" 
           />
-          <motion.h1 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className='text-[2.75rem] leading-[1.05] sm:text-7xl md:text-8xl font-black tracking-tighter mt-2'
-          >
-            <span className='text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-cyan-400 to-emerald-500 bg-[length:200%_auto] animate-gradient block'>
-              {t.hero.subtitle}.
-            </span>
-          </motion.h1>
+          <WavyText 
+            text={t.hero.subtitle} 
+            delay={0.5}
+            className="text-[2.5rem] leading-[1.1] sm:text-7xl md:text-8xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-cyan-400 to-emerald-500 bg-[length:200%_auto] animate-gradient" 
+          />
         </div>
 
         {/* Subtitle */}
         <motion.p 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className='mt-4 max-w-2xl mx-auto text-base sm:text-lg md:text-2xl text-slate-300 font-medium px-2'
+          transition={{ duration: 0.8, delay: 1.5 }}
+          className='mt-8 max-w-2xl mx-auto text-base sm:text-lg md:text-2xl text-slate-300 font-medium px-2'
         >
           {t.hero.description}
         </motion.p>
@@ -113,7 +107,7 @@ const Hero = () => {
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
+          transition={{ duration: 0.8, delay: 1.8 }}
           className='mt-10 sm:mt-12 flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6'
         >
           <Link to='/contact' className='w-full sm:w-auto group relative flex items-center justify-center gap-2 px-8 py-4 sm:px-10 sm:py-5 bg-emerald-500 text-slate-900 font-black text-base sm:text-lg rounded-2xl hover:bg-emerald-400 transition-all duration-300 shadow-2xl active:scale-95'>
@@ -128,7 +122,7 @@ const Hero = () => {
         <motion.div 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1, duration: 1 }}
+          transition={{ delay: 2.2, duration: 1 }}
           className="mt-16 sm:mt-24 flex justify-center items-center gap-4 sm:gap-8 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all overflow-hidden"
         >
            <span className="text-white font-bold tracking-widest text-[10px] sm:text-sm uppercase">{language === 'en' ? 'Innovation' : 'Innovasjon'}</span>
