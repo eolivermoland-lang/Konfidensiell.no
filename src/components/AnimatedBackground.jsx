@@ -9,9 +9,7 @@ const Building = ({ position, scale, speed, color }) => {
   useFrame((state) => {
     const t = state.clock.getElapsedTime();
     if (mesh.current) {
-      // Massive pulsing movement
-      mesh.current.scale.y = scale[1] + Math.sin(t * speed) * (scale[1] * 0.2);
-      // Keep base at the bottom
+      mesh.current.scale.y = scale[1] + Math.sin(t * speed) * (scale[1] * 0.15);
       mesh.current.position.y = mesh.current.scale.y / 2 - 10;
     }
   });
@@ -22,46 +20,41 @@ const Building = ({ position, scale, speed, color }) => {
         <boxGeometry args={[1, 1, 1]} />
         <meshStandardMaterial 
           color={color} 
-          metalness={0.9} 
-          roughness={0.1} 
+          metalness={0.8} 
+          roughness={0.2} 
           transparent 
-          opacity={0.3}
+          opacity={0.25}
           emissive={color}
-          emissiveIntensity={0.5}
+          emissiveIntensity={0.3}
         />
-        {/* Detail wireframe */}
-        <mesh scale={[1.05, 1, 1.05]}>
-          <boxGeometry args={[1, 1, 1]} />
-          <meshBasicMaterial color={color} wireframe transparent opacity={0.1} />
-        </mesh>
       </mesh>
-      {/* Top light cap */}
-      <mesh position={[0, 0, 0]} rotation={[-Math.PI / 2, 0, 0]}>
-        <planeGeometry args={[1.1, 1.1]} />
-        <meshBasicMaterial color="#ffffff" transparent opacity={0.4} />
+      {/* Visual top cap */}
+      <mesh position={[0, scale[1] * 0.6, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+        <planeGeometry args={[scale[0] * 1.1, scale[2] * 1.1]} />
+        <meshBasicMaterial color={color} transparent opacity={0.3} />
       </mesh>
     </group>
   );
 };
 
-const City = () => {
-  const buildingCount = 45;
+const City = ({ isMobile }) => {
+  const buildingCount = isMobile ? 15 : 35; // Significant reduction for mobile
   const buildings = useMemo(() => {
     return Array.from({ length: buildingCount }, () => ({
       position: [
-        (Math.random() - 0.5) * 40,
+        (Math.random() - 0.5) * 35,
         0,
-        (Math.random() - 0.5) * 40
+        (Math.random() - 0.5) * 35
       ],
       scale: [
-        Math.random() * 3 + 2, // Width
-        Math.random() * 15 + 10, // Height
-        Math.random() * 3 + 2  // Depth
+        Math.random() * 2 + 2,
+        Math.random() * 12 + 8,
+        Math.random() * 2 + 2
       ],
-      speed: Math.random() * 0.4 + 0.1,
+      speed: Math.random() * 0.3 + 0.1,
       color: Math.random() > 0.5 ? "#10b981" : "#06b6d4"
     }));
-  }, []);
+  }, [buildingCount]);
 
   return (
     <group>
@@ -72,19 +65,18 @@ const City = () => {
   );
 };
 
-const Scene = () => {
+const Scene = ({ isMobile }) => {
   return (
     <>
       <color attach="background" args={['#050a1f']} />
-      <fog attach="fog" args={['#050a1f', 10, 50]} />
-      <ambientLight intensity={0.8} />
-      <pointLight position={[20, 30, 10]} intensity={2} color="#10b981" />
-      <pointLight position={[-20, 30, -10]} intensity={2} color="#06b6d4" />
+      <fog attach="fog" args={['#050a1f', 10, 45]} />
+      <ambientLight intensity={0.7} />
+      <pointLight position={[20, 30, 10]} intensity={1.5} color="#10b981" />
+      <pointLight position={[-20, 30, -10]} intensity={1.5} color="#06b6d4" />
       
-      <City />
+      <City isMobile={isMobile} />
       
-      {/* Massive bottom grid for scale */}
-      <gridHelper args={[200, 50, "#10b981", "#050a1f"]} position={[0, -10, 0]} opacity={0.2} transparent />
+      <gridHelper args={[150, 40, "#10b981", "#050a1f"]} position={[0, -10, 0]} opacity={0.15} transparent />
       
       <AdaptiveDpr pixelated />
       <AdaptiveEvents />
@@ -94,10 +86,18 @@ const Scene = () => {
 
 const AnimatedBackground = () => {
   const [mounted, setMounted] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => setMounted(true), 100);
-    return () => clearTimeout(timer);
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    const timer = setTimeout(() => setMounted(true), 200);
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('resize', checkMobile);
+    };
   }, []);
 
   if (!mounted) return <div className="fixed inset-0 bg-[#050a1f]" />;
@@ -105,17 +105,22 @@ const AnimatedBackground = () => {
   return (
     <div className="fixed inset-0 z-[-1] pointer-events-none bg-[#050a1f]">
       <Canvas 
-        dpr={[1, 1.5]}
-        gl={{ antialias: false, powerPreference: "high-performance" }}
+        dpr={isMobile ? [1, 1] : [1, 1.5]} // Lower resolution on mobile for speed
+        gl={{ 
+          antialias: false, 
+          powerPreference: "high-performance",
+          alpha: false,
+          stencil: false,
+          depth: true
+        }}
         performance={{ min: 0.5 }}
       >
-        {/* Top-down perspective camera */}
-        <PerspectiveCamera makeDefault position={[15, 25, 15]} rotation={[-Math.PI / 3, Math.PI / 6, 0]} fov={55} />
+        <PerspectiveCamera makeDefault position={[12, 22, 12]} rotation={[-Math.PI / 3.5, Math.PI / 6, 0]} fov={isMobile ? 65 : 55} />
         <Suspense fallback={null}>
-          <Scene />
+          <Scene isMobile={isMobile} />
         </Suspense>
       </Canvas>
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#050a1f] opacity-80" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#050a1f] opacity-90" />
     </div>
   );
 };

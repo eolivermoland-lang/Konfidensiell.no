@@ -23,21 +23,49 @@ const PageLoader = () => (
 
 const PageManager = () => {
   const { pathname } = useLocation();
+  const { language } = useLanguage();
+
   useEffect(() => {
     window.scrollTo(0, 0);
-    const pageTitles = {
-      '/': 'Home — Konfidensiell IT Solutions',
-      '/about': 'About Us — Konfidensiell',
-      '/services': 'Our Services — Konfidensiell',
-      '/tools': 'Developer Tools — Konfidensiell',
-      '/contact': 'Contact Us — Konfidensiell',
+    
+    const content = {
+      en: {
+        '/': { title: 'Konfidensiell — Premium IT Help & Website Development Norway', desc: 'Expert IT help, professional website development, and secure digital infrastructure for businesses and startups.' },
+        '/about': { title: 'About Us — Konfidensiell IT Solutions', desc: 'Learn about Konfidensiell, a Norwegian powerhouse of innovation specializing in secure and scalable software.' },
+        '/services': { title: 'Our Services — IT Consulting & Web Development', desc: 'Comprehensive IT services including web optimization, security solutions, and startup tech support in Norway.' },
+        '/tools': { title: 'Developer Tools — Free Technical Assets', desc: 'Free online tools for network verification, secure password generation, and infrastructure planning.' },
+        '/contact': { title: 'Contact Us — Book a Free IT Strategy Session', desc: 'Get in touch with our expert engineers for professional IT help and custom website development projects.' },
+      },
+      no: {
+        '/': { title: 'Konfidensiell — IT Hjelp & Utvikling av Nettsider i Norge', desc: 'Ekspert IT-hjelp, profesjonell utvikling av nettsider og sikker digital infrastruktur for bedrifter og startups.' },
+        '/about': { title: 'Om Oss — Konfidensiell IT-løsninger', desc: 'Lær mer om Konfidensiell, et norsk kraftsenter for innovasjon spesialisert på sikker og skalerbar programvare.' },
+        '/services': { title: 'Våre Tjenester — IT-rådgivning & Webutvikling', desc: 'Omfattende IT-tjenester inkludert web-optimalisering, sikkerhetsløsninger og teknisk støtte for startups.' },
+        '/tools': { title: 'Verktøy — Gratis Tekniske Ressurser', desc: 'Gratis online verktøy for nettverksverifisering, sikker passordgenerering og infrastrukturplanlegging.' },
+        '/contact': { title: 'Kontakt Oss — Bestill Gratis IT-Strategisamtale', desc: 'Kontakt våre eksperter for profesjonell IT-hjelp og skreddersydde prosjekter for utvikling av nettsider.' },
+      }
     };
+
+    const current = content[language][pathname] || content[language]['/'];
+    
     if (pathname.startsWith('/services/')) {
-      document.title = 'Service Details — Konfidensiell';
+      document.title = language === 'en' ? 'Service Details — Konfidensiell' : 'Tjenestedetaljer — Konfidensiell';
     } else {
-      document.title = pageTitles[pathname] || 'Konfidensiell IT Solutions';
+      document.title = current.title;
     }
-  }, [pathname]);
+
+    // Update Meta Description dynamically
+    let metaDesc = document.querySelector('meta[name="description"]');
+    if (!metaDesc) {
+      metaDesc = document.createElement('meta');
+      metaDesc.name = 'description';
+      document.head.appendChild(metaDesc);
+    }
+    metaDesc.setAttribute('content', current.desc);
+
+    // Update HTML lang attribute
+    document.documentElement.lang = language;
+  }, [pathname, language]);
+  
   return null;
 };
 
