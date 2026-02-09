@@ -41,22 +41,20 @@ export const translations = {
     },
     pricing: {
       heading: "Investment Tiers",
-      subheading: "Transparent pricing for businesses ready to scale. No hidden fees.",
-      cta: "Get Offer",
+      subheading: "Strategic digital solutions tailored to your business needs.",
+      cta: "Request Quote",
       popular: "Best Seller",
+      on_request: "Price on request",
       enkel: {
         title: "Basic",
-        price: "From 9,900,-",
         features: ["Professional Landing Page", "Mobile Optimization", "Technical SEO Start", "1 Business Email", "Contact Form"]
       },
       pluss: {
         title: "Plus",
-        price: "From 19,900,-",
         features: ["Full Multi-page Website", "CMS (Edit content yourself)", "Advanced SEO Setup", "5 Business Emails", "Google Maps Integration", "Priority Support"]
       },
       premium: {
         title: "Premium",
-        price: "Custom Quote",
         features: ["Custom Web Application", "E-commerce Solutions", "Advanced Security Hardening", "Strategic IT Consulting", "24/7 Priority Support", "Infrastructure Hosting"]
       }
     },
@@ -205,22 +203,20 @@ export const translations = {
     },
     pricing: {
       heading: "Prisnivåer",
-      subheading: "Gjennomsiktige priser for bedrifter som er klare for å vokse. Ingen skjulte kostnader.",
+      subheading: "Strategiske digitale løsninger tilpasset din bedrifts behov.",
       cta: "Få tilbud",
       popular: "Bestselger",
+      on_request: "Pris på forespørsel",
       enkel: {
         title: "Enkel",
-        price: "Fra 9 900,-",
         features: ["Profesjonell Landingsside", "Mobiloptimalisering", "Teknisk SEO Startpakke", "1 Bedrifts-epost", "Kontaktskjema"]
       },
       pluss: {
         title: "Pluss",
-        price: "Fra 19 900,-",
         features: ["Komplett flersiders nettside", "CMS (Rediger innhold selv)", "Avansert SEO-oppsett", "5 Bedrifts-eposter", "Google Maps-integrasjon", "Prioritert support"]
       },
       premium: {
         title: "Premium",
-        price: "Pris på forespørsel",
         features: ["Skreddersydd Web-applikasjon", "Nettbutikk-løsninger", "Avansert sikkerhetsherding", "Strategisk IT-rådgivning", "24/7 Prioritert Support", "Infrastruktur & Hosting"]
       }
     },
