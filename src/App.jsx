@@ -1,6 +1,7 @@
 import React, { useEffect, Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation, Link } from 'react-router-dom';
 import Navbar from './components/Navbar';
+import { useLanguage } from './store/LanguageContext';
 
 // Critical UI components
 const AnimatedBackground = lazy(() => import('./components/AnimatedBackground'));
