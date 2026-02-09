@@ -39,6 +39,27 @@ export const translations = {
       card2_title: "Startup IT Support",
       card2_desc: "Fast-moving tech help for fast-moving founders. We scale our IT solutions as you grow."
     },
+    pricing: {
+      heading: "Investment Tiers",
+      subheading: "Transparent pricing for businesses ready to scale. No hidden fees.",
+      cta: "Get Offer",
+      popular: "Best Seller",
+      enkel: {
+        title: "Basic",
+        price: "From 9,900,-",
+        features: ["Professional Landing Page", "Mobile Optimization", "Technical SEO Start", "1 Business Email", "Contact Form"]
+      },
+      pluss: {
+        title: "Plus",
+        price: "From 19,900,-",
+        features: ["Full Multi-page Website", "CMS (Edit content yourself)", "Advanced SEO Setup", "5 Business Emails", "Google Maps Integration", "Priority Support"]
+      },
+      premium: {
+        title: "Premium",
+        price: "Custom Quote",
+        features: ["Custom Web Application", "E-commerce Solutions", "Advanced Security Hardening", "Strategic IT Consulting", "24/7 Priority Support", "Infrastructure Hosting"]
+      }
+    },
     process: {
       heading: "Our Project Methodology",
       subheading: "A structured, transparent approach to IT help and digital development.",
@@ -182,6 +203,27 @@ export const translations = {
       card2_title: "Startup IT-Hjelp",
       card2_desc: "Rask teknisk hjelp for ambisiøse gründere. Vi skalerer våre IT-løsninger i takt med din vekst.",
     },
+    pricing: {
+      heading: "Prisnivåer",
+      subheading: "Gjennomsiktige priser for bedrifter som er klare for å vokse. Ingen skjulte kostnader.",
+      cta: "Få tilbud",
+      popular: "Bestselger",
+      enkel: {
+        title: "Enkel",
+        price: "Fra 9 900,-",
+        features: ["Profesjonell Landingsside", "Mobiloptimalisering", "Teknisk SEO Startpakke", "1 Bedrifts-epost", "Kontaktskjema"]
+      },
+      pluss: {
+        title: "Pluss",
+        price: "Fra 19 900,-",
+        features: ["Komplett flersiders nettside", "CMS (Rediger innhold selv)", "Avansert SEO-oppsett", "5 Bedrifts-eposter", "Google Maps-integrasjon", "Prioritert support"]
+      },
+      premium: {
+        title: "Premium",
+        price: "Pris på forespørsel",
+        features: ["Skreddersydd Web-applikasjon", "Nettbutikk-løsninger", "Avansert sikkerhetsherding", "Strategisk IT-rådgivning", "24/7 Prioritert Support", "Infrastruktur & Hosting"]
+      }
+    },
     process: {
       heading: "Vår Prosjektmetodikk",
       subheading: "En strukturert og transparent tilnærming til IT-hjelp og digital utvikling.",
@@ -272,7 +314,7 @@ export const translations = {
       card1_title: "Premium IT-Hjelp",
       card1_desc: "Vi skriver kode som varer, og følger industriens beste praksis og strenge standarder.",
       card2_title: "Ekstrem Sikkerhet",
-      card2_desc: "I en verden av trusler bygger vi festninger. Din datasikkerhet og IT-konfidensialitet er våre prioriteringer.",
+      card2_desc: "In a world of threats, we build festninger. Din datasikkerhet og IT-konfidensialitet er våre prioriteringer.",
       card3_title: "Digital Vekst",
       card3_desc: "Din vekst er vårt mål på suksess. Vi jobber tett med deg som en langsiktig partner på nettsideutvikling.",
       card4_title: "Moderne Stack",

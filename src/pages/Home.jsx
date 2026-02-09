@@ -1,5 +1,6 @@
 import React from 'react';
 import Hero from '../components/Hero';
+import Pricing from '../components/Pricing';
 import { motion } from 'framer-motion';
 import { ArrowRight, Code, Zap, Shield, Search, Lightbulb, Rocket, Settings, CheckCircle, Target, UserCheck } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -48,6 +49,9 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      {/* Pricing Section */}
+      <Pricing />
 
       {/* Intro Section */}
       <section className='py-20 sm:py-32 bg-transparent' aria-labelledby="intro-heading">
