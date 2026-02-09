@@ -47,15 +47,15 @@ export const translations = {
       on_request: "Price on request",
       enkel: {
         title: "Basic",
-        features: ["Professional Landing Page", "Mobile Optimization", "Technical SEO Start", "1 Business Email", "Contact Form"]
+        features: ["1 Professional Page", "Contact Form Integration", "Complete Design & Copywriting", "Fast Technical Support", "Mobile Performance Fix"]
       },
       pluss: {
         title: "Plus",
-        features: ["Full Multi-page Website", "CMS (Edit content yourself)", "Advanced SEO Setup", "5 Business Emails", "Google Maps Integration", "Priority Support"]
+        features: ["Up to 5 Custom Subpages", "Advanced Contact System", "Premium Visuals & Content", "Product/Price Catalog", "Dedicated Norwegian Support", "Privacy & GDPR Setup"]
       },
       premium: {
         title: "Premium",
-        features: ["Custom Web Application", "E-commerce Solutions", "Advanced Security Hardening", "Strategic IT Consulting", "24/7 Priority Support", "Infrastructure Hosting"]
+        features: ["Up to 10 Custom Subpages", "Unlimited Articles/Blog Posts", "Self-Edit System (CMS)", "Full Visual Identity", "Strategic Business Roadmap", "Advanced Security Hardening"]
       }
     },
     process: {
@@ -209,15 +209,15 @@ export const translations = {
       on_request: "Pris på forespørsel",
       enkel: {
         title: "Enkel",
-        features: ["Profesjonell Landingsside", "Mobiloptimalisering", "Teknisk SEO Startpakke", "1 Bedrifts-epost", "Kontaktskjema"]
+        features: ["1 Profesjonell Side", "Integrert Kontaktskjema", "Ferdig design, tekst og bilder", "Rask teknisk support", "Mobiloptimalisering"]
       },
       pluss: {
         title: "Pluss",
-        features: ["Komplett flersiders nettside", "CMS (Rediger innhold selv)", "Avansert SEO-oppsett", "5 Bedrifts-eposter", "Google Maps-integrasjon", "Prioritert support"]
+        features: ["Opptil 5 undersider", "Avansert kontaktskjema", "Ferdig design, tekst og bilder", "Produktmeny eller prisliste", "Rask norsk support", "Personvernerklæring"]
       },
       premium: {
         title: "Premium",
-        features: ["Skreddersydd Web-applikasjon", "Nettbutikk-løsninger", "Avansert sikkerhetsherding", "Strategisk IT-rådgivning", "24/7 Prioritert Support", "Infrastruktur & Hosting"]
+        features: ["Opptil 10 undersider", "Ubegrenset artikler/blogg", "Rediger selv (CMS)", "Komplett visuell profil", "Produktmeny eller prisliste", "Avansert sikkerhet"]
       }
     },
     process: {
