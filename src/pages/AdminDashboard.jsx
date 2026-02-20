@@ -13,12 +13,10 @@ const AdminDashboard = () => {
   const [ngrokUrl, setNgrokUrl] = useState(localStorage.getItem('titan_ngrok_url') || 'https://kaleb-mudfat-taxably.ngrok-free.dev');
   const [chatInput, setChatInput] = useState('');
   const [messages, setMessages] = useState([
-    { role: 'assistant', content: 'Titan-1.0gp online. System status: Beta Alpha XT. How can I assist you today?' }
+    { role: 'assistant', content: 'Titan-1.0gp online. System status: Beta Alpha XT. Proxy active. How can I assist you today?' }
   ]);
   const [isTyping, setIsTyping] = useState(false);
   const chatScrollRef = useRef(null);
-
-  const API_KEY = "Titan_Safe_9823_Alpha_XT";
 
   useEffect(() => {
     const auth = localStorage.getItem('admin_auth');
@@ -72,27 +70,26 @@ const AdminDashboard = () => {
     setIsTyping(true);
 
     try {
-      // Saving ngrok URL for convenience
       localStorage.setItem('titan_ngrok_url', ngrokUrl);
 
-      const response = await fetch(`${ngrokUrl}/v1/chat/completions`, {
+      // CALLING PROXY INSTEAD OF NGROK DIRECTLY TO FIX CORS
+      const response = await fetch(`/api/titan`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${API_KEY}`
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          model: "Titan-1.0gp",
-          messages: [{ role: "user", content: userMessage }],
-          temperature: 0.7
+          ngrokUrl: ngrokUrl,
+          message: userMessage
         })
       });
 
       const data = await response.json();
+      
+      if (data.error) throw new Error(data.error);
+
       const botReply = data.choices[0].message.content;
       setMessages(prev => [...prev, { role: 'assistant', content: botReply }]);
     } catch (err) {
-      setMessages(prev => [...prev, { role: 'assistant', content: "Error: Could not reach Titan. Check if your ngrok tunnel is active and the URL is correct." }]);
+      setMessages(prev => [...prev, { role: 'assistant', content: `Error: ${err.message || "Failed to reach Titan."}` }]);
     } finally {
       setIsTyping(false);
     }
@@ -104,7 +101,7 @@ const AdminDashboard = () => {
     <div className="py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto text-white">
       <header className="flex justify-between items-center mb-12">
         <div>
-          <h1 className="text-4xl font-black uppercase tracking-tighter">Command Center</h1>
+          <h1 className="text-4xl font-black uppercase tracking-tighter text-white">Command Center</h1>
           <p className="text-emerald-500 font-bold text-xs uppercase tracking-widest mt-1">Admin Access Authorized</p>
         </div>
         <button onClick={handleLogout} className="px-6 py-3 bg-rose-600/10 text-rose-500 rounded-xl font-bold hover:bg-rose-600 hover:text-white transition-all">Logout</button>
@@ -142,7 +139,7 @@ const AdminDashboard = () => {
             </div>
             <div className="flex items-center gap-2">
               <Activity size={14} className="text-emerald-500 animate-pulse" />
-              <span className="text-[10px] font-black text-emerald-500 uppercase">System Ready</span>
+              <span className="text-[10px] font-black text-emerald-500 uppercase">Secure Proxy Active</span>
             </div>
           </div>
 
@@ -180,7 +177,7 @@ const AdminDashboard = () => {
                 value={chatInput}
                 onChange={(e) => setChatInput(e.target.value)}
                 placeholder="Ask Titan anything..."
-                className="flex-1 bg-slate-950/50 border border-white/5 rounded-xl px-4 py-3 text-sm outline-none focus:border-emerald-500/50 transition-all"
+                className="flex-1 bg-slate-950/50 border border-white/5 rounded-xl px-4 py-3 text-sm outline-none focus:border-emerald-500/50 transition-all text-white"
               />
               <button 
                 type="submit"
@@ -207,7 +204,7 @@ const AdminDashboard = () => {
                   value={ngrokUrl}
                   onChange={(e) => setNgrokUrl(e.target.value)}
                   placeholder="https://your-id.ngrok-free.app"
-                  className="w-full mt-2 bg-slate-950/50 border border-white/5 rounded-xl px-4 py-3 text-xs outline-none focus:border-emerald-500/50"
+                  className="w-full mt-2 bg-slate-950/50 border border-white/5 rounded-xl px-4 py-3 text-xs outline-none focus:border-emerald-500/50 text-white"
                 />
               </div>
               <div className="p-4 bg-emerald-500/5 rounded-xl border border-emerald-500/10">
@@ -217,7 +214,7 @@ const AdminDashboard = () => {
                 </div>
                 <p className="text-[11px] text-slate-400 leading-relaxed">
                   Version: Titan-1.0gp<br />
-                  Key: {API_KEY.slice(0,8)}...XT<br />
+                  Proxy: Active (Fixed CORS)<br />
                   Host: Ngrok Tunnel
                 </p>
               </div>
@@ -228,7 +225,7 @@ const AdminDashboard = () => {
              <h3 className="text-xl font-black mb-6 uppercase tracking-tighter flex items-center gap-3">
                <Globe className="text-cyan-500" /> Infrastructure
              </h3>
-             <p className="text-slate-400 text-sm">Cloudflare Edge & Ngrok API active.</p>
+             <p className="text-slate-400 text-sm">Cloudflare Edge & Secure Proxy active.</p>
              <div className="mt-6 pt-6 border-t border-white/5 space-y-3">
                 <div className="flex justify-between items-center text-[10px] font-black uppercase tracking-widest">
                   <span className="text-slate-500">Node Sync</span>
