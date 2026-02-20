@@ -9,6 +9,8 @@
   "vars": {
     "ADMIN_EMAIL": "olivermolandeyde@hotmail.com",
     "ADMIN_PASSWORD": "5Femertallet1",
+    "ADMIN_EMAIL_2": "tobiasnordgard7@gmail.com",
+    "ADMIN_PASSWORD_2": "Lillemy09",
     "CLOUDFLARE_ACCOUNT_ID": "961d9b8159d86770ecbfa38b78c6ea7c",
     "CLOUDFLARE_API_TOKEN": "VqbFcHPBkLelYskDf6tzknO7Ag0Jr6CTnQQ4T_Tv"
   }
