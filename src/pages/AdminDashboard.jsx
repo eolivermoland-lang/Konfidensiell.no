@@ -98,14 +98,23 @@ const AdminDashboard = () => {
       }
       
       if (data.error) {
-        throw new Error(data.error);
+        const errorMsg = data.hint 
+          ? `${data.error} (Hint: ${data.hint})` 
+          : data.error;
+        const finalMsg = data.url ? `${errorMsg} [URL: ${data.url}]` : errorMsg;
+        throw new Error(finalMsg);
       }
 
       const botReply = data.choices?.[0]?.message?.content || "No response content";
       setMessages(prev => [...prev, { role: 'assistant', content: botReply }]);
     } catch (err) {
       console.error("Titan Error:", err);
-      setMessages(prev => [...prev, { role: 'assistant', content: `Error: ${err.message || "Failed to reach Titan."}` }]);
+      // Clean up the error message if it contains the full HTML dump from ngrok
+      let displayError = err.message || "Failed to reach Titan.";
+      if (displayError.includes("<!DOCTYPE html>")) {
+        displayError = displayError.split(": <!DOCTYPE html>")[0] + " (Server returned an error page instead of API response)";
+      }
+      setMessages(prev => [...prev, { role: 'assistant', content: `Error: ${displayError}` }]);
     } finally {
       setIsTyping(false);
     }
