@@ -22,15 +22,22 @@ export default {
 
     // 2. TITAN AI PROXY - Forbedret feilsøking
     if (url.pathname === '/api/titan' && request.method === 'POST') {
+      let cleanUrl = "Ukjent URL";
       try {
-        const { ngrokUrl, message } = await request.json();
+        const body = await request.json();
+        const { ngrokUrl, message } = body;
         const TITAN_API_KEY = "Titan_Safe_9823_Alpha_XT";
 
-        if (!ngrokUrl) throw new Error("Mangler ngrok-URL");
+        if (!ngrokUrl) throw new Error("Mangler ngrok-URL i forespørselen");
 
-        const cleanUrl = ngrokUrl.replace(/\/$/, ""); 
+        // Valider og rens URL
+        let processedUrl = ngrokUrl.trim().replace(/\/$/, "");
+        if (!processedUrl.startsWith('http')) {
+          processedUrl = `https://${processedUrl}`;
+        }
+        cleanUrl = processedUrl;
 
-        console.log(`Forsøker å koble til Titan på: ${cleanUrl}`);
+        console.log(`Forsøker å koble til Titan på: ${cleanUrl}/v1/chat/completions`);
 
         const titanResponse = await fetch(`${cleanUrl}/v1/chat/completions`, {
           method: 'POST',
@@ -50,8 +57,15 @@ export default {
 
         if (!titanResponse.ok) {
           const errorDetail = await titanResponse.text();
+          let errorMessage = `Titan API feil (${titanResponse.status})`;
+          
+          if (titanResponse.status === 502 || titanResponse.status === 504) {
+            errorMessage = `Titan-serveren er utilgjengelig (502/504). Sjekk at ngrok kjører og at lokal server er på.`;
+          }
+
           return new Response(JSON.stringify({ 
-            error: `Titan API feil (${titanResponse.status}): ${errorDetail.slice(0, 100)}` 
+            error: `${errorMessage}: ${errorDetail.slice(0, 150)}`,
+            debug: { url: cleanUrl, status: titanResponse.status }
           }), {
             status: titanResponse.status,
             headers: { 'Content-Type': 'application/json' },
@@ -65,7 +79,9 @@ export default {
 
       } catch (err) {
         return new Response(JSON.stringify({ 
-          error: `Proxy krasjet: ${err.message}. Sjekk at ngrok er aktiv og URL-en stemmer.` 
+          error: `Proxy feil: ${err.message}`,
+          hint: "Sjekk at ngrok-URLen er korrekt og at tunnelen er aktiv.",
+          url: cleanUrl
         }), {
           status: 500,
           headers: { 'Content-Type': 'application/json' },

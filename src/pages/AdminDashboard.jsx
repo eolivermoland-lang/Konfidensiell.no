@@ -70,25 +70,41 @@ const AdminDashboard = () => {
     setIsTyping(true);
 
     try {
-      localStorage.setItem('titan_ngrok_url', ngrokUrl);
+      // Validate URL before sending
+      let finalNgrokUrl = ngrokUrl.trim();
+      if (!finalNgrokUrl.startsWith('http')) {
+        finalNgrokUrl = `https://${finalNgrokUrl}`;
+      }
+      
+      localStorage.setItem('titan_ngrok_url', finalNgrokUrl);
 
       // CALLING PROXY INSTEAD OF NGROK DIRECTLY TO FIX CORS
       const response = await fetch(`/api/titan`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          ngrokUrl: ngrokUrl,
+          ngrokUrl: finalNgrokUrl,
           message: userMessage
         })
       });
 
-      const data = await response.json();
+      let data;
+      const contentType = response.headers.get("content-type");
+      if (contentType && contentType.includes("application/json")) {
+        data = await response.json();
+      } else {
+        const text = await response.text();
+        throw new Error(`Server returned non-JSON response (${response.status}): ${text.slice(0, 100)}`);
+      }
       
-      if (data.error) throw new Error(data.error);
+      if (data.error) {
+        throw new Error(data.error);
+      }
 
-      const botReply = data.choices[0].message.content;
+      const botReply = data.choices?.[0]?.message?.content || "No response content";
       setMessages(prev => [...prev, { role: 'assistant', content: botReply }]);
     } catch (err) {
+      console.error("Titan Error:", err);
       setMessages(prev => [...prev, { role: 'assistant', content: `Error: ${err.message || "Failed to reach Titan."}` }]);
     } finally {
       setIsTyping(false);
