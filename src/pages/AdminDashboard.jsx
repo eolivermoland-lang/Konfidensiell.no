@@ -11,6 +11,7 @@ const AdminDashboard = () => {
   
   // Titan AI State
   const [ngrokUrl, setNgrokUrl] = useState(localStorage.getItem('titan_ngrok_url') || 'https://kaleb-mudfat-taxably.ngrok-free.dev');
+  const [titanKey, setTitanKey] = useState(localStorage.getItem('titan_api_key') || 'Titan_Safe_9823_Alpha_XT');
   const [chatInput, setChatInput] = useState('');
   const [messages, setMessages] = useState([
     { role: 'assistant', content: 'Titan-1.0gp online. System status: Beta Alpha XT. Proxy active. How can I assist you today?' }
@@ -77,6 +78,7 @@ const AdminDashboard = () => {
       }
       
       localStorage.setItem('titan_ngrok_url', finalNgrokUrl);
+      localStorage.setItem('titan_api_key', titanKey);
 
       // CALLING PROXY INSTEAD OF NGROK DIRECTLY TO FIX CORS
       const response = await fetch(`/api/titan`, {
@@ -84,7 +86,8 @@ const AdminDashboard = () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           ngrokUrl: finalNgrokUrl,
-          message: userMessage
+          message: userMessage,
+          apiKey: titanKey
         })
       });
 
@@ -229,6 +232,16 @@ const AdminDashboard = () => {
                   value={ngrokUrl}
                   onChange={(e) => setNgrokUrl(e.target.value)}
                   placeholder="https://your-id.ngrok-free.app"
+                  className="w-full mt-2 bg-slate-950/50 border border-white/5 rounded-xl px-4 py-3 text-xs outline-none focus:border-emerald-500/50 text-white"
+                />
+              </div>
+              <div>
+                <label className="text-[10px] font-black uppercase text-slate-500 tracking-widest ml-1">Titan API Key</label>
+                <input 
+                  type="password"
+                  value={titanKey}
+                  onChange={(e) => setTitanKey(e.target.value)}
+                  placeholder="Enter API Key"
                   className="w-full mt-2 bg-slate-950/50 border border-white/5 rounded-xl px-4 py-3 text-xs outline-none focus:border-emerald-500/50 text-white"
                 />
               </div>

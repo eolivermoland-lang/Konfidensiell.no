@@ -25,8 +25,10 @@ export default {
       let cleanUrl = "Ukjent URL";
       try {
         const body = await request.json();
-        const { ngrokUrl, message } = body;
-        const TITAN_API_KEY = "Titan_Safe_9823_Alpha_XT";
+        const { ngrokUrl, message, apiKey } = body;
+        
+        // Use the key from the request, or fallback to the hardcoded one
+        const TITAN_API_KEY = apiKey || "Titan_Safe_9823_Alpha_XT";
 
         if (!ngrokUrl) throw new Error("Mangler ngrok-URL i forespørselen");
 
@@ -38,6 +40,7 @@ export default {
         cleanUrl = processedUrl;
 
         console.log(`Forsøker å koble til Titan på: ${cleanUrl}/v1/chat/completions`);
+        console.log(`Bruker Auth: Bearer ${TITAN_API_KEY.substring(0, 5)}...`);
 
         const titanResponse = await fetch(`${cleanUrl}/v1/chat/completions`, {
           method: 'POST',
