@@ -40,13 +40,13 @@ export default {
         cleanUrl = processedUrl;
 
         console.log(`Forsøker å koble til Titan på: ${cleanUrl}/v1/chat/completions`);
-        console.log(`Bruker Auth: Bearer ${TITAN_API_KEY.substring(0, 5)}...`);
+        console.log(`Bruker Auth: X-Titan-Key: ${TITAN_API_KEY.substring(0, 5)}...`);
 
         const titanResponse = await fetch(`${cleanUrl}/v1/chat/completions`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${TITAN_API_KEY}`,
+            'X-Titan-Key': TITAN_API_KEY,
             'ngrok-skip-browser-warning': 'true',
             'Accept': 'application/json'
           },
