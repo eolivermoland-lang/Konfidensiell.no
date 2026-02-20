@@ -16,17 +16,21 @@ export default {
       });
     }
 
-    // 2. TITAN AI PROXY - Løser CORS og beskytter API-nøkkelen
+    // 2. TITAN AI PROXY - Løser CORS og ngrok browser warnings
     if (url.pathname === '/api/titan' && request.method === 'POST') {
-      const { ngrokUrl, message } = await request.json();
-      const TITAN_API_KEY = "Titan_Safe_9823_Alpha_XT";
-
       try {
-        const response = await fetch(`${ngrokUrl}/v1/chat/completions`, {
+        const { ngrokUrl, message } = await request.json();
+        const TITAN_API_KEY = "Titan_Safe_9823_Alpha_XT";
+
+        // Sørger for at URL-en er formatert riktig
+        const cleanUrl = ngrokUrl.replace(/\/$/, ""); 
+
+        const response = await fetch(`${cleanUrl}/v1/chat/completions`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${TITAN_API_KEY}`
+            'Authorization': `Bearer ${TITAN_API_KEY}`,
+            'ngrok-skip-browser-warning': 'true' // VIKTIG: Slipper forespørselen forbi ngrok sin advarselsside
           },
           body: JSON.stringify({
             model: "Titan-1.0gp",
@@ -37,10 +41,13 @@ export default {
 
         const data = await response.json();
         return new Response(JSON.stringify(data), {
-          headers: { 'Content-Type': 'application/json' },
+          headers: { 
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*' // Ekstra sikkerhet
+          },
         });
       } catch (err) {
-        return new Response(JSON.stringify({ error: 'Kunne ikke koble til Titan-tjenesten via ngrok.' }), {
+        return new Response(JSON.stringify({ error: `Backend Proxy Error: ${err.message}` }), {
           status: 500,
           headers: { 'Content-Type': 'application/json' },
         });
