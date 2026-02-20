@@ -4,7 +4,7 @@
   Referrer-Policy: strict-origin-when-cross-origin
   Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
   Cross-Origin-Opener-Policy: same-origin
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://api.ipify.org; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https:; connect-src 'self' https://api.ipify.org https://api.cloudflare.com https://api.emailjs.com; font-src 'self' https://fonts.gstatic.com;
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://api.ipify.org; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https:; connect-src 'self' https://api.ipify.org https://api.cloudflare.com https://api.emailjs.com https://*.ngrok-free.dev; font-src 'self' https://fonts.gstatic.com;
 
 # Cache static assets (JS, CSS, Icons) for 1 year
 /assets/*
