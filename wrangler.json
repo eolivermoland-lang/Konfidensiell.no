@@ -1,8 +1,15 @@
 {
   "name": "codenext",
+  "main": "worker.js",
   "compatibility_date": "2026-01-29",
   "assets": {
     "directory": "./dist",
     "not_found_handling": "single-page-application"
+  },
+  "vars": {
+    "ADMIN_EMAIL": "olivermolandeyde@hotmail.com",
+    "ADMIN_PASSWORD": "5Femertallet1",
+    "CLOUDFLARE_ACCOUNT_ID": "961d9b8159d86770ecbfa38b78c6ea7c",
+    "CLOUDFLARE_API_TOKEN": "VqbFcHPBkLelYskDf6tzknO7Ag0Jr6CTnQQ4T_Tv"
   }
 }
