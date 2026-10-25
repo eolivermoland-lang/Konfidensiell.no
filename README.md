@@ -1,73 +1,96 @@
-# site-template
+# Konfidensiell.no — Developer Portfolio
 
-Gjenbrukbar startmal basert på oppsettet fra det tidligere prosjektet
-(`makerspase-site` / BubbleBubbleGum). Samme byggeverktøy, samme
-mappestruktur og samme kode-mønster (routing, handlekurv, PayPal,
-Firebase-innlogging) — men uten innhold, nøkler eller bilder som var
-spesifikke for det gamle prosjektet.
+A personal developer portfolio showcasing my projects, technical skills, and experience in software and web development.
 
-## Stack
+🌐 **Website:** [konfidensiell.no](https://konfidensiell.no)  
+💻 **GitHub:** [eolivermoland-lang](https://github.com/eolivermoland-lang)
 
-- Vite 8 + React 19
-- Tailwind CSS 4 (via `@tailwindcss/vite`)
-- React Router 7
-- Framer Motion (parallax-hero)
-- Firebase Auth (innlogging/registrering)
-- PayPal (`@paypal/react-paypal-js`) for betaling i handlekurven
+## About
 
-## Kom i gang med et nytt prosjekt
+Konfidensiell.no is my personal developer portfolio, built to present my work, development projects, and growing experience in technology.
 
-1. Kopier hele denne mal-mappen til et nytt navn/sted.
-2. `npm install`
-3. `cp .env.example .env` og fyll inn dine egne Firebase- og
-   PayPal-nøkler (se under). Uten dette vil ikke innlogging eller
-   betaling fungere, men resten av siten kjører fint.
-4. `npm run dev`
+I am an aspiring developer interested in building modern websites, applications, and software solutions. I enjoy exploring new technologies, solving problems, and continuously improving my development skills through practical projects.
 
-Trenger du ikke Firebase eller PayPal i det nye prosjektet, kan du
-bare la de tilhørende feltene i `.env` stå tomme, eller fjerne
-`Login`/`SignUp`/`CartSummary`-komponentene og `PayPalScriptProvider`
-i `App.jsx`.
+The portfolio serves as a central place to showcase my work and document my development journey.
 
-## Hvorfor `.env` og ikke hardkodede nøkler
+## Tech Stack
 
-I det originale prosjektet lå Firebase-konfigurasjonen og
-PayPal-client-ID direkte i kildekoden. Det er fjernet herfra og
-flyttet til miljøvariabler (`VITE_...` i `.env`), slik at malen kan
-brukes på nytt uten at gamle/virkelige nøkler følger med, og slik at
-`.env` ikke havner i git (den er lagt i `.gitignore`).
+The portfolio is built using modern frontend technologies, including:
 
-## Struktur
+- **React** — Component-based UI development
+- **JavaScript** — Interactive functionality and application logic
+- **Tailwind CSS** — Responsive styling and UI design
+- **Vite** — Fast development environment and build tooling
+- **React Router** — Client-side page navigation
 
-```
-src/
-  App.jsx            – Router, cart-state (localStorage), PayPal-provider
-  firebase.js        – Firebase-oppsett, leser fra .env
-  pages/
-    Home.jsx         – forside (Navbar + Hero + ProductList)
-    About.jsx        – enkel placeholder-side
-    Cart.jsx         – innlogging/registrering
-    Checkout.jsx      – handlekurv-oppsummering + PayPal-knapper
-  components/
-    Navbar.jsx        – responsiv navbar m/ mobilmeny og cart-teller
-    Hero.jsx          – parallax-hero (framer-motion)
-    Login.jsx / SignUp.jsx – Firebase-autentisering
-    ProductList.jsx   – produktgrid, placeholder-data
-    CartSummary.jsx   – handlekurv + PayPal-betaling
-  assets/             – tom, legg egne bilder her
+Additional tools and technologies are explored as the project evolves.
+
+## Features
+
+- Personal developer portfolio
+- Project showcase
+- Responsive user interface
+- Modern component-based architecture
+- Norwegian and English language support
+- Custom styling and interactive elements
+
+## Getting Started
+
+### Prerequisites
+
+- [Node.js](https://nodejs.org/)
+- npm
+- Git
+
+### Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/eolivermoland-lang/Konfidensiell.no.git
+cd Konfidensiell.no
 ```
 
-## Ting å bytte ut per nytt prosjekt
+Install dependencies:
 
-- `Site Name` i `Navbar.jsx` og tittel i `index.html`
-- Fargetema (nå `indigo`/`slate` Tailwind-klasser — søk/erstatt)
-- Placeholder-produktene i `ProductList.jsx`
-- Legg inn ekte bilder i `src/assets/` og importer dem der du vil
-  ha dem (f.eks. i `Hero.jsx` eller `Home.jsx`, samme mønster som i
-  det gamle prosjektet: `import bg from '../assets/bg.jpg'`)
+```bash
+npm install
+```
 
-## Ikke inkludert fra det gamle prosjektet
+Start the local development server:
 
-- Ekte Firebase- og PayPal-nøkler (bevisst fjernet)
-- Produktbilder og bakgrunnsbilder (var 13+ MB, prosjekt-spesifikke)
-- Prosjektnavnet "BubbleBubbleGum" og norsk sidenavn "Tjenester"
+```bash
+npm run dev
+```
+
+### Build for Production
+
+Create an optimized production build:
+
+```bash
+npm run build
+```
+
+Preview the production build locally:
+
+```bash
+npm run preview
+```
+
+## Project Goals
+
+The goal of this project is to build a professional online presence while developing practical experience in modern web development.
+
+Future improvements may include additional projects, interface refinements, performance optimizations, and new functionality.
+
+## Status
+
+The portfolio is an ongoing project. Features, content, and design may change as development continues.
+
+For the latest version, visit [konfidensiell.no](https://konfidensiell.no).
+
+---
+
+Developed by **Oliver Moland Eyde**.
+
+*Building, learning, and improving — one project at a time.*
