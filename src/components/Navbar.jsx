@@ -5,14 +5,7 @@ function Logo() {
   return (
     <svg viewBox="0 0 100 100" fill="none" className="h-10 w-10">
       <rect width="100" height="100" rx="22" fill="#ffffff" />
-      <circle cx="34" cy="50" r="15" stroke="#9e353a" strokeWidth="7" />
-      <polyline
-        points="60,67 60,34 70.5,52 81,34 81,67"
-        stroke="#9e353a"
-        strokeWidth="7"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+      <circle cx="50" cy="50" r="25" stroke="#9e353a" strokeWidth="10" />
     </svg>
   );
 }
@@ -28,7 +21,7 @@ export default function Navbar({ language, setLanguage }) {
       </Link>
 
       {/* pc menu */}
-      <div className="hidden md:flex ml-auto font-extrabold gap-2 text-lg underline">
+      <div className="hidden md:flex ml-auto font-extrabold gap-2 text-lg">
         <Link to="/" className="p-2 hover:text-yellow-600 duration-100">{language === 'no' ? 'Hjem' : 'Home'}</Link>
         <Link to="/proskjekter" className="p-2 hover:text-yellow-600 duration-100">{language === 'no' ? 'Prosjekter' : 'Projects'}</Link>
       </div>
