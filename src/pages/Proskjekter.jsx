@@ -1,5 +1,5 @@
 import Navbar from '../components/Navbar'
-import Projects from '../components/projects'
+import Projects from '../components/Projects.jsx'
 import Footer from '../components/Footer'
 
 export default function Proskjekter({ language, setLanguage }) {
